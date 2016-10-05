@@ -1,0 +1,76 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "GradleRIO"
+            url = "http://dev.imjac.in/maven"
+        }
+    }
+    dependencies {
+        classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'GradleRIO'
+
+sourceCompatibility = 1.8
+
+group 'org.usfirst.frc.team449.robot2016'
+version '1.0'
+
+gradlerio.robotClass = "org.usfirst.frc.team449.robot.Robot"
+gradlerio.team = "449"
+
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "GradleRio"
+        url = "http://dev.imjac.in/maven"
+    }
+    flatDir {
+        dirs System.properties['user.home'] + '/wpilib/java/current/lib'
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile name: "NetworkTables"
+    compile name: "WPILib"
+    compile project(':449-central-repo')
+}
+
+task convertFiles << {
+    fileTree("./src/main/resources").matching { include "**/*.json" }.each { aFile ->
+        exec {
+            commandLine 'dos2unix'
+            args aFile.absolutePath
+        }
+    }
+}
+
+gradlerio {
+    deployers += [to: "/home/lvuser/cfg.json", from: './src/main/resources/cfg.json']
+}
+
+def robotManifest = {
+    attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
+    attributes 'Robot-Class': gradlerio.robotClass
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest robotManifest
+}
+
+task genJavadoc(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives genJavadoc
+}

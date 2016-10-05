@@ -1,0 +1,4 @@
+rootProject.name = 'turret2016'
+
+include ':449-central-repo'
+project(':449-central-repo').projectDir = new File(settingsDir, '../449-central-repo')
