@@ -63,9 +63,9 @@ public class Robot extends IterativeRobot {
         _talon.enableLimitSwitch(true, true);
 
         _talon.setForwardSoftLimit(percentToEnc(10));
-        _talon.enableForwardSoftLimit(true);
+        _talon.enableForwardSoftLimit(false);
         _talon.setReverseSoftLimit(percentToEnc(-10));
-        _talon.enableReverseSoftLimit(true);
+        _talon.enableReverseSoftLimit(false);
     }
 
     /**
