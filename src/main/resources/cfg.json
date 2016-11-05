@@ -1,0 +1,36 @@
+{
+  "components": {},
+  "MechanismMap" : {
+    "components": {},
+    "TurntableMap": {
+      "components": {
+        "CANTalonSRX": {
+          "instances": {
+            "canTalonSRXMap": {
+              "port": 1,
+              "feedBackDevice": 6,
+              "reverseSensor": false,
+              "reverseOutput": false,
+              "nominalOutVoltage": 0.0,
+              "peakOutVoltage": 12.0,
+              "profile": 0,
+              "kP": 0.1,
+              "kI": 0.0,
+              "kD": 0.0,
+              "kF": 0.0,
+              "fwdLimNormOpen": true,
+              "revLimNormOpen": true,
+              "fwdLimEnabled": true,
+              "revLimEnabled": true,
+              "fwdSoftLimEnabled": false,
+              "revSoftLimEnabled": false,
+              "fwdSoftLimVal": 0.1,
+              "revSoftLimVal": -0.1
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

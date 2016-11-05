@@ -17,7 +17,7 @@ public class CANTalonSRX extends Component {
                                profile, double kP, double
                                kI, double kD, double kF,
                        boolean fwdLimNormOpen, boolean
-                               revNormClose, boolean
+                               revNormOpen, boolean
                                fwdLimEnabled, boolean
                                revLimEnabled, boolean
                                fwdSoftLimEnabled, double
@@ -38,7 +38,8 @@ public class CANTalonSRX extends Component {
         canTalon.setD(kD);
         canTalon.setF(kF);
         canTalon.ConfigFwdLimitSwitchNormallyOpen(fwdLimNormOpen);
-        canTalon.ConfigRevLimitSwitchNormallyOpen(revNormClose);
+        canTalon.ConfigRevLimitSwitchNormallyOpen
+                (revNormOpen);
         canTalon.enableLimitSwitch(fwdLimEnabled,
                 revLimEnabled);
         canTalon.enableForwardSoftLimit(fwdSoftLimEnabled);
@@ -51,6 +52,35 @@ public class CANTalonSRX extends Component {
         canTalon.setEncPosition(0);
     }
 
+    public double getOutputVoltage() {
+        return canTalon.getOutputVoltage();
+    }
+
+    public double getEncVelocity() {
+        return canTalon.getEncVelocity();
+    }
+
+    public double getEncPosition() {
+        return canTalon.getEncPosition();
+    }
+
+    public double getClosedLoopError() {
+        return canTalon.getClosedLoopError();
+    }
+
+    public double getError() {
+        return canTalon.getError();
+    }
+
+    public void setControlMode(CANTalon.TalonControlMode
+                                       mode) {
+        canTalon.changeControlMode(mode);
+    }
+
+    public void setByMode(double sp) {
+        canTalon.set(sp);
+    }
+
     @Override
     public boolean getInverted() {
         return false;
@@ -58,6 +88,5 @@ public class CANTalonSRX extends Component {
 
     @Override
     public void setInverted(boolean b) {
-
     }
 }
