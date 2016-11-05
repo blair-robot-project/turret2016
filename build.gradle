@@ -16,14 +16,15 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'GradleRIO'
 
-sourceCompatibility = 1.8
-
-group 'org.usfirst.frc.team449.robot2016'
+group 'org.usfirst.frc.team449.turret2016'
 version '1.0'
 
-gradlerio.robotClass = "org.usfirst.frc.team449.robot.Robot"
+gradlerio.robotClass = "org.usfirst.frc.team449.robot.Robot"   //The class for the main Robot Class. Used in manifest
 gradlerio.team = "449"
 
+allprojects {
+    tasks.withType(Javadoc).all { enabled = false }
+}
 
 repositories {
     mavenCentral()
@@ -31,6 +32,7 @@ repositories {
         name = "GradleRio"
         url = "http://dev.imjac.in/maven"
     }
+
     flatDir {
         dirs System.properties['user.home'] + '/wpilib/java/current/lib'
     }
