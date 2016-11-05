@@ -22,7 +22,18 @@ public class TurntableSubsystem extends MappedSubsystem {
                 map).canTalonSRXMap);
     }
 
-    @Override
+    public void zero() {
+        canTalonSRX.zero();
+    }
+
+    public double getEncVelocity() {
+        return canTalonSRX.getEncVelocity();
+    }
+
+    public double getEncPosition() {
+        return canTalonSRX.getEncPosition();
+    }
+
     protected void initDefaultCommand() {
     }
 }
