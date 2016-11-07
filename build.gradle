@@ -33,15 +33,18 @@ repositories {
         url = "http://dev.imjac.in/maven"
     }
 
-    flatDir {
-        dirs System.properties['user.home'] + '/wpilib/java/current/lib'
+    maven {
+        name = "WPILib"
+        url = "http://first.wpi.edu/FRC/roborio/maven/release"
     }
+    /*flatDir {
+        dirs System.properties['user.home'] + '/wpilib/java/current/lib'
+    }*/
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile name: "NetworkTables"
-    compile name: "WPILib"
+    compile group: 'edu.wpi.first.wpilibj', name:'wpilibJavaFinal', version:'0.1.0-SNAPSHOT'
+    compile group:'edu.wpi.first.wpilib.networktables.java', name:'NetworkTables', version:'3.0.0-SNAPSHOT'
     compile project(':449-central-repo')
 }
 
