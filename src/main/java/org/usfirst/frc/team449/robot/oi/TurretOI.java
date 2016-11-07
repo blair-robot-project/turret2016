@@ -12,22 +12,15 @@ public class TurretOI extends OISubsystem implements
     private Joystick turntableJ;
     private Joystick injectorJ;
     private Joystick flywheelJ;
-//    private Button button;
 
     public TurretOI(RobotMap map) {
         super(map);
         turntableJ = new Joystick(0);
         injectorJ = new Joystick(1);
         flywheelJ = new Joystick(2);
-
-//        button = new JoystickButton(turntableJ, 1);
     }
 
     public void mapButtons() {
-//        System.out.println("Map buttons start");
-//        button.whenPressed(new DefaultTurn(Robot
-//                .turntableSubsystem, this));
-//        System.out.println("Map buttons finished");
     }
 
     @Override
@@ -47,11 +40,9 @@ public class TurretOI extends OISubsystem implements
 
     @Override
     public void toggleCamera() {
-
     }
 
     @Override
     protected void initDefaultCommand() {
-
     }
 }
