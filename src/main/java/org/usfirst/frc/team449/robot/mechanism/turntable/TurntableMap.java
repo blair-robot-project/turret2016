@@ -1,6 +1,5 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import org.json.JSONObject;
 import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.mechanism.MechanismMap;
@@ -28,7 +27,7 @@ public class TurntableMap extends MechanismMap {
     public static class CANTalonSRXMap extends RobotMap
             .MapObject {
         public int port;
-        public CANTalon.FeedbackDevice feedbackDevice;
+        public int feedbackDevice;
         public boolean reverseSensor;
         public boolean reverseOutput;
         public double nominalOutVoltage;

@@ -4,6 +4,7 @@ package org.usfirst.frc.team449.robot.mechanism.turntable
 
 import edu.wpi.first.wpilibj.CANTalon;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
+import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.mechanism.turntable
         .TurntableSubsystem;
 
@@ -12,8 +13,8 @@ import org.usfirst.frc.team449.robot.mechanism.turntable
  * Created by BlairRobot on 2016-11-05.
  */
 public class BangCalibrate extends ReferencingCommand {
-    private boolean finished = false;
-    private boolean hitLeft = false;
+    private boolean finished;
+    private boolean hitLeft;
 
     private TurntableSubsystem turntableSubsystem;
 
@@ -21,7 +22,10 @@ public class BangCalibrate extends ReferencingCommand {
                                  turntableSubsystem,
                          double timeout) {
         super(turntableSubsystem, timeout);
+        requires(Robot.turntableSubsystem);
         this.turntableSubsystem = turntableSubsystem;
+        finished = false;
+        hitLeft = false;
     }
 
     @Override
@@ -31,7 +35,7 @@ public class BangCalibrate extends ReferencingCommand {
 
     @Override
     protected void execute() {
-        if ((!hitLeft)) {
+        if (!hitLeft) {
             turntableSubsystem
                     .setControlMode(CANTalon
                             .TalonControlMode.PercentVbus);
@@ -41,7 +45,7 @@ public class BangCalibrate extends ReferencingCommand {
                 turntableSubsystem.setEncPos(0);
             }
         } else {
-            turntableSubsystem.setByMode(0.5);
+            turntableSubsystem.setByMode(-0.5);
             if (turntableSubsystem.isRevSwitchClosed()) {
                 finished = true;
                 turntableSubsystem.setByMode(0);

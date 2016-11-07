@@ -5,13 +5,16 @@ import org.usfirst.frc.team449.robot.MappedSubsystem;
 import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
 import org.usfirst.frc.team449.robot.mechanism.turntable
-        .commands.BangCalibrate;
+        .commands.DefaultTurntableGroup;
+import org.usfirst.frc.team449.robot.mechanism.turntable
+        .ois.TurnTableOI;
 
 /**
  * Created by BlairRobot on 2016-11-05.
  */
 public class TurntableSubsystem extends MappedSubsystem {
-    CANTalonSRX canTalonSRX;
+    private CANTalonSRX canTalonSRX;
+    private TurnTableOI oi;
 
     /**
      * Creates a mapped subsystem and sets its map
@@ -19,10 +22,15 @@ public class TurntableSubsystem extends MappedSubsystem {
      * @param map the map of constants relevant to this
      *            subsystem
      */
-    public TurntableSubsystem(RobotMap map) {
+    public TurntableSubsystem(RobotMap map, TurnTableOI
+            oi) {
         super(map);
         TurntableMap turntableMap = (TurntableMap) map;
-        canTalonSRX = new CANTalonSRX(turntableMap.canTalonSRXMap);
+        this.oi = oi;
+        canTalonSRX = new CANTalonSRX(turntableMap
+                .canTalonSRXMap);
+        System.out.println("TurntableSubsystem " +
+                "constructed");
     }
 
     public void setEncPos(int pos) {
@@ -41,20 +49,26 @@ public class TurntableSubsystem extends MappedSubsystem {
         canTalonSRX.setByMode(sp);
     }
 
-    public void setControlMode(CANTalon.TalonControlMode mode){
+    public void setControlMode(CANTalon.TalonControlMode
+                                       mode) {
         canTalonSRX.setControlMode(mode);
     }
 
-    public boolean isFwdSwitchClosed(){
+    public boolean isFwdSwitchClosed() {
         return canTalonSRX.isFwdSwitchClosed();
     }
 
-    public boolean isRevSwitchClosed(){
+    public boolean isRevSwitchClosed() {
         return canTalonSRX.isRevSwitchClosed();
     }
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new BangCalibrate(this, 10));
+        System.out.println("TurntableSubsystem " +
+                "initDefaultCommand started");
+        setDefaultCommand(new DefaultTurntableGroup(this,
+                oi));
+        System.out.println("TurntableSubsystem " +
+                "initDefaultCommand finished");
     }
 }

@@ -4,11 +4,11 @@
     "components": {},
     "TurntableMap": {
       "components": {
-        "CANTalonSRX": {
+        "CANTalonSRXMap": {
           "instances": {
             "canTalonSRXMap": {
-              "port": 1,
-              "feedBackDevice": 6,
+              "port": 2,
+              "feedbackDevice": 6,
               "reverseSensor": false,
               "reverseOutput": false,
               "nominalOutVoltage": 0.0,

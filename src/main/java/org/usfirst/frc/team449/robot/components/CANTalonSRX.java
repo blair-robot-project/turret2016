@@ -12,8 +12,10 @@ public class CANTalonSRX extends Component {
     CANTalon canTalon;
 
     public CANTalonSRX(TurntableMap.CANTalonSRXMap m) {
+        System.out.println(m.port);
         canTalon = new CANTalon(m.port);
-        canTalon.setFeedbackDevice(m.feedbackDevice);
+        canTalon.setFeedbackDevice(CANTalon
+                .FeedbackDevice.valueOf(m.feedbackDevice));
         canTalon.reverseSensor(m.reverseSensor);
         canTalon.reverseOutput(m.reverseOutput);
         canTalon.configNominalOutputVoltage
