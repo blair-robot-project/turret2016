@@ -36,8 +36,8 @@ public class CANTalonSRX extends Component {
         canTalon.setReverseSoftLimit(m.revSoftLimVal);
     }
 
-    public void zero() {
-        canTalon.setEncPosition(0);
+    public void setEncPos(int pos) {
+        canTalon.setEncPosition(pos);
     }
 
     public double getOutputVoltage() {
@@ -63,6 +63,14 @@ public class CANTalonSRX extends Component {
     public void setControlMode(CANTalon.TalonControlMode
                                        mode) {
         canTalon.changeControlMode(mode);
+    }
+
+    public boolean isFwdSwitchClosed(){
+        return canTalon.isFwdLimitSwitchClosed();
+    }
+
+    public boolean isRevSwitchClosed(){
+        return canTalon.isRevLimitSwitchClosed();
     }
 
     public void setByMode(double sp) {
