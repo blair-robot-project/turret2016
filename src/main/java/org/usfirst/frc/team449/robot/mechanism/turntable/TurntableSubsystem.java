@@ -9,10 +9,16 @@ import org.usfirst.frc.team449.robot.mechanism.turntable
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurnTableOI;
 
 /**
- * Created by BlairRobot on 2016-11-05.
+ * Turntable subsystem
  */
 public class TurntableSubsystem extends MappedSubsystem {
+    /**
+     * Talon speed controller used to turn the turntable
+     */
     private CANTalonSRX canTalonSRX;
+    /**
+     * OI to get throttle from
+     */
     private TurnTableOI oi;
 
     /**
@@ -31,14 +37,26 @@ public class TurntableSubsystem extends MappedSubsystem {
                 "constructed");
     }
 
+    /**
+     * Reset the encoder tick counter to a set value
+     * @param pos value to set the tick counter to
+     */
     public void setEncPos(int pos) {
         canTalonSRX.setEncPos(pos);
     }
 
+    /**
+     * @return encoder tick count
+     */
     public double getEncPosition() {
         return canTalonSRX.getEncPosition();
     }
 
+    /**
+     * Feed a number to the speed controller. Either
+     * voltage command or PID setpoint
+     * @param sp
+     */
     public void setByMode(double sp) {
         canTalonSRX.setByMode(sp);
     }
