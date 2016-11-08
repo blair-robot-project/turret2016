@@ -6,8 +6,7 @@ import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
 import org.usfirst.frc.team449.robot.mechanism.turntable
         .commands.DefaultTurntableGroup;
-import org.usfirst.frc.team449.robot.mechanism.turntable
-        .ois.TurnTableOI;
+import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurnTableOI;
 
 /**
  * Created by BlairRobot on 2016-11-05.
@@ -27,18 +26,13 @@ public class TurntableSubsystem extends MappedSubsystem {
         super(map);
         TurntableMap turntableMap = (TurntableMap) map;
         this.oi = oi;
-        canTalonSRX = new CANTalonSRX(turntableMap
-                .canTalonSRXMap);
+        canTalonSRX = new CANTalonSRX(turntableMap.canTalonSRXMap);
         System.out.println("TurntableSubsystem " +
                 "constructed");
     }
 
     public void setEncPos(int pos) {
         canTalonSRX.setEncPos(pos);
-    }
-
-    public double getEncVelocity() {
-        return canTalonSRX.getEncVelocity();
     }
 
     public double getEncPosition() {
@@ -49,16 +43,15 @@ public class TurntableSubsystem extends MappedSubsystem {
         canTalonSRX.setByMode(sp);
     }
 
-    public void setControlMode(CANTalon.TalonControlMode
-                                       mode) {
+    public void setControlMode(CANTalon.TalonControlMode mode){
         canTalonSRX.setControlMode(mode);
     }
 
-    public boolean isFwdSwitchClosed() {
+    public boolean isFwdSwitchClosed(){
         return canTalonSRX.isFwdSwitchClosed();
     }
 
-    public boolean isRevSwitchClosed() {
+    public boolean isRevSwitchClosed(){
         return canTalonSRX.isRevSwitchClosed();
     }
 
@@ -67,7 +60,7 @@ public class TurntableSubsystem extends MappedSubsystem {
         System.out.println("TurntableSubsystem " +
                 "initDefaultCommand started");
         setDefaultCommand(new DefaultTurntableGroup(this,
-                oi));
+         oi       ));
         System.out.println("TurntableSubsystem " +
                 "initDefaultCommand finished");
     }
