@@ -3,16 +3,16 @@ package org.usfirst.frc.team449.robot.mechanism.turntable.commands;
 
 import org.usfirst.frc.team449.robot.ReferencingCommandGroup;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
-import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurnTableOI;
+import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 
 /**
  * Created by BlairRobot on 2016-11-07.
  */
 public class DefaultTurntableGroup extends ReferencingCommandGroup {
-    private TurnTableOI oi;
+    private TurntableOI oi;
     public DefaultTurntableGroup(TurntableSubsystem
                                          turntableSubsystem,
-                                 TurnTableOI oi) {
+                                 TurntableOI oi) {
         super(turntableSubsystem);
         this.oi = oi;
 

@@ -79,6 +79,10 @@ public class CANTalonSRX extends Component {
         canTalon.set(sp);
     }
 
+    public void enableBrakeMode (boolean brake){
+        canTalon.enableBrakeMode(brake);
+    }
+
     @Override
     public boolean getInverted() {
         return false;

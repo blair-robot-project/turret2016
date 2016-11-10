@@ -5,19 +5,18 @@ import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.mechanism.turntable
         .TurntableSubsystem;
-import org.usfirst.frc.team449.robot.mechanism.turntable
-        .ois.TurnTableOI;
+import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 
 /**
  * Created by BlairRobot on 2016-11-07.
  */
 public class DefaultTurn extends ReferencingCommand {
-    private TurnTableOI oi;
+    private TurntableOI oi;
     private TurntableSubsystem turntableSubsystem;
 
     public DefaultTurn(TurntableSubsystem
                                turntableSubsystem,
-                       TurnTableOI oi) {
+                       TurntableOI oi) {
         super(turntableSubsystem);
         requires(Robot.turntableSubsystem);
         System.out.println("DefaultTurn start construct");

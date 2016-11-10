@@ -1,15 +1,21 @@
 package org.usfirst.frc.team449.robot.oi;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.RobotMap;
-import org.usfirst.frc.team449.robot.mechanism.turntable
-        .ois.TurnTableOI;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.AccelerateFlywheel;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DecelerateFlywheel;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.IntakeBall;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.StopIntakeBall;
+import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 
 /**
  * OI used to control the turret
  */
 public class TurretOI extends OISubsystem implements
-        TurnTableOI {
+        TurntableOI {
     /**
      * Joystick used to control the turntable
      */
@@ -17,11 +23,11 @@ public class TurretOI extends OISubsystem implements
     /**
      * Joystick used to control the injector wheel
      */
-    private Joystick injectorJ;
+    private Button injectorB;
     /**
      * Joystick used to control the flywheel
      */
-    private Joystick flywheelJ;
+    private Button flywheelB;
 
     /**
      * Instantiate the TurretOI
@@ -31,8 +37,8 @@ public class TurretOI extends OISubsystem implements
     public TurretOI(RobotMap map) {
         super(map);
         turntableJ = new Joystick(0);
-        injectorJ = new Joystick(1);
-        flywheelJ = new Joystick(2);
+        injectorB = new JoystickButton(turntableJ,2);
+        flywheelB = new JoystickButton(turntableJ,1);
     }
 
     /**
@@ -42,6 +48,10 @@ public class TurretOI extends OISubsystem implements
      * Does not do anything right now (no buttons to map)
      */
     public void mapButtons() {
+        injectorB.whenPressed(new IntakeBall(Robot.shooterSubsystem));
+        injectorB.whenReleased(new StopIntakeBall(Robot.shooterSubsystem));
+        flywheelB.whenPressed(new AccelerateFlywheel(Robot.shooterSubsystem));
+        flywheelB.whenReleased(new DecelerateFlywheel(Robot.shooterSubsystem));
     }
 
     /**

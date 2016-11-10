@@ -6,7 +6,7 @@ import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
 import org.usfirst.frc.team449.robot.mechanism.turntable
         .commands.DefaultTurntableGroup;
-import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurnTableOI;
+import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 
 /**
  * Turntable subsystem
@@ -19,7 +19,7 @@ public class TurntableSubsystem extends MappedSubsystem {
     /**
      * OI to get throttle from
      */
-    private TurnTableOI oi;
+    private TurntableOI oi;
 
     /**
      * Creates a mapped subsystem and sets its map
@@ -27,7 +27,7 @@ public class TurntableSubsystem extends MappedSubsystem {
      * @param map the map of constants relevant to this
      *            subsystem
      */
-    public TurntableSubsystem(RobotMap map, TurnTableOI
+    public TurntableSubsystem(RobotMap map, TurntableOI
             oi) {
         super(map);
         TurntableMap turntableMap = (TurntableMap) map;
