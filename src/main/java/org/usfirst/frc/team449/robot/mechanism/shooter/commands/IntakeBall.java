@@ -29,14 +29,13 @@ public class IntakeBall extends ReferencingCommand{
 
     @Override
     protected void initialize(){
-        shooterSubsystem
-                .intake.setControlMode(CANTalon.TalonControlMode.PercentVbus);
+        shooterSubsystem.setIntakeControlMode(CANTalon.TalonControlMode.PercentVbus);
         System.out.println("IntakeBall init");
     }
 
     @Override
     protected void execute(){
-        shooterSubsystem.intake.setByMode(0.1);
+        shooterSubsystem.setIntakeByMode(0.1);
         shooterSubsystem.setIntaking(true);
         System.out.println("IntakeBall executed");
     }

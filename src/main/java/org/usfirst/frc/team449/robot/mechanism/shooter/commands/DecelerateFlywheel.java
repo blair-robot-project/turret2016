@@ -24,19 +24,19 @@ public class DecelerateFlywheel extends ReferencingCommand {
     public DecelerateFlywheel(MappedSubsystem subsystem) {
         super(subsystem);
         shooterSubsystem = (ShooterSubsystem) subsystem;
+        System.out.println("DecelerateFlywheel constructed");
     }
 
     @Override
     protected void initialize(){
-        shooterSubsystem
-                .flywheel.setControlMode(CANTalon.TalonControlMode.PercentVbus);
-        shooterSubsystem.flywheel.enableBrakeMode(true);
+        shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.PercentVbus);
+        shooterSubsystem.enableFlywheelBrakeMode(true);
         System.out.println("DecelerateFlywheel init");
     }
 
     @Override
     protected void execute(){
-        shooterSubsystem.flywheel.setByMode(0);
+        shooterSubsystem.setFlywheelByMode(0);
         shooterSubsystem.setAccelerated(false);
         System.out.println("DecelerateFlywheel executed");
     }

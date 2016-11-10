@@ -24,18 +24,18 @@ public class AccelerateFlywheel extends ReferencingCommand{
     public AccelerateFlywheel(MappedSubsystem subsystem) {
         super(subsystem);
         shooterSubsystem = (ShooterSubsystem) subsystem;
+        System.out.println("AccelerateFlywheel constructed");
     }
 
     @Override
     protected void initialize(){
-        shooterSubsystem
-                .flywheel.setControlMode(CANTalon.TalonControlMode.PercentVbus);
+        shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.PercentVbus);
         System.out.println("AccelerateFlywheel init");
     }
 
     @Override
     protected void execute(){
-        shooterSubsystem.flywheel.setByMode(1);
+        shooterSubsystem.setFlywheelByMode(1);
         shooterSubsystem.setAccelerated(true);
         System.out.println("AccelerateFlywheel executed");
     }

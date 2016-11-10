@@ -1,5 +1,6 @@
 package org.usfirst.frc.team449.robot.mechanism.shooter;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import org.usfirst.frc.team449.robot.MappedSubsystem;
 import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
@@ -12,11 +13,11 @@ public class ShooterSubsystem extends MappedSubsystem{
     /**
      * The motor on the lower bar to suck up the ball.
      */
-    public CANTalonSRX intake;
+    private CANTalonSRX intake;
     /**
      * The motor on the upper bar that spins at high speed to launch the ball.
      */
-    public CANTalonSRX flywheel;
+    private CANTalonSRX flywheel;
     /**
      * OI to get the fire button from
      */
@@ -65,5 +66,25 @@ public class ShooterSubsystem extends MappedSubsystem{
 
     public void setAccelerated(boolean isAccelerated){
         this.isAccelerated = isAccelerated;
+    }
+
+    public void setFlywheelControlMode(CANTalon.TalonControlMode mode){
+        flywheel.setControlMode(mode);
+    }
+
+    public void setFlywheelByMode(double sp){
+        flywheel.setByMode(sp);
+    }
+
+    public void enableFlywheelBrakeMode(boolean brake){
+        flywheel.enableBrakeMode(brake);
+    }
+
+    public void setIntakeControlMode(CANTalon.TalonControlMode mode){
+        intake.setControlMode(mode);
+    }
+
+    public void setIntakeByMode(double sp){
+        intake.setByMode(sp);
     }
 }

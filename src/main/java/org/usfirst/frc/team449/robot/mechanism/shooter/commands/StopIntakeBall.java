@@ -24,18 +24,18 @@ public class StopIntakeBall extends ReferencingCommand {
     public StopIntakeBall(MappedSubsystem subsystem) {
         super(subsystem);
         shooterSubsystem = (ShooterSubsystem) subsystem;
+        System.out.println("StopIntakeBall constructed");
     }
 
     @Override
     protected void initialize(){
-        shooterSubsystem
-                .intake.setControlMode(CANTalon.TalonControlMode.PercentVbus);
+        shooterSubsystem.setIntakeControlMode(CANTalon.TalonControlMode.PercentVbus);
         System.out.println("StopIntakeBall init");
     }
 
     @Override
     protected void execute(){
-        shooterSubsystem.intake.setByMode(0);
+        shooterSubsystem.setIntakeByMode(0);
         shooterSubsystem.setIntaking(false);
         System.out.println("StopIntakeBall executed");
     }
