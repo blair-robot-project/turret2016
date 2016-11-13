@@ -18,6 +18,7 @@ public class CANTalonSRX extends Component {
                 .FeedbackDevice.valueOf(m.feedbackDevice));
         canTalon.reverseSensor(m.reverseSensor);
         canTalon.reverseOutput(m.reverseOutput);
+        canTalon.setInverted(m.isInverted);
         canTalon.configNominalOutputVoltage
                 (+m.nominalOutVoltage, -m.nominalOutVoltage);
         canTalon.configPeakOutputVoltage(+m.peakOutVoltage,

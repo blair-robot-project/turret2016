@@ -5,17 +5,24 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.RobotMap;
-import org.usfirst.frc.team449.robot.mechanism.shooter.commands.AccelerateFlywheel;
-import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DecelerateFlywheel;
-import org.usfirst.frc.team449.robot.mechanism.shooter.commands.IntakeBall;
-import org.usfirst.frc.team449.robot.mechanism.shooter.commands.StopIntakeBall;
-import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
+import org.usfirst.frc.team449.robot.mechanism.shooter
+        .commands.AccelerateFlywheel;
+import org.usfirst.frc.team449.robot.mechanism.shooter
+        .commands.DecelerateFlywheel;
+import org.usfirst.frc.team449.robot.mechanism.shooter
+        .commands.IntakeBall;
+import org.usfirst.frc.team449.robot.mechanism.shooter
+        .commands.StopIntakeBall;
+import org.usfirst.frc.team449.robot.mechanism.shooter
+        .ois.ShooterOI;
+import org.usfirst.frc.team449.robot.mechanism.turntable
+        .ois.TurntableOI;
 
 /**
  * OI used to control the turret
  */
 public class TurretOI extends OISubsystem implements
-        TurntableOI {
+        TurntableOI, ShooterOI {
     /**
      * Joystick used to control the turntable
      */

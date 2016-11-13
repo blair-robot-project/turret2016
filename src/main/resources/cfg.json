@@ -11,6 +11,7 @@
               "feedbackDevice": 6,
               "reverseSensor": false,
               "reverseOutput": false,
+              "isInverted": false,
               "nominalOutVoltage": 0.0,
               "peakOutVoltage": 12.0,
               "profile": 0,
@@ -36,10 +37,11 @@
         "CANTalonSRXMap": {
           "instances": {
             "intakeMap": {
-              "port": 1,
+              "port": 3,
               "feedbackDevice": 6,
               "reverseSensor": false,
               "reverseOutput": false,
+              "isInverted": false,
               "nominalOutVoltage": 0.0,
               "peakOutVoltage": 12.0,
               "profile": 0,
@@ -57,10 +59,11 @@
               "revSoftLimVal": -0.1
             },
             "flywheelMap":{
-              "port": 3,
+              "port": 1,
               "feedbackDevice": 6,
               "reverseSensor": false,
               "reverseOutput": false,
+              "isInverted": true,
               "nominalOutVoltage": 0.0,
               "peakOutVoltage": 12.0,
               "profile": 0,
