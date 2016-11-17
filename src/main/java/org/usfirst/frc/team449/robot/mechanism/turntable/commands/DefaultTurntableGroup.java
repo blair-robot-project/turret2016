@@ -16,9 +16,7 @@ public class DefaultTurntableGroup extends ReferencingCommandGroup {
         super(turntableSubsystem);
         this.oi = oi;
 
-        addSequential(new BangCalibrate
-                (turntableSubsystem, 10));
-        addSequential(new DefaultTurn(turntableSubsystem,
-                oi));
+        //addSequential(new BangCalibrate(turntableSubsystem, 10));
+        addSequential(new DefaultTurn(turntableSubsystem, oi));
     }
 }

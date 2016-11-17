@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable
         .commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.mechanism.turntable
@@ -33,10 +34,9 @@ public class DefaultTurn extends ReferencingCommand {
 
     @Override
     protected void execute() {
-        System.out.println("THROTTLE: " + oi
-                .getTurntableVelocity());
-        turntableSubsystem.setByMode(oi
-                .getTurntableVelocity());
+        //System.out.println("THROTTLE: " + oi.getTurntableVelocity());
+        //turntableSubsystem.setByMode(oi.getTurntableVelocity());
+        SmartDashboard.putNumber("Turntable Encoder", turntableSubsystem.getEncPosition());
     }
 
     @Override

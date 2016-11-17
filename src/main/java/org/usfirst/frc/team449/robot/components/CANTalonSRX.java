@@ -22,7 +22,7 @@ public class CANTalonSRX extends Component {
         canTalon.configNominalOutputVoltage
                 (+m.nominalOutVoltage, -m.nominalOutVoltage);
         canTalon.configPeakOutputVoltage(+m.peakOutVoltage,
-                0); // TODO figure out why this is zero
+                -m.peakOutVoltage);
         canTalon.setProfile(m.profile);
         canTalon.setP(m.kP);
         canTalon.setI(m.kI);
@@ -39,6 +39,22 @@ public class CANTalonSRX extends Component {
         canTalon.setReverseSoftLimit(m.revSoftLimVal);
     }
 
+    public double getFGain() {
+        return canTalon.getF();
+    }
+
+    public boolean isEnabled() {
+        return canTalon.isEnabled();
+    }
+
+    public boolean isAlive() {
+        return canTalon.isAlive();
+    }
+
+    public CANTalon.TalonControlMode getControlMode() {
+        return canTalon.getControlMode();
+    }
+
     public void setEncPos(int pos) {
         canTalon.setEncPosition(pos);
     }
@@ -48,6 +64,7 @@ public class CANTalonSRX extends Component {
     }
 
     public double getEncVelocity() {
+        System.out.println("Enc Vel: " + canTalon.getEncVelocity());
         return canTalon.getEncVelocity();
     }
 

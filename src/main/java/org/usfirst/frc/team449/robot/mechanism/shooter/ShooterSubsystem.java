@@ -4,12 +4,18 @@ import edu.wpi.first.wpilibj.CANTalon;
 import org.usfirst.frc.team449.robot.MappedSubsystem;
 import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DefaultShooterGroup;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
+
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Shooter Subsystem
  */
-public class ShooterSubsystem extends MappedSubsystem{
+public class ShooterSubsystem extends MappedSubsystem {
     /**
      * The motor on the lower bar to suck up the ball.
      */
@@ -34,6 +40,14 @@ public class ShooterSubsystem extends MappedSubsystem{
      * Whether the flywheel uis accelerated or not
      */
     private boolean isAccelerated;
+    /**
+     * The output writer.
+     */
+    private PrintWriter pr;
+    /**
+     * The time when the subsystem was initiated
+     */
+    private long startTime;
 
     /**
      * Creates a mapped subsystem and sets its map
@@ -41,7 +55,7 @@ public class ShooterSubsystem extends MappedSubsystem{
      * @param map the map of constants relevant to this
      *            subsystem
      */
-    public ShooterSubsystem(RobotMap map, ShooterOI oi){
+    public ShooterSubsystem(RobotMap map, ShooterOI oi) {
         super(map);
         ShooterMap shooterMap = (ShooterMap) map;
         this.oi = oi;
@@ -50,41 +64,90 @@ public class ShooterSubsystem extends MappedSubsystem{
         hasBall = false;
         isIntaking = false;
         isAccelerated = false;
+        try {
+            pr = new PrintWriter("/home/lvuser/PID Out.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("'PID Out.txt' not found.");
+        }
+        startTime = System.nanoTime();
         System.out.println("ShooterSubsystem constructed");
     }
 
     @Override
     protected void initDefaultCommand() {
         System.out.println("ShooterSubsystem initDefaultCommand started");
-        //setDefaultCommand(new DefaultShooterGroup(this, oi));
+        setDefaultCommand(new DefaultShooterGroup(this, oi));
         System.out.println("ShooterSubsystem.initDefaultCommand finished");
     }
 
-    public void setIntaking(boolean isIntaking){
+    public void setIntaking(boolean isIntaking) {
         this.isIntaking = isIntaking;
     }
 
-    public void setAccelerated(boolean isAccelerated){
+    public void setAccelerated(boolean isAccelerated) {
         this.isAccelerated = isAccelerated;
     }
 
-    public void setFlywheelControlMode(CANTalon.TalonControlMode mode){
+    public void setFlywheelControlMode(CANTalon.TalonControlMode mode) {
         flywheel.setControlMode(mode);
     }
 
-    public void setFlywheelByMode(double sp){
+    public void setFlywheelByMode(double sp) {
         flywheel.setByMode(sp);
     }
 
-    public void enableFlywheelBrakeMode(boolean brake){
+    public void enableFlywheelBrakeMode(boolean brake) {
         flywheel.enableBrakeMode(brake);
     }
 
-    public void setIntakeControlMode(CANTalon.TalonControlMode mode){
+    public void setIntakeControlMode(CANTalon.TalonControlMode mode) {
         intake.setControlMode(mode);
     }
 
-    public void setIntakeByMode(double sp){
+    public void setIntakeByMode(double sp) {
         intake.setByMode(sp);
+    }
+
+    public double getFlywheelEncVel() {
+        return flywheel.getEncVelocity();
+    }
+
+    public double getFlywheelFGain() {
+        return flywheel.getFGain();
+    }
+
+    public double getFlywheelOutputVoltage() {
+        return flywheel.getOutputVoltage();
+    }
+
+    public double getError() {
+        return flywheel.getError();
+    }
+
+    public boolean isEnabled() {
+        return flywheel.isEnabled();
+    }
+
+    public boolean isAlive() {
+        return flywheel.isAlive();
+    }
+
+    public CANTalon.TalonControlMode getControlMode() {
+        return flywheel.getControlMode();
+    }
+
+    public void logData() {
+        try (FileWriter fw = new FileWriter("/home/lvuser/shooterLog.csv", true)) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(System.nanoTime() - startTime);
+            sb.append(",");
+            sb.append(oi.getJoyValue());
+            sb.append(",");
+            sb.append(getFlywheelEncVel());
+            sb.append("\n");
+            fw.write(sb.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
