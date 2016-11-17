@@ -29,10 +29,9 @@ public class DefaultFlywheel extends ReferencingCommand {
 
     @Override
     protected void initialize() {
-        shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.PercentVbus); //SWITCH OUT WHICH IS
-        // COMMENTED
-        //shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.Speed);     //WITH THIS ONE
-
+        shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.Position);
+        shooterSubsystem.setEncPos(0);
+        shooterSubsystem.setFlywheelByMode(2048); //WITH THIS ONE
         System.out.println("DefaultTurn initialized");
     }
 
@@ -49,7 +48,7 @@ public class DefaultFlywheel extends ReferencingCommand {
         SmartDashboard.putBoolean("PID Talon Alive", shooterSubsystem.isAlive());
         SmartDashboard.putBoolean("PID Talon", shooterSubsystem.getControlMode().isPID());
         //shooterSubsystem.setFlywheelByMode(oi.getJoyValue()*MAX_SPEED); //SWITCH OUT WHICH IS COMMENTED
-        shooterSubsystem.setFlywheelByMode(1); //WITH THIS ONE
+//        shooterSubsystem.setFlywheelByMode(1); //WITH THIS ONE
         //shooterSubsystem.setFlywheelByMode(MAX_SPEED);
     }
 

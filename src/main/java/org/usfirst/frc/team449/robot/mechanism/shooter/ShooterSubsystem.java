@@ -96,6 +96,10 @@ public class ShooterSubsystem extends MappedSubsystem {
         flywheel.setByMode(sp);
     }
 
+    public void setEncPos(int enc) {
+        flywheel.setEncPos(enc);
+    }
+
     public void enableFlywheelBrakeMode(boolean brake) {
         flywheel.enableBrakeMode(brake);
     }
