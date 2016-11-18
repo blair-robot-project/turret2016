@@ -150,6 +150,7 @@ public class ShooterSubsystem extends MappedSubsystem {
             sb.append(getFlywheelEncVel());
             sb.append("\n");
             fw.write(sb.toString());
+            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
