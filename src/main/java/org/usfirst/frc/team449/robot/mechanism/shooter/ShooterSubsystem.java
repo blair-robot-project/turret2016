@@ -7,10 +7,8 @@ import org.usfirst.frc.team449.robot.components.CANTalonSRX;
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DefaultShooterGroup;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Shooter Subsystem
@@ -41,10 +39,6 @@ public class ShooterSubsystem extends MappedSubsystem {
      */
     private boolean isAccelerated;
     /**
-     * The output writer.
-     */
-    private PrintWriter pr;
-    /**
      * The time when the subsystem was initiated
      */
     private long startTime;
@@ -64,11 +58,6 @@ public class ShooterSubsystem extends MappedSubsystem {
         hasBall = false;
         isIntaking = false;
         isAccelerated = false;
-        try {
-            pr = new PrintWriter("/home/lvuser/PID Out.txt");
-        } catch (FileNotFoundException e) {
-            System.out.println("'PID Out.txt' not found.");
-        }
         startTime = System.nanoTime();
         System.out.println("ShooterSubsystem constructed");
     }
