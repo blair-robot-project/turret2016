@@ -67,7 +67,7 @@ public class TurretOI extends OISubsystem implements
     }
 
     public double getJoyValue(){
-        return flywheelJ.getRawAxis(1);
+        return flywheelJ.getAxis(Joystick.AxisType.kY);
     }
 
     /**

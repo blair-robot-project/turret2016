@@ -10,11 +10,12 @@ import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
 /**
  * Created by BlairRobot on 2016-11-13.
  */
+
 public class DefaultFlywheel extends ReferencingCommand {
     private ShooterOI oi;
     private ShooterSubsystem shooterSubsystem;
 
-    private static final int CPR = 1024;
+    private final int CPR = 1024;
     private final double MAX_SPEED = 26000; //PUT SPEED HERE
 
     public DefaultFlywheel(ShooterSubsystem shooterSubsystem, ShooterOI oi) {
@@ -29,21 +30,24 @@ public class DefaultFlywheel extends ReferencingCommand {
     @Override
     protected void initialize() {
         shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.PercentVbus);
-        //shooterSubsystem.setFlywheelEncPos(0);
-        //shooterSubsystem.setFlywheelByMode(0); //WITH THIS ONE
+        shooterSubsystem.setFlywheelEncPos(0);
+        shooterSubsystem.setFlywheelByMode(0); //WITH THIS ONE
         System.out.println("DefaultTurn initialized");
     }
 
+
     @Override
     protected void execute() {
+        //shooterSubsystem.setFlywheelByMode(revPerSecToEnc(oi.getJoyValue()));
         shooterSubsystem.setFlywheelByMode(oi.getJoyValue());
-        //shooterSubsystem.logData();
+        shooterSubsystem.logData();
         SmartDashboard.putNumber("Joystick", oi.getJoyValue());
+        SmartDashboard.putNumber("Output Voltage", shooterSubsystem.getFlywheelOutputVoltage());
         //SmartDashboard.putNumber("Velocity Setpoint", oi.getJoyValue()*MAX_SPEED);
-        SmartDashboard.putNumber("Raw Speed", shooterSubsystem.getFlywheelEncVel());
+        SmartDashboard.putNumber("RPS Speed", encToRevPerSec(shooterSubsystem.getFlywheelEncVel()));
         SmartDashboard.putNumber("Raw Position", shooterSubsystem.getFlywheelEncPos());
-        SmartDashboard.putNumber("test", 3);
         SmartDashboard.putNumber("Speed (rev/s)", shooterSubsystem.getFlywheelEncVel()/409.6);
+        System.out.println(shooterSubsystem.getFlywheelEncVel()/409.6);
 
         //SmartDashboard.putNumber("FGain", shooterSubsystem.getFlywheelFGain());
         //SmartDashboard.putNumber("Output Voltage", shooterSubsystem.getFlywheelOutputVoltage());
@@ -61,11 +65,11 @@ public class DefaultFlywheel extends ReferencingCommand {
         return false;
     }
 
-    private static double encToRevPerSec(double enc){
+    private double encToRevPerSec(double enc){
         return (enc*10)/(CPR*4);
     }
 
-    public static double revPerSecToEnc(double rps){
+    private double revPerSecToEnc(double rps){
         return (4*CPR*rps)/10;
     }
 } //TYPE "gradle deploy"

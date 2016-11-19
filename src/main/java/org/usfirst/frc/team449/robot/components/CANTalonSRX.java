@@ -20,12 +20,13 @@ public class CANTalonSRX extends Component {
         canTalon.configNominalOutputVoltage
                 (+m.nominalOutVoltage, -m.nominalOutVoltage);
         canTalon.configPeakOutputVoltage(+m.peakOutVoltage,
+        //        0.0f);
                 -m.peakOutVoltage);
         canTalon.setProfile(m.profile);
-//        canTalon.setP(m.kP);
-//        canTalon.setI(m.kI);
-//        canTalon.setD(m.kD);
-//        canTalon.setF(m.kF * 1023);
+        canTalon.setP(m.kP);
+        canTalon.setI(m.kI);
+        canTalon.setD(m.kD);
+        canTalon.setF(m.kF);
         canTalon.setPID(m.kP, m.kI, m.kD, m.kF, 0, 0, 0);
         canTalon.setProfile(0);
         canTalon.ConfigFwdLimitSwitchNormallyOpen(m.fwdLimNormOpen);

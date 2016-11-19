@@ -58,6 +58,12 @@ public class ShooterSubsystem extends MappedSubsystem {
         hasBall = false;
         isIntaking = false;
         isAccelerated = false;
+        try (FileWriter fw = new FileWriter("/home/lvuser/shooterLog.csv", true)) {
+            fw.write("Time,Throttle,EncVal");
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
         startTime = System.nanoTime();
         System.out.println("ShooterSubsystem constructed");
     }
@@ -105,6 +111,10 @@ public class ShooterSubsystem extends MappedSubsystem {
         return flywheel.getEncVelocity();
     }
 
+    public double getFlywheelVoltage(){
+        return flywheel.getOutputVoltage();
+    }
+
     public double getFlywheelEncPos(){
         return flywheel.getEncPosition();
     }
@@ -129,18 +139,18 @@ public class ShooterSubsystem extends MappedSubsystem {
         return flywheel.isAlive();
     }
 
-    public CANTalon.TalonControlMode getControlMode() {
+    public CANTalon.TalonControlMode getFlywheelControlMode() {
         return flywheel.getControlMode();
     }
 
     public void logData() {
         try (FileWriter fw = new FileWriter("/home/lvuser/shooterLog.csv", true)) {
             StringBuilder sb = new StringBuilder();
-            sb.append(System.nanoTime() - startTime);
+            sb.append((System.nanoTime() - startTime)/100);
             sb.append(",");
             sb.append(oi.getJoyValue());
             sb.append(",");
-            sb.append(getFlywheelEncVel());
+            sb.append(getFlywheelEncVel()/409.6);
             sb.append("\n");
             fw.write(sb.toString());
             fw.close();
