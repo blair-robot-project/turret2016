@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.components;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.mechanism.turntable
         .TurntableMap;
 
@@ -11,7 +12,7 @@ public class CANTalonSRX extends Component {
 
     CANTalon canTalon;
 
-    public CANTalonSRX(TurntableMap.CANTalonSRXMap m) {
+    public CANTalonSRX(RobotMap.CANTalonSRXMap m) {
         System.out.println(m.port);
         canTalon = new CANTalon(m.port);
         canTalon.setFeedbackDevice(CANTalon
