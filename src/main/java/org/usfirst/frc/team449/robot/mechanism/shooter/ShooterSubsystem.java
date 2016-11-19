@@ -85,7 +85,7 @@ public class ShooterSubsystem extends MappedSubsystem {
         flywheel.setByMode(sp);
     }
 
-    public void setEncPos(int enc) {
+    public void setFlywheelEncPos(int enc) {
         flywheel.setEncPos(enc);
     }
 
@@ -103,6 +103,10 @@ public class ShooterSubsystem extends MappedSubsystem {
 
     public double getFlywheelEncVel() {
         return flywheel.getEncVelocity();
+    }
+
+    public double getFlywheelEncPos(){
+        return flywheel.getEncPosition();
     }
 
     public double getFlywheelFGain() {

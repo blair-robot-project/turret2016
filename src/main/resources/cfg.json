@@ -26,7 +26,8 @@
               "fwdSoftLimEnabled": false,
               "revSoftLimEnabled": false,
               "fwdSoftLimVal": 0.1,
-              "revSoftLimVal": -0.1
+              "revSoftLimVal": -0.1,
+              "brakeMode": true
             }
           }
         }
@@ -56,14 +57,15 @@
               "fwdSoftLimEnabled": false,
               "revSoftLimEnabled": false,
               "fwdSoftLimVal": 0.1,
-              "revSoftLimVal": -0.1
+              "revSoftLimVal": -0.1,
+              "brakeMode": true
             },
             "flywheelMap":{
               "port": 1,
               "feedbackDevice": 6,
               "reverseSensor": true,
               "reverseOutput": false,
-              "isInverted": true,
+              "isInverted": false,
               "nominalOutVoltage": 0.0,
               "peakOutVoltage": 12.0,
               "profile": 0,
@@ -78,7 +80,8 @@
               "fwdSoftLimEnabled": false,
               "revSoftLimEnabled": false,
               "fwdSoftLimVal": 0.1,
-              "revSoftLimVal": -0.1
+              "revSoftLimVal": -0.1,
+              "brakeMode": false
             }
           }
         }

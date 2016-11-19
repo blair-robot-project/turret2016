@@ -2,8 +2,6 @@ package org.usfirst.frc.team449.robot.components;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import org.usfirst.frc.team449.robot.RobotMap;
-import org.usfirst.frc.team449.robot.mechanism.turntable
-        .TurntableMap;
 
 /**
  * Created by BlairRobot on 2016-11-05.
@@ -15,8 +13,7 @@ public class CANTalonSRX extends Component {
     public CANTalonSRX(RobotMap.CANTalonSRXMap m) {
         System.out.println(m.port);
         canTalon = new CANTalon(m.port);
-        canTalon.setFeedbackDevice(CANTalon
-                .FeedbackDevice.valueOf(m.feedbackDevice));
+        canTalon.setFeedbackDevice(CANTalon.FeedbackDevice.valueOf(m.feedbackDevice));
         canTalon.reverseSensor(m.reverseSensor);
         canTalon.reverseOutput(m.reverseOutput);
         canTalon.setInverted(m.isInverted);
@@ -40,6 +37,7 @@ public class CANTalonSRX extends Component {
         canTalon.setForwardSoftLimit(m.fwdSoftLimVal);
         canTalon.enableReverseSoftLimit(m.revSoftLimEnabled);
         canTalon.setReverseSoftLimit(m.revSoftLimVal);
+        canTalon.enableBrakeMode(m.brakeMode);
     }
 
     public double getFGain() {
@@ -67,7 +65,7 @@ public class CANTalonSRX extends Component {
     }
 
     public double getEncVelocity() {
-        System.out.println("Enc Vel: " + canTalon.getEncVelocity());
+        //System.out.println("Enc Vel: " + canTalon.getEncVelocity());
         return canTalon.getEncVelocity();
     }
 
