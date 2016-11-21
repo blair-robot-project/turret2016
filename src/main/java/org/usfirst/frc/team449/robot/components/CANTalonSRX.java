@@ -22,9 +22,14 @@ public class CANTalonSRX extends Component {
         canTalon.configPeakOutputVoltage(+m.peakOutVoltage,
                 -m.peakOutVoltage);
         canTalon.setProfile(m.profile);
+
+        /* c is the true kF term. We assign our true kF term to be our config kF scaled by the RPS / native units. This
+         * allows us to put kF as the desired RPS jump in the configuration file.
+         */
         double c = m.kF * 1023. / 409.60;
         canTalon.setPID(m.kP, m.kI, m.kD, c, 0, 0, 0);
         canTalon.setProfile(0);
+
         canTalon.ConfigFwdLimitSwitchNormallyOpen(m.fwdLimNormOpen);
         canTalon.ConfigRevLimitSwitchNormallyOpen
                 (m.revLimNormOpen);
