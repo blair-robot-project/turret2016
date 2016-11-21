@@ -9,6 +9,7 @@ import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Shooter Subsystem
@@ -58,19 +59,19 @@ public class ShooterSubsystem extends MappedSubsystem {
         hasBall = false;
         isIntaking = false;
         isAccelerated = false;
-        try (FileWriter fw = new FileWriter("/home/lvuser/shooterLog.csv", true)) {
-            fw.write("Time,Throttle,EncVal");
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        startTime = System.nanoTime();
         System.out.println("ShooterSubsystem constructed");
     }
 
     @Override
     protected void initDefaultCommand() {
         System.out.println("ShooterSubsystem initDefaultCommand started");
+        try (PrintWriter writer = new PrintWriter("/home/lvuser/shooterLog.csv")) {
+            writer.println("Time,Joystick,EncVal");
+            writer.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        startTime = System.nanoTime();
         setDefaultCommand(new DefaultShooterGroup(this, oi));
         System.out.println("ShooterSubsystem.initDefaultCommand finished");
     }
@@ -143,12 +144,12 @@ public class ShooterSubsystem extends MappedSubsystem {
         return flywheel.getControlMode();
     }
 
-    public void logData() {
+    public void logData(double sp) {
         try (FileWriter fw = new FileWriter("/home/lvuser/shooterLog.csv", true)) {
             StringBuilder sb = new StringBuilder();
             sb.append((System.nanoTime() - startTime)/100);
             sb.append(",");
-            sb.append(oi.getJoyValue());
+            sb.append(sp);
             sb.append(",");
             sb.append(getFlywheelEncVel()/409.6);
             sb.append("\n");

@@ -29,7 +29,7 @@ public class AccelerateFlywheel extends ReferencingCommand{
 
     @Override
     protected void initialize(){
-        shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.PercentVbus);
+        shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.Speed);
         System.out.println("AccelerateFlywheel init");
     }
 
@@ -37,21 +37,24 @@ public class AccelerateFlywheel extends ReferencingCommand{
     protected void execute(){
         shooterSubsystem.setFlywheelByMode(1);
         shooterSubsystem.setAccelerated(true);
+        shooterSubsystem.logData(1);
         System.out.println("AccelerateFlywheel executed");
     }
 
     @Override
     protected boolean isFinished(){
-        return true;
+        return false;
     }
 
     @Override
     protected void end(){
+        shooterSubsystem.setFlywheelByMode(0);
         System.out.println("AccelerateFlywheel end");
     }
 
     @Override
     protected void interrupted(){
+        shooterSubsystem.setFlywheelByMode(0);
         System.out.println("AccelerateFlywheel interrupted");
     }
 }

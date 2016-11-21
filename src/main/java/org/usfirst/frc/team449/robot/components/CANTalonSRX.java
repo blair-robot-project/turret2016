@@ -20,14 +20,10 @@ public class CANTalonSRX extends Component {
         canTalon.configNominalOutputVoltage
                 (+m.nominalOutVoltage, -m.nominalOutVoltage);
         canTalon.configPeakOutputVoltage(+m.peakOutVoltage,
-        //        0.0f);
                 -m.peakOutVoltage);
         canTalon.setProfile(m.profile);
-        canTalon.setP(m.kP);
-        canTalon.setI(m.kI);
-        canTalon.setD(m.kD);
-        canTalon.setF(m.kF);
-        canTalon.setPID(m.kP, m.kI, m.kD, m.kF, 0, 0, 0);
+        double c = m.kF * 1023. / 409.60;
+        canTalon.setPID(m.kP, m.kI, m.kD, c, 0, 0, 0);
         canTalon.setProfile(0);
         canTalon.ConfigFwdLimitSwitchNormallyOpen(m.fwdLimNormOpen);
         canTalon.ConfigRevLimitSwitchNormallyOpen
@@ -66,7 +62,6 @@ public class CANTalonSRX extends Component {
     }
 
     public double getEncVelocity() {
-        //System.out.println("Enc Vel: " + canTalon.getEncVelocity());
         return canTalon.getEncVelocity();
     }
 
@@ -87,11 +82,11 @@ public class CANTalonSRX extends Component {
         canTalon.changeControlMode(mode);
     }
 
-    public boolean isFwdSwitchClosed(){
+    public boolean isFwdSwitchClosed() {
         return canTalon.isFwdLimitSwitchClosed();
     }
 
-    public boolean isRevSwitchClosed(){
+    public boolean isRevSwitchClosed() {
         return canTalon.isRevLimitSwitchClosed();
     }
 
@@ -99,7 +94,7 @@ public class CANTalonSRX extends Component {
         canTalon.set(sp);
     }
 
-    public void enableBrakeMode (boolean brake){
+    public void enableBrakeMode(boolean brake) {
         canTalon.enableBrakeMode(brake);
     }
 

@@ -29,9 +29,9 @@ public class DefaultFlywheel extends ReferencingCommand {
 
     @Override
     protected void initialize() {
-        shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.PercentVbus);
+        shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.Speed);
         shooterSubsystem.setFlywheelEncPos(0);
-        shooterSubsystem.setFlywheelByMode(0); //WITH THIS ONE
+        shooterSubsystem.setFlywheelByMode(-1); //WITH THIS ONE
         System.out.println("DefaultTurn initialized");
     }
 
@@ -39,8 +39,8 @@ public class DefaultFlywheel extends ReferencingCommand {
     @Override
     protected void execute() {
         //shooterSubsystem.setFlywheelByMode(revPerSecToEnc(oi.getJoyValue()));
-        shooterSubsystem.setFlywheelByMode(oi.getJoyValue());
-        shooterSubsystem.logData();
+//        shooterSubsystem.setFlywheelByMode(oi.getJoyValue());
+        shooterSubsystem.logData(oi.getJoyValue());
         SmartDashboard.putNumber("Joystick", oi.getJoyValue());
         SmartDashboard.putNumber("Output Voltage", shooterSubsystem.getFlywheelOutputVoltage());
         //SmartDashboard.putNumber("Velocity Setpoint", oi.getJoyValue()*MAX_SPEED);
