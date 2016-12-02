@@ -23,11 +23,33 @@ public class CANTalonSRX extends Component {
                 -m.peakOutVoltage);
         canTalon.setProfile(m.profile);
 
-        /* c is the true kF term. We assign our true kF term to be our config kF scaled by the RPS / native units. This
-         * allows us to put kF as the desired RPS jump in the configuration file.
+        /*
+        p = 1023 <edges> * response <unit-less> / maxError <<native> / <100 ms>>
+
+        response = kP   // scale factor to increase by for a given error; set in cfg
+
+        maxError = 3.072559 <<rev>/<sec>> // measured
+        maxError = 3.072559 <<rev> / <sec>> * 4096 <<native> / <rev>> * .1 <<sec> / <100 ms>>
+        maxError = 3.072559 * 4096 * 0.1 <native> / <100ms>
+
+        p = 1023 * kP / (30.72559 * 4096 * 0.1) <edges> *  <100 ms> / <native>
          */
-        double c = m.kF * 1023. / 409.60;
-        canTalon.setPID(m.kP, m.kI, m.kD, c, 0, 0, 0);
+        double p = m.kP * 1023 / (30.72559 * 4096 * 0.1);
+
+        /**/
+        double i = m.kI;
+
+        /**/
+        double d = m.kD;
+
+        /*
+        f = 64 rev/sec * 60 sec/min * 1/60 min/sec * 1 / 10 (sec / <100 ms>) * 4096 native / rev
+        f = 64 * 60  * 1/60  * 1 / 10 ( / <100 ms>) * 4096 native;
+        f = 64 / 10 * 4096 (native / <100 ms>)
+        */
+        double f = 64 * 4096 / 10;
+
+        canTalon.setPID(p, i, d, f, 0, 0, 0);
         canTalon.setProfile(0);
 
         canTalon.ConfigFwdLimitSwitchNormallyOpen(m.fwdLimNormOpen);
