@@ -136,15 +136,15 @@ public class ShooterSubsystem extends MappedSubsystem {
         return flywheel.getOutputVoltage();
     }
 
-    public double getError() {
+    public double getFlywheelError() {
         return flywheel.getError();
     }
 
-    public boolean isEnabled() {
+    public boolean isFlywheelEnabled() {
         return flywheel.isEnabled();
     }
 
-    public boolean isAlive() {
+    public boolean isFlywheelAlive() {
         return flywheel.isAlive();
     }
 
@@ -160,6 +160,8 @@ public class ShooterSubsystem extends MappedSubsystem {
             sb.append(sp);
             sb.append(",");
             sb.append(getFlywheelEncVel()/409.6);
+            sb.append(",");
+            sb.append(getFlywheelError());
             sb.append("\n");
             fw.write(sb.toString());
             fw.close();

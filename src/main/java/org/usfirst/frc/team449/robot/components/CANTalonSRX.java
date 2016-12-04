@@ -47,7 +47,7 @@ public class CANTalonSRX extends Component {
         f = 64 * 60  * 1/60  * 1 / 10 ( / <100 ms>) * 4096 native;
         f = 64 / 10 * 4096 (native / <100 ms>)
         */
-        double f = 64 * 4096 / 10;
+        double f = m.kF * 4096 / 10;
 
         canTalon.setPID(p, i, d, f, 0, 0, 0);
         canTalon.setProfile(0);
