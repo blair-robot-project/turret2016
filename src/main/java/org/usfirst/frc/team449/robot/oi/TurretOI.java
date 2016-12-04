@@ -46,8 +46,8 @@ public class TurretOI extends OISubsystem implements
      */
     public TurretOI(RobotMap map) {
         super(map);
-        turntableJ = new Joystick(7);
-        flywheelJ = new Joystick(0);
+        turntableJ = new Joystick(0);
+        flywheelJ = new Joystick(1);
         injectorB = new JoystickButton(turntableJ,2);
         flywheelB = new JoystickButton(turntableJ,1);
         turntableThrottle = new SmoothedThrottle(turntableJ, 2);

@@ -3,6 +3,7 @@ package org.usfirst.frc.team449.robot.mechanism.turntable
 
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.mechanism.turntable
@@ -48,9 +49,11 @@ public class BangCalibrate extends ReferencingCommand {
                 finished = true;
                 turntableSubsystem.setByMode(0);
                 turntableSubsystem.setEncPos((int) (turntableSubsystem.getEncPosition() / 2));
-                turntableSubsystem.setLimit((long) (Math.abs(turntableSubsystem.getEncPosition())*0.98));
+                turntableSubsystem.setLimit((long) (Math.abs(turntableSubsystem.getEncPosition()) * 0.49));
+                SmartDashboard.putNumber("Limit", turntableSubsystem.getLimit());
             }
         }
+        SmartDashboard.putNumber("Turntable Encoder", turntableSubsystem.getEncPosition());
     }
 
     @Override

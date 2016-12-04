@@ -23,7 +23,7 @@ public class TurntableSubsystem extends MappedSubsystem {
     /**
      * Largest magnitude position possible.
      */
-    private long limit;
+    private long limit = 1;
 
     /**
      * Creates a mapped subsystem and sets its map
@@ -81,6 +81,14 @@ public class TurntableSubsystem extends MappedSubsystem {
 
     public void setLimit(long limit){
         this.limit = limit;
+    }
+
+    public double getError(){
+        return canTalonSRX.getClosedLoopError();
+    }
+
+    public double getOutputVoltage() {
+        return canTalonSRX.getOutputVoltage();
     }
 
     @Override
