@@ -20,6 +20,10 @@ public class TurntableSubsystem extends MappedSubsystem {
      * OI to get throttle from
      */
     private TurntableOI oi;
+    /**
+     * Largest magnitude position possible.
+     */
+    private long limit;
 
     /**
      * Creates a mapped subsystem and sets its map
@@ -27,14 +31,12 @@ public class TurntableSubsystem extends MappedSubsystem {
      * @param map the map of constants relevant to this
      *            subsystem
      */
-    public TurntableSubsystem(RobotMap map, TurntableOI
-            oi) {
+    public TurntableSubsystem(RobotMap map, TurntableOI oi) {
         super(map);
         TurntableMap turntableMap = (TurntableMap) map;
         this.oi = oi;
         canTalonSRX = new CANTalonSRX(turntableMap.canTalonSRXMap);
-        System.out.println("TurntableSubsystem " +
-                "constructed");
+        System.out.println("TurntableSubsystem constructed");
     }
 
     /**
@@ -73,13 +75,18 @@ public class TurntableSubsystem extends MappedSubsystem {
         return canTalonSRX.isRevSwitchClosed();
     }
 
+    public long getLimit(){
+        return limit;
+    }
+
+    public void setLimit(long limit){
+        this.limit = limit;
+    }
+
     @Override
     protected void initDefaultCommand() {
-        System.out.println("TurntableSubsystem " +
-                "initDefaultCommand started");
-        setDefaultCommand(new DefaultTurntableGroup(this,
-         oi       ));
-        System.out.println("TurntableSubsystem " +
-                "initDefaultCommand finished");
+        System.out.println("TurntableSubsystem initDefaultCommand started");
+        setDefaultCommand(new DefaultTurntableGroup(this, oi));
+        System.out.println("TurntableSubsystem initDefaultCommand finished");
     }
 }

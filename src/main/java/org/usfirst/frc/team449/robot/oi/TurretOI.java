@@ -2,9 +2,18 @@ package org.usfirst.frc.team449.robot.oi;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team449.robot.RobotMap;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.AccelerateFlywheel;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DecelerateFlywheel;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.IntakeBall;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.StopIntakeBall;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
+import org.usfirst.frc.team449.robot.oi.components.SmoothedThrottle;
+import org.usfirst.frc.team449.robot.oi.components.Throttle;
+
+import static org.usfirst.frc.team449.robot.Robot.shooterSubsystem;
 
 /**
  * OI used to control the turret
@@ -15,6 +24,8 @@ public class TurretOI extends OISubsystem implements
      * Joystick used to control the turntable
      */
     private Joystick turntableJ;
+
+    private Throttle turntableThrottle;
     /**
      * Joystick used to control the flywheel
      */
@@ -35,10 +46,11 @@ public class TurretOI extends OISubsystem implements
      */
     public TurretOI(RobotMap map) {
         super(map);
-        //turntableJ = new Joystick(7);
+        turntableJ = new Joystick(7);
         flywheelJ = new Joystick(0);
-        //injectorB = new JoystickButton(turntableJ,2);
-        //flywheelB = new JoystickButton(turntableJ,1);
+        injectorB = new JoystickButton(turntableJ,2);
+        flywheelB = new JoystickButton(turntableJ,1);
+        turntableThrottle = new SmoothedThrottle(turntableJ, 2);
     }
 
     /**
@@ -48,13 +60,10 @@ public class TurretOI extends OISubsystem implements
      * Does not do anything right now (no buttons to map)
      */
     public void mapButtons() {
-        /*
-        injectorB.whenPressed(new IntakeBall(Robot
-                .shooterSubsystem));
+        injectorB.whenPressed(new IntakeBall(shooterSubsystem));
         injectorB.whenReleased(new StopIntakeBall(shooterSubsystem));
         flywheelB.whenPressed(new AccelerateFlywheel(shooterSubsystem));
         flywheelB.whenReleased(new DecelerateFlywheel(shooterSubsystem));
-        */
     }
 
     /**
@@ -62,8 +71,7 @@ public class TurretOI extends OISubsystem implements
      */
     @Override
     public double getTurntableVelocity() {
-        //return turntableJ.getRawAxis(1);
-        return 0;
+        return turntableThrottle.getValue();
     }
 
     public double getJoyValue(){

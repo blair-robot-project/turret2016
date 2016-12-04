@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable
         .commands;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.Robot;
@@ -28,14 +29,16 @@ public class DefaultTurn extends ReferencingCommand {
 
     @Override
     protected void initialize() {
-        turntableSubsystem.setByMode(0.0);
+        turntableSubsystem.setControlMode(CANTalon.TalonControlMode.Position);
+        turntableSubsystem.setByMode(0);
         System.out.println("DefaultTurn initialized");
     }
 
     @Override
     protected void execute() {
-        //System.out.println("THROTTLE: " + oi.getTurntableVelocity());
-        //turntableSubsystem.setByMode(oi.getTurntableVelocity());
+        System.out.println("Throttle: " + oi.getTurntableVelocity());
+        turntableSubsystem.setByMode(oi.getTurntableVelocity()*turntableSubsystem.getLimit());
+        SmartDashboard.putNumber("Throttle", oi.getTurntableVelocity());
         SmartDashboard.putNumber("Turntable Encoder", turntableSubsystem.getEncPosition());
     }
 

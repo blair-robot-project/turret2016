@@ -18,9 +18,7 @@ public class BangCalibrate extends ReferencingCommand {
 
     private TurntableSubsystem turntableSubsystem;
 
-    public BangCalibrate(TurntableSubsystem
-                                 turntableSubsystem,
-                         double timeout) {
+    public BangCalibrate(TurntableSubsystem turntableSubsystem, double timeout) {
         super(turntableSubsystem, timeout);
         requires(Robot.turntableSubsystem);
         this.turntableSubsystem = turntableSubsystem;
@@ -49,8 +47,8 @@ public class BangCalibrate extends ReferencingCommand {
             if (turntableSubsystem.isRevSwitchClosed()) {
                 finished = true;
                 turntableSubsystem.setByMode(0);
-                turntableSubsystem.setEncPos
-                ((int) (turntableSubsystem.getEncPosition() / 2));
+                turntableSubsystem.setEncPos((int) (turntableSubsystem.getEncPosition() / 2));
+                turntableSubsystem.setLimit((long) (Math.abs(turntableSubsystem.getEncPosition())*0.98));
             }
         }
     }
