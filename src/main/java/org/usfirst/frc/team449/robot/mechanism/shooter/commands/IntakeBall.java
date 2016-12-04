@@ -35,7 +35,7 @@ public class IntakeBall extends ReferencingCommand{
 
     @Override
     protected void execute(){
-        shooterSubsystem.setIntakeByMode(0.2);
+        shooterSubsystem.setIntakeByMode(1);
         shooterSubsystem.setIntaking(true);
         System.out.println("IntakeBall executed");
     }

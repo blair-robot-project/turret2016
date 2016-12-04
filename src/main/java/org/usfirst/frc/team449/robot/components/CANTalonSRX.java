@@ -37,7 +37,7 @@ public class CANTalonSRX extends Component {
         double p = (m.kP * 1023) / (30.72559 * 4096 * 0.1);
 
         /**/
-        double i = m.kI;
+        double i = (m.kI * 1023) / (30.72559 * 4096 * 0.1);
 
         /**/
         double d = m.kD;

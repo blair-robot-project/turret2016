@@ -70,7 +70,7 @@ public class ShooterSubsystem extends MappedSubsystem {
     protected void initDefaultCommand() {
         System.out.println("ShooterSubsystem initDefaultCommand started");
         try (PrintWriter writer = new PrintWriter("/home/lvuser/shooterLog.csv")) {
-            writer.println("Time,Joystick,EncVal");
+            writer.println("Time,Setpoint,EncVel,Error");
             writer.close();
         }catch (IOException e) {
             e.printStackTrace();
