@@ -34,7 +34,7 @@ public class CANTalonSRX extends Component {
 
         p = 1023 * kP / (30.72559 * 4096 * 0.1) <edges> *  <100 ms> / <native>
          */
-        double p = m.kP * 1023 / (30.72559 * 4096 * 0.1);
+        double p = (m.kP * 1023) / (30.72559 * 4096 * 0.1);
 
         /**/
         double i = m.kI;
@@ -43,11 +43,12 @@ public class CANTalonSRX extends Component {
         double d = m.kD;
 
         /*
-        f = 64 rev/sec * 60 sec/min * 1/60 min/sec * 1 / 10 (sec / <100 ms>) * 4096 native / rev
-        f = 64 * 60  * 1/60  * 1 / 10 ( / <100 ms>) * 4096 native;
-        f = 64 / 10 * 4096 (native / <100 ms>)
+        f = max output / max speed <native units>
+        f = 1023 / (64 rev/sec * 60 sec/min * 1/60 min/sec * 1 / 10 (sec / <100 ms>) * 4096 native / rev)
+        f = 1023 / (64 * 60  * 1/60  * 1 / 10 ( / <100 ms>) * 4096 native)
+        f = 1023/ (64 / 10 * 4096 (native / <100 ms>))
         */
-        double f = m.kF * 4096 / 10;
+        double f = (double) (1023.0) / ((double) (m.kF) * (double) (409.6));
 
         canTalon.setPID(p, i, d, f, 0, 0, 0);
         canTalon.setProfile(0);
@@ -126,11 +127,19 @@ public class CANTalonSRX extends Component {
      * @param sp setpoint
      */
     public void setByMode(double sp) {
-        canTalon.set(sp);
+        if(getControlMode() == CANTalon.TalonControlMode.Speed){
+            canTalon.set(sp * 60);
+        } else {
+            canTalon.set(sp);
+        }
     }
 
     public void enableBrakeMode(boolean brake) {
         canTalon.enableBrakeMode(brake);
+    }
+
+    public double getSetpoint(){
+        return canTalon.getSetpoint();
     }
 
     @Override

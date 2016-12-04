@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.mechanism.shooter;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.MappedSubsystem;
 import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
@@ -15,6 +16,9 @@ import java.io.PrintWriter;
  * Shooter Subsystem
  */
 public class ShooterSubsystem extends MappedSubsystem {
+
+    private final double NATIVE = 409.6;
+
     /**
      * The motor on the lower bar to suck up the ball.
      */
@@ -120,10 +124,6 @@ public class ShooterSubsystem extends MappedSubsystem {
         return flywheel.getEncVelocity();
     }
 
-    public double getFlywheelVoltage(){
-        return flywheel.getOutputVoltage();
-    }
-
     public double getFlywheelEncPos(){
         return flywheel.getEncPosition();
     }
@@ -136,8 +136,8 @@ public class ShooterSubsystem extends MappedSubsystem {
         return flywheel.getOutputVoltage();
     }
 
-    public double getFlywheelError() {
-        return flywheel.getError();
+    public double getFlywheelClosedLoopError() {
+        return flywheel.getClosedLoopError();
     }
 
     public boolean isFlywheelEnabled() {
@@ -146,6 +146,10 @@ public class ShooterSubsystem extends MappedSubsystem {
 
     public boolean isFlywheelAlive() {
         return flywheel.isAlive();
+    }
+
+    public double getFlywheelSetpoint(){
+        return flywheel.getSetpoint();
     }
 
     public CANTalon.TalonControlMode getFlywheelControlMode() {
@@ -158,10 +162,14 @@ public class ShooterSubsystem extends MappedSubsystem {
             sb.append((System.nanoTime() - startTime)/100);
             sb.append(",");
             sb.append(sp);
+            SmartDashboard.putNumber("Flywheel Setpoint", getFlywheelSetpoint()/60);
             sb.append(",");
-            sb.append(getFlywheelEncVel()/409.6);
+            sb.append(getFlywheelEncVel()/NATIVE);
+            SmartDashboard.putNumber("Flywheel Velocity", getFlywheelEncVel()/NATIVE);
             sb.append(",");
-            sb.append(getFlywheelError());
+            sb.append(getFlywheelClosedLoopError()/NATIVE);
+            SmartDashboard.putNumber("Flywheel Error", getFlywheelClosedLoopError()/NATIVE);
+            SmartDashboard.putNumber("Flywheel Output Voltage", getFlywheelOutputVoltage());
             sb.append("\n");
             fw.write(sb.toString());
             fw.close();
