@@ -1,6 +1,6 @@
 {
   "components": {},
-  "MechanismMap" : {
+  "MechanismMap": {
     "components": {},
     "TurntableMap": {
       "components": {
@@ -33,7 +33,7 @@
         }
       }
     },
-    "ShooterMap":{
+    "ShooterMap": {
       "components": {
         "CANTalonSRXMap": {
           "instances": {
@@ -60,7 +60,7 @@
               "revSoftLimVal": -0.1,
               "brakeMode": true
             },
-            "flywheelMap":{
+            "flywheelMap": {
               "port": 1,
               "feedbackDevice": 7,
               "reverseSensor": true,

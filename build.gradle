@@ -1,14 +1,14 @@
 buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "GradleRIO"
-            url = "http://dev.imjac.in/maven"
-        }
-    }
-    dependencies {
-        classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+'
-    }
+	repositories {
+		mavenCentral()
+		maven {
+			name = "GradleRIO"
+			url = "http://dev.imjac.in/maven"
+		}
+	}
+	dependencies {
+		classpath group: 'jaci.openrio.gradle', name: 'GradleRIO', version: '+'
+	}
 }
 
 apply plugin: 'java'
@@ -23,59 +23,59 @@ gradlerio.robotClass = "org.usfirst.frc.team449.robot.Robot"   //The class for t
 gradlerio.team = "449"
 
 allprojects {
-    tasks.withType(Javadoc).all { enabled = false }
+	tasks.withType(Javadoc).all { enabled = false }
 }
 
 repositories {
-    mavenCentral()
-    maven {
-        name = "GradleRio"
-        url = "http://dev.imjac.in/maven"
-    }
+	mavenCentral()
+	maven {
+		name = "GradleRio"
+		url = "http://dev.imjac.in/maven"
+	}
 
-    maven {
-        name = "WPILib"
-        url = "http://first.wpi.edu/FRC/roborio/maven/release"
-    }
-    /*flatDir {
-        dirs System.properties['user.home'] + '/wpilib/java/current/lib'
-    }*/
+	maven {
+		name = "WPILib"
+		url = "http://first.wpi.edu/FRC/roborio/maven/release"
+	}
+	/*flatDir {
+		dirs System.properties['user.home'] + '/wpilib/java/current/lib'
+	}*/
 }
 
 dependencies {
-    compile group: 'edu.wpi.first.wpilibj', name:'wpilibJavaFinal', version:'0.1.0-SNAPSHOT'
-    compile group:'edu.wpi.first.wpilib.networktables.java', name:'NetworkTables', version:'3.0.0-SNAPSHOT'
-    compile project(':449-central-repo')
+	compile group: 'edu.wpi.first.wpilibj', name: 'wpilibJavaFinal', version: '0.1.0-SNAPSHOT'
+	compile group: 'edu.wpi.first.wpilib.networktables.java', name: 'NetworkTables', version: '3.0.0-SNAPSHOT'
+	compile project(':449-central-repo')
 }
 
 task convertFiles << {
-    fileTree("./src/main/resources").matching { include "**/*.json" }.each { aFile ->
-        exec {
-            commandLine 'dos2unix'
-            args aFile.absolutePath
-        }
-    }
+	fileTree("./src/main/resources").matching { include "**/*.json" }.each { aFile ->
+		exec {
+			commandLine 'dos2unix'
+			args aFile.absolutePath
+		}
+	}
 }
 
 gradlerio {
-    deployers += [to: "/home/lvuser/cfg.json", from: './src/main/resources/cfg.json']
+	deployers += [to: "/home/lvuser/cfg.json", from: './src/main/resources/cfg.json']
 }
 
 def robotManifest = {
-    attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
-    attributes 'Robot-Class': gradlerio.robotClass
+	attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase'
+	attributes 'Robot-Class': gradlerio.robotClass
 }
 
 jar {
-    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    manifest robotManifest
+	from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	manifest robotManifest
 }
 
 task genJavadoc(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
+	classifier = 'javadoc'
+	from javadoc.destinationDir
 }
 
 artifacts {
-    archives genJavadoc
+	archives genJavadoc
 }
