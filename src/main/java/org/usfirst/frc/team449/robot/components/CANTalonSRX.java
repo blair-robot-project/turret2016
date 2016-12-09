@@ -182,7 +182,7 @@ public class CANTalonSRX extends Component {
 	 */
 	public void setSpeed(double velocitySp) {
 		canTalon.changeControlMode(CANTalon.TalonControlMode.Speed);
-		canTalon.set(velocitySp);
+		canTalon.set(velocitySp * 60); // 60 converts from RPS to RPM, TODO figure out where the 60 should actually go
 	}
 
 	public void enableBrakeMode(boolean brake) {
