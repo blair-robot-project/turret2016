@@ -10,6 +10,11 @@ public class CANTalonSRX extends Component {
 
 	CANTalon canTalon;
 
+	protected double kP;
+	protected double kI;
+	protected double kD;
+	protected double kF;
+
 	public CANTalonSRX(RobotMap.CANTalonSRXMap m) {
 		System.out.println(m.port);
 		canTalon = new CANTalon(m.port);
@@ -23,36 +28,13 @@ public class CANTalonSRX extends Component {
 				-m.peakOutVoltage);
 		canTalon.setProfile(m.profile);
 
-        /*
-        p = 1023 <edges> * response <unit-less> / maxError <<native> / <100 ms>>
+		kP = m.kP;
+		kI = m.kI;
+		kD = m.kD;
+		kF = m.kF;
+		setPIDF(m.kP, m.kI, m.kD, m.kF);
+		canTalon.setPID(kP, kI, kD, kF, 0, 0, 0);
 
-        response = kP   // scale factor to increase by for a given error; set in cfg
-
-        maxError = 3.072559 <<rev>/<sec>> // measured
-        maxError = 3.072559 <<rev> / <sec>> * 4096 <<native> / <rev>> * .1 <<sec> / <100 ms>>
-        maxError = 3.072559 * 4096 * 0.1 <native> / <100ms>
-
-        p = 1023 * kP / (30.72559 * 4096 * 0.1) <edges> *  <100 ms> / <native>
-         */
-		//        double p = (m.kP * 1023) / (30.72559 * 4096 * 0.1);
-
-		double p = (m.kP * 2048 / 1.4e6);
-
-        /**/
-		double i = (m.kI * 1023) / (30.72559 * 4096 * 0.1);
-
-        /**/
-		double d = m.kD;
-
-        /*
-        f = max output / max speed <native units>
-        f = 1023 / (64 rev/sec * 60 sec/min * 1/60 min/sec * 1 / 10 (sec / <100 ms>) * 4096 native / rev)
-        f = 1023 / (64 * 60  * 1/60  * 1 / 10 ( / <100 ms>) * 4096 native)
-        f = 1023/ (64 / 10 * 4096 (native / <100 ms>))
-        */
-		double f = (double) (1023.0) / ((double) (m.kF) * (double) (409.6));
-
-		canTalon.setPID(p, i, d, f, 0, 0, 0);
 		canTalon.setProfile(0);
 
 		canTalon.ConfigFwdLimitSwitchNormallyOpen(m.fwdLimNormOpen);
@@ -65,6 +47,35 @@ public class CANTalonSRX extends Component {
 		canTalon.enableReverseSoftLimit(m.revSoftLimEnabled);
 		canTalon.setReverseSoftLimit(m.revSoftLimVal);
 		canTalon.enableBrakeMode(m.brakeMode);
+	}
+
+	/**
+	 * Method called in the constructor that sets the true PID values before they are handed to the Talon's internal
+	 * PID controller.
+	 * <p>
+	 * When called in the constructor, this method takes the map's PIDF values as its arguments, scales them, and sticks
+	 * them in the kP, kI, kD, kF fields. Later in the constructor, the Talon is given those fields as the final PIDF.
+	 * <p>
+	 * By default, the map PIDF values are untouched before they go into the Talon. However, you may want to specify
+	 * a scaling factor between the map PIDF and the PIDF that is fed to the Talon. When you are PIDF tuning, you want
+	 * to think of changing PIDF as fractions of a full response. However, robots have intrinsic scaling factors between
+	 * the input units and the measured units and PIDF values, so this method allows you to specify external scaling
+	 * factors so that you can have your fractional PIDF in one place on the map and your scaling in another place in
+	 * the map.
+	 * <p>
+	 * To scale PIDF between the map and the Talon, override this method and change what the PIDF fields are assigned
+	 * to.
+	 * <p>
+	 * Note that true PIDF have already been assigned for the first time in the constructor. If you do not want to scale
+	 * anything, you do not need to fill out this method, and if you only want to scale one value, you can write in just
+	 * that one value when you override this.
+	 *
+	 * @param mkP map kP
+	 * @param mkI map kI
+	 * @param mkD map kD
+	 * @param mkF map KF
+	 */
+	public void setPIDF(double mkP, double mkI, double mkD, double mkF) {
 	}
 
 	public double getFGain() {
@@ -81,6 +92,11 @@ public class CANTalonSRX extends Component {
 
 	public CANTalon.TalonControlMode getControlMode() {
 		return canTalon.getControlMode();
+	}
+
+	public void setControlMode(CANTalon.TalonControlMode
+			                           mode) {
+		canTalon.changeControlMode(mode);
 	}
 
 	public void setEncPos(int pos) {
@@ -117,11 +133,6 @@ public class CANTalonSRX extends Component {
 
 	public double getError() {
 		return canTalon.getError();
-	}
-
-	public void setControlMode(CANTalon.TalonControlMode
-			                           mode) {
-		canTalon.changeControlMode(mode);
 	}
 
 	public boolean isFwdSwitchClosed() {
