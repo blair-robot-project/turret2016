@@ -32,7 +32,7 @@ public class VBusCennter extends ReferencingCommand {
 		turntableSubsystem
 				.setControlMode(CANTalon
 						.TalonControlMode.PercentVbus);
-		turntableSubsystem.setByMode(0.5);
+		turntableSubsystem.setPercentVbus(0.5);
 
 		SmartDashboard.putNumber("Turntable Encoder", turntableSubsystem.getEncPosition());
 		SmartDashboard.putNumber("Turtable Position", turntableSubsystem.getPosition());

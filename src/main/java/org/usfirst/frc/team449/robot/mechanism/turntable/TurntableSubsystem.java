@@ -73,14 +73,8 @@ public class TurntableSubsystem extends MappedSubsystem {
 		return canTalonSRX.getAnalogPosition();
 	}
 
-	/**
-	 * Feed a number to the speed controller. Either
-	 * voltage command or PID setpoint
-	 *
-	 * @param sp
-	 */
-	public void setByMode(double sp) {
-		canTalonSRX.setByMode(sp);
+	public void setPercentVbus(double percentVbus) {
+		canTalonSRX.setPercentVbus(percentVbus);
 	}
 
 	public void setPosition(double sp) {

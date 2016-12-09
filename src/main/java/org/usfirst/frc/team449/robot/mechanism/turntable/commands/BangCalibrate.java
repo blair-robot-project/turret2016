@@ -35,25 +35,22 @@ public class BangCalibrate extends ReferencingCommand {
 	@Override
 	protected void execute() {
 		if (!hitLeft) {
-			turntableSubsystem
-					.setControlMode(CANTalon
-							.TalonControlMode.PercentVbus);
-			turntableSubsystem.setByMode(0.5);
+			turntableSubsystem.setPercentVbus(0.5);
 			if (turntableSubsystem.isFwdSwitchClosed()) {
 				hitLeft = true;
 				turntableSubsystem.setEncPos(0);
 			}
 		} else if (!finished) {
-			turntableSubsystem.setByMode(-0.5);
+			turntableSubsystem.setPercentVbus(-0.5);
 			if (turntableSubsystem.isRevSwitchClosed()) {
 				finished = true;
-				turntableSubsystem.setByMode(0);
+				turntableSubsystem.setPercentVbus(0);
 				turntableSubsystem.setEncPos((int) (turntableSubsystem.getEncPosition() / 2));
 				turntableSubsystem.setLimit((long) (Math.abs(turntableSubsystem.getEncPosition()) * 0.49));
 				System.out.println("FULL SWEEP " + turntableSubsystem.getEncPosition());
 			}
 		} else if (finished && Math.abs(turntableSubsystem.getEncPosition()) > 1000) {
-			turntableSubsystem.setByMode(0.5);
+			turntableSubsystem.setPercentVbus(0.5);
 		} else {
 			actuallyFinished = true;
 			System.out.println("ACTUALLY FINISHED");

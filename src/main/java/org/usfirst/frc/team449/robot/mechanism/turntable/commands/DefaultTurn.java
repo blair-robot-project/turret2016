@@ -29,7 +29,7 @@ public class DefaultTurn extends ReferencingCommand {
 		//        double setpoint = 0.00025 * .75;
 		double setpoint = 1. / 7.;
 		turntableSubsystem.setControlMode(CANTalon.TalonControlMode.Position);
-		turntableSubsystem.setByMode(setpoint);
+		turntableSubsystem.setPosition(setpoint);
 		System.out.println("DefaultTurn initialized");
 	}
 
