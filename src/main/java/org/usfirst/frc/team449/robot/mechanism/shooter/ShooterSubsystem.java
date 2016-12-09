@@ -17,164 +17,164 @@ import java.io.PrintWriter;
  */
 public class ShooterSubsystem extends MappedSubsystem {
 
-    private final double NATIVE = 409.6;
+	private final double NATIVE = 409.6;
 
-    /**
-     * The motor on the lower bar to suck up the ball.
-     */
-    private CANTalonSRX intake;
-    /**
-     * The motor on the upper bar that spins at high speed to launch the ball.
-     */
-    private CANTalonSRX flywheel;
-    /**
-     * OI to get the fire button from
-     */
-    private ShooterOI oi;
-    /**
-     * Whether there is a ball in the shooter.
-     */
-    private boolean hasBall;
-    /**
-     * Whether the intake is currently sucking in a ball
-     */
-    private boolean isIntaking;
-    /**
-     * Whether the flywheel uis accelerated or not
-     */
-    private boolean isAccelerated;
-    /**
-     * The time when the subsystem was initiated
-     */
-    private long startTime;
+	/**
+	 * The motor on the lower bar to suck up the ball.
+	 */
+	private CANTalonSRX intake;
+	/**
+	 * The motor on the upper bar that spins at high speed to launch the ball.
+	 */
+	private CANTalonSRX flywheel;
+	/**
+	 * OI to get the fire button from
+	 */
+	private ShooterOI oi;
+	/**
+	 * Whether there is a ball in the shooter.
+	 */
+	private boolean hasBall;
+	/**
+	 * Whether the intake is currently sucking in a ball
+	 */
+	private boolean isIntaking;
+	/**
+	 * Whether the flywheel uis accelerated or not
+	 */
+	private boolean isAccelerated;
+	/**
+	 * The time when the subsystem was initiated
+	 */
+	private long startTime;
 
-    /**
-     * Creates a mapped subsystem and sets its map
-     *
-     * @param map the map of constants relevant to this
-     *            subsystem
-     */
-    public ShooterSubsystem(RobotMap map, ShooterOI oi) {
-        super(map);
-        ShooterMap shooterMap = (ShooterMap) map;
-        this.oi = oi;
-        intake = new CANTalonSRX(shooterMap.intakeMap);
-        flywheel = new CANTalonSRX(shooterMap.flywheelMap);
-        hasBall = false;
-        isIntaking = false;
-        isAccelerated = false;
-        System.out.println("ShooterSubsystem constructed");
-    }
+	/**
+	 * Creates a mapped subsystem and sets its map
+	 *
+	 * @param map the map of constants relevant to this
+	 *            subsystem
+	 */
+	public ShooterSubsystem(RobotMap map, ShooterOI oi) {
+		super(map);
+		ShooterMap shooterMap = (ShooterMap) map;
+		this.oi = oi;
+		intake = new CANTalonSRX(shooterMap.intakeMap);
+		flywheel = new CANTalonSRX(shooterMap.flywheelMap);
+		hasBall = false;
+		isIntaking = false;
+		isAccelerated = false;
+		System.out.println("ShooterSubsystem constructed");
+	}
 
-    @Override
-    protected void initDefaultCommand() {
-        System.out.println("ShooterSubsystem initDefaultCommand started");
-        try (PrintWriter writer = new PrintWriter("/home/lvuser/shooterLog.csv")) {
-            writer.println("Time,Setpoint,EncVel,Error");
-            writer.close();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        startTime = System.nanoTime();
-        setDefaultCommand(new DefaultShooterGroup(this, oi));
-        System.out.println("ShooterSubsystem.initDefaultCommand finished");
-    }
+	@Override
+	protected void initDefaultCommand() {
+		System.out.println("ShooterSubsystem initDefaultCommand started");
+		try (PrintWriter writer = new PrintWriter("/home/lvuser/shooterLog.csv")) {
+			writer.println("Time,Setpoint,EncVel,Error");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		startTime = System.nanoTime();
+		setDefaultCommand(new DefaultShooterGroup(this, oi));
+		System.out.println("ShooterSubsystem.initDefaultCommand finished");
+	}
 
-    public void setIntaking(boolean isIntaking) {
-        this.isIntaking = isIntaking;
-    }
+	public void setIntaking(boolean isIntaking) {
+		this.isIntaking = isIntaking;
+	}
 
-    public void setAccelerated(boolean isAccelerated) {
-        this.isAccelerated = isAccelerated;
-    }
+	public void setAccelerated(boolean isAccelerated) {
+		this.isAccelerated = isAccelerated;
+	}
 
-    public void setFlywheelControlMode(CANTalon.TalonControlMode mode) {
-        flywheel.setControlMode(mode);
-    }
+	public void setFlywheelControlMode(CANTalon.TalonControlMode mode) {
+		flywheel.setControlMode(mode);
+	}
 
-    /**
-     * Wrapper on the flywheel's native CAN Talon set method.
-     *
-     * When controlling using PercentVBUS, -1 <= sp <= 1
-     * When controlling using Speed, sp is in RPM (note: revolutions per MINUTE, not second)
-     *
-     * @param sp setpoint
-     */
-    public void setFlywheelByMode(double sp) {
-        flywheel.setByMode(sp);
-    }
+	/**
+	 * Wrapper on the flywheel's native CAN Talon set method.
+	 * <p>
+	 * When controlling using PercentVBUS, -1 <= sp <= 1
+	 * When controlling using Speed, sp is in RPM (note: revolutions per MINUTE, not second)
+	 *
+	 * @param sp setpoint
+	 */
+	public void setFlywheelByMode(double sp) {
+		flywheel.setByMode(sp);
+	}
 
-    public void setFlywheelEncPos(int enc) {
-        flywheel.setEncPos(enc);
-    }
+	public void setFlywheelEncPos(int enc) {
+		flywheel.setEncPos(enc);
+	}
 
-    public void enableFlywheelBrakeMode(boolean brake) {
-        flywheel.enableBrakeMode(brake);
-    }
+	public void enableFlywheelBrakeMode(boolean brake) {
+		flywheel.enableBrakeMode(brake);
+	}
 
-    public void setIntakeControlMode(CANTalon.TalonControlMode mode) {
-        intake.setControlMode(mode);
-    }
+	public void setIntakeControlMode(CANTalon.TalonControlMode mode) {
+		intake.setControlMode(mode);
+	}
 
-    public void setIntakeByMode(double sp) {
-        intake.setByMode(sp);
-    }
+	public void setIntakeByMode(double sp) {
+		intake.setByMode(sp);
+	}
 
-    public double getFlywheelEncVel() {
-        return flywheel.getEncVelocity();
-    }
+	public double getFlywheelEncVel() {
+		return flywheel.getEncVelocity();
+	}
 
-    public double getFlywheelEncPos(){
-        return flywheel.getEncPosition();
-    }
+	public double getFlywheelEncPos() {
+		return flywheel.getEncPosition();
+	}
 
-    public double getFlywheelFGain() {
-        return flywheel.getFGain();
-    }
+	public double getFlywheelFGain() {
+		return flywheel.getFGain();
+	}
 
-    public double getFlywheelOutputVoltage() {
-        return flywheel.getOutputVoltage();
-    }
+	public double getFlywheelOutputVoltage() {
+		return flywheel.getOutputVoltage();
+	}
 
-    public double getFlywheelClosedLoopError() {
-        return flywheel.getClosedLoopError();
-    }
+	public double getFlywheelClosedLoopError() {
+		return flywheel.getClosedLoopError();
+	}
 
-    public boolean isFlywheelEnabled() {
-        return flywheel.isEnabled();
-    }
+	public boolean isFlywheelEnabled() {
+		return flywheel.isEnabled();
+	}
 
-    public boolean isFlywheelAlive() {
-        return flywheel.isAlive();
-    }
+	public boolean isFlywheelAlive() {
+		return flywheel.isAlive();
+	}
 
-    public double getFlywheelSetpoint(){
-        return flywheel.getSetpoint();
-    }
+	public double getFlywheelSetpoint() {
+		return flywheel.getSetpoint();
+	}
 
-    public CANTalon.TalonControlMode getFlywheelControlMode() {
-        return flywheel.getControlMode();
-    }
+	public CANTalon.TalonControlMode getFlywheelControlMode() {
+		return flywheel.getControlMode();
+	}
 
-    public void logData(double sp) {
-        try (FileWriter fw = new FileWriter("/home/lvuser/shooterLog.csv", true)) {
-            StringBuilder sb = new StringBuilder();
-            sb.append((System.nanoTime() - startTime)/100);
-            sb.append(",");
-            sb.append(sp);
-            SmartDashboard.putNumber("Flywheel Setpoint", getFlywheelSetpoint()/60);
-            sb.append(",");
-            sb.append(getFlywheelEncVel()/NATIVE);
-            SmartDashboard.putNumber("Flywheel Velocity", getFlywheelEncVel()/NATIVE);
-            sb.append(",");
-            sb.append(getFlywheelClosedLoopError()/NATIVE);
-            SmartDashboard.putNumber("Flywheel Error", getFlywheelClosedLoopError()/NATIVE);
-            SmartDashboard.putNumber("Flywheel Output Voltage", getFlywheelOutputVoltage());
-            sb.append("\n");
-            fw.write(sb.toString());
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	public void logData(double sp) {
+		try (FileWriter fw = new FileWriter("/home/lvuser/shooterLog.csv", true)) {
+			StringBuilder sb = new StringBuilder();
+			sb.append((System.nanoTime() - startTime) / 100);
+			sb.append(",");
+			sb.append(sp);
+			SmartDashboard.putNumber("Flywheel Setpoint", getFlywheelSetpoint() / 60);
+			sb.append(",");
+			sb.append(getFlywheelEncVel() / NATIVE);
+			SmartDashboard.putNumber("Flywheel Velocity", getFlywheelEncVel() / NATIVE);
+			sb.append(",");
+			sb.append(getFlywheelClosedLoopError() / NATIVE);
+			SmartDashboard.putNumber("Flywheel Error", getFlywheelClosedLoopError() / NATIVE);
+			SmartDashboard.putNumber("Flywheel Output Voltage", getFlywheelOutputVoltage());
+			sb.append("\n");
+			fw.write(sb.toString());
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

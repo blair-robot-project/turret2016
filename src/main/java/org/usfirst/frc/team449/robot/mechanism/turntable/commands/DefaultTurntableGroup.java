@@ -9,17 +9,18 @@ import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
  * Created by BlairRobot on 2016-11-07.
  */
 public class DefaultTurntableGroup extends ReferencingCommandGroup {
-    private TurntableOI oi;
-    public DefaultTurntableGroup(TurntableSubsystem
-                                         turntableSubsystem,
-                                 TurntableOI oi) {
-        super(turntableSubsystem);
-        requires(turntableSubsystem);
-        this.oi = oi;
+	private TurntableOI oi;
 
-//        addSequential(new BangCalibrate(turntableSubsystem, 10));
-//        addSequential(new VBusCennter(turntableSubsystem, 3));
-        addSequential(new DefaultTurn(turntableSubsystem, oi));
-        System.out.println("DONE WITH DEFAULT TURNTABLE GROUP");
-    }
+	public DefaultTurntableGroup(TurntableSubsystem
+			                             turntableSubsystem,
+	                             TurntableOI oi) {
+		super(turntableSubsystem);
+		requires(turntableSubsystem);
+		this.oi = oi;
+
+		//        addSequential(new BangCalibrate(turntableSubsystem, 10));
+		//        addSequential(new VBusCennter(turntableSubsystem, 3));
+		addSequential(new DefaultTurn(turntableSubsystem, oi));
+		System.out.println("DONE WITH DEFAULT TURNTABLE GROUP");
+	}
 }

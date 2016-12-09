@@ -11,25 +11,24 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * TODO put this in the central repo
  */
 public abstract class ReferencingCommandGroup extends
-        CommandGroup {
-    /**
-     * Subsystem to reference to
-     */
-    MappedSubsystem subsystem;
+		CommandGroup {
+	/**
+	 * Subsystem to reference to
+	 */
+	MappedSubsystem subsystem;
 
-    /**
-     * Instantiate the ReferencingCommandGroup
-     *
-     * @param mappedSubsystem the {@link MappedSubsystem}
-     *                        to feed to this
-     *                        {@code
-     *                        ReferencingCommandGroup}'s
-     *                        {@link ReferencingCommand}s
-     *
-     */
-    // TODO refactor mappedSubsystem to something SHORTER
-    public ReferencingCommandGroup(MappedSubsystem
-                                           mappedSubsystem) {
-        subsystem = mappedSubsystem;
-    }
+	/**
+	 * Instantiate the ReferencingCommandGroup
+	 *
+	 * @param mappedSubsystem the {@link MappedSubsystem}
+	 *                        to feed to this
+	 *                        {@code
+	 *                        ReferencingCommandGroup}'s
+	 *                        {@link ReferencingCommand}s
+	 */
+	// TODO refactor mappedSubsystem to something SHORTER
+	public ReferencingCommandGroup(MappedSubsystem
+			                               mappedSubsystem) {
+		subsystem = mappedSubsystem;
+	}
 }
