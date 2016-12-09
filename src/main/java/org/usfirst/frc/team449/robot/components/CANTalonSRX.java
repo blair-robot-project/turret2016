@@ -173,12 +173,11 @@ public class CANTalonSRX extends Component {
 	}
 
 	/**
-	 * Give a velocity setpoint
+	 * Give a velocity setpoint in RPS
 	 * Note: This method is called setSpeed since the TalonControlMode enum is called speed. However, the input argument
 	 * is signed and is actually a velocity
-	 * TODO: figure out units and warning clip to input range
 	 *
-	 * @param velocitySp velocity setpoint
+	 * @param velocitySp velocity setpoint in revolutions per second
 	 */
 	public void setSpeed(double velocitySp) {
 		canTalon.changeControlMode(CANTalon.TalonControlMode.Speed);
