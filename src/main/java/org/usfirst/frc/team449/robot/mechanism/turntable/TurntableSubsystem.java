@@ -39,7 +39,7 @@ public class TurntableSubsystem extends MappedSubsystem {
 			@Override
 			protected void setPIDF(double mkP, double mkI, double mkD, double mkF) {
 				// TODO put this in map instead of hardcoding
-				kP = mkP * 2048 / 1.4e6;
+				kP = mkP * 2000. / 1.4e6 / 2.;
 			}
 		};
 		System.out.println("TurntableSubsystem constructed");
