@@ -11,11 +11,11 @@ import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
 /**
  * Created by BlairRobot on 2016-11-05.
  */
-public class VBusCennter extends ReferencingCommand {
+public class VBusCenter extends ReferencingCommand {
 	private long startTime;
 	private TurntableSubsystem turntableSubsystem;
 
-	public VBusCennter(TurntableSubsystem turntableSubsystem, double timeout) {
+	public VBusCenter(TurntableSubsystem turntableSubsystem, double timeout) {
 		super(turntableSubsystem, timeout);
 		requires(Robot.turntableSubsystem);
 		this.turntableSubsystem = turntableSubsystem;

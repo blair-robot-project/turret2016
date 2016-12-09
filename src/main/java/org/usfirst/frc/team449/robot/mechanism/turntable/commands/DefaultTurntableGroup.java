@@ -19,7 +19,7 @@ public class DefaultTurntableGroup extends ReferencingCommandGroup {
 		this.oi = oi;
 
 		//        addSequential(new BangCalibrate(turntableSubsystem, 10));
-		//        addSequential(new VBusCennter(turntableSubsystem, 3));
+		//        addSequential(new VBusCenter(turntableSubsystem, 3));
 		addSequential(new DefaultTurn(turntableSubsystem, oi));
 		System.out.println("DONE WITH DEFAULT TURNTABLE GROUP");
 	}
