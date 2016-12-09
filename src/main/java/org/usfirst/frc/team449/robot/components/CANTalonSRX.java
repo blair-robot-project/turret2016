@@ -34,7 +34,9 @@ public class CANTalonSRX extends Component {
 
         p = 1023 * kP / (30.72559 * 4096 * 0.1) <edges> *  <100 ms> / <native>
          */
-        double p = (m.kP * 1023) / (30.72559 * 4096 * 0.1);
+//        double p = (m.kP * 1023) / (30.72559 * 4096 * 0.1);
+
+        double p = (m.kP * 2048 / 1.4e6);
 
         /**/
         double i = (m.kI * 1023) / (30.72559 * 4096 * 0.1);
@@ -95,6 +97,18 @@ public class CANTalonSRX extends Component {
 
     public double getEncPosition() {
         return canTalon.getEncPosition();
+    }
+
+    public double getPosition() {
+        return canTalon.getPosition();
+    }
+
+    public double getPWPosition() {
+        return canTalon.getPulseWidthPosition();
+    }
+
+    public double getAnalogPosition() {
+        return canTalon.getAnalogInPosition();
     }
 
     public double getClosedLoopError() {

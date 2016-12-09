@@ -3,11 +3,9 @@ package org.usfirst.frc.team449.robot.mechanism.turntable
 
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.Robot;
-import org.usfirst.frc.team449.robot.mechanism.turntable
-        .TurntableSubsystem;
+import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
 
 
 /**
@@ -15,6 +13,7 @@ import org.usfirst.frc.team449.robot.mechanism.turntable
  */
 public class BangCalibrate extends ReferencingCommand {
     private boolean finished;
+    private boolean actuallyFinished;
     private boolean hitLeft;
 
     private TurntableSubsystem turntableSubsystem;
@@ -25,6 +24,7 @@ public class BangCalibrate extends ReferencingCommand {
         this.turntableSubsystem = turntableSubsystem;
         finished = false;
         hitLeft = false;
+        actuallyFinished = false;
     }
 
     @Override
@@ -43,26 +43,32 @@ public class BangCalibrate extends ReferencingCommand {
                 hitLeft = true;
                 turntableSubsystem.setEncPos(0);
             }
-        } else {
+        } else if (!finished) {
             turntableSubsystem.setByMode(-0.5);
             if (turntableSubsystem.isRevSwitchClosed()) {
                 finished = true;
                 turntableSubsystem.setByMode(0);
                 turntableSubsystem.setEncPos((int) (turntableSubsystem.getEncPosition() / 2));
                 turntableSubsystem.setLimit((long) (Math.abs(turntableSubsystem.getEncPosition()) * 0.49));
-                SmartDashboard.putNumber("Limit", turntableSubsystem.getLimit());
+                System.out.println("FULL SWEEP " + turntableSubsystem.getEncPosition());
             }
+        } else if (finished && Math.abs(turntableSubsystem.getEncPosition()) > 1000) {
+            turntableSubsystem.setByMode(0.5);
+        } else {
+            actuallyFinished = true;
+            System.out.println("ACTUALLY FINISHED");
         }
-        SmartDashboard.putNumber("Turntable Encoder", turntableSubsystem.getEncPosition());
+        turntableSubsystem.log();
     }
 
     @Override
     protected boolean isFinished() {
-        return finished;
+        return actuallyFinished;
     }
 
     @Override
     protected void end() {
+        System.out.println("BANG CALIBRATE END POS " + turntableSubsystem.getEncPosition());
         System.out.println("BangCalibrate end");
     }
 

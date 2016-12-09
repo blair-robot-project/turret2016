@@ -1,11 +1,11 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.MappedSubsystem;
 import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
-import org.usfirst.frc.team449.robot.mechanism.turntable
-        .commands.DefaultTurntableGroup;
+import org.usfirst.frc.team449.robot.mechanism.turntable.commands.DefaultTurntableGroup;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 
 /**
@@ -54,6 +54,18 @@ public class TurntableSubsystem extends MappedSubsystem {
         return canTalonSRX.getEncPosition();
     }
 
+    public double getPosition() {
+        return canTalonSRX.getPosition();
+    }
+
+    public double getPWPosition() {
+        return canTalonSRX.getPWPosition();
+    }
+
+    public double getAnalogPosition() {
+        return canTalonSRX.getAnalogPosition();
+    }
+
     /**
      * Feed a number to the speed controller. Either
      * voltage command or PID setpoint
@@ -87,6 +99,10 @@ public class TurntableSubsystem extends MappedSubsystem {
         return canTalonSRX.getClosedLoopError();
     }
 
+    public double getSetpoint() {
+        return canTalonSRX.getSetpoint();
+    }
+
     public double getOutputVoltage() {
         return canTalonSRX.getOutputVoltage();
     }
@@ -96,5 +112,12 @@ public class TurntableSubsystem extends MappedSubsystem {
         System.out.println("TurntableSubsystem initDefaultCommand started");
         setDefaultCommand(new DefaultTurntableGroup(this, oi));
         System.out.println("TurntableSubsystem initDefaultCommand finished");
+    }
+
+    public void log() {
+        SmartDashboard.putNumber("Position", getPosition());
+        SmartDashboard.putNumber("Enc Position", getEncPosition());
+        SmartDashboard.putNumber("PW Position", getPWPosition());
+        SmartDashboard.putNumber("Analog Position", getAnalogPosition());
     }
 }

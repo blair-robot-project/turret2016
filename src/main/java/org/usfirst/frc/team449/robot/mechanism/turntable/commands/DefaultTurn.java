@@ -27,7 +27,7 @@ public class DefaultTurn extends ReferencingCommand {
     @Override
     protected void initialize() {
 //        double setpoint = 0.00025 * .75;
-        double setpoint = (100/4096);
+        double setpoint = 1. / 7.;
         turntableSubsystem.setControlMode(CANTalon.TalonControlMode.Position);
         turntableSubsystem.setByMode(setpoint);
         System.out.println("DefaultTurn initialized");
@@ -35,21 +35,8 @@ public class DefaultTurn extends ReferencingCommand {
 
     @Override
     protected void execute() {
-        double setpoint = 0;
-        System.out.println("Throttle: " + oi.getTurntableVelocity());
-        //turntableSubsystem.setByMode(oi.getTurntableVelocity()*turntableSubsystem.getLimit());
-        //SmartDashboard.putNumber("Throttle", oi.getTurntableVelocity());
-//        if (turntableSubsystem.getEncPosition() < 0){
-//            turntableSubsystem.setByMode(1);
-//        } else if (turntableSubsystem.getEncPosition() > 0){
-//            turntableSubsystem.setByMode(-1);
-//        } else {
-//            turntableSubsystem.setByMode(0);
-//        }
-        SmartDashboard.putNumber("Turntable Setpoint", setpoint);
-        SmartDashboard.putNumber("Turntable Error", turntableSubsystem.getError());
-        SmartDashboard.putNumber("Turntable Encoder", turntableSubsystem.getEncPosition());
-        SmartDashboard.putNumber("Turntable Output", turntableSubsystem.getOutputVoltage());
+        turntableSubsystem.log();
+        SmartDashboard.putNumber("Error", turntableSubsystem.getError());
     }
 
     @Override
