@@ -83,6 +83,10 @@ public class TurntableSubsystem extends MappedSubsystem {
 		canTalonSRX.setByMode(sp);
 	}
 
+	public void setPosition(double sp) {
+		canTalonSRX.setPosition(sp);
+	}
+
 	public void setControlMode(CANTalon.TalonControlMode mode) {
 		canTalonSRX.setControlMode(mode);
 	}

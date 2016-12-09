@@ -112,6 +112,10 @@ public class ShooterSubsystem extends MappedSubsystem {
 		flywheel.setByMode(sp);
 	}
 
+	public void setFlywheelSpeed(double sp) {
+		flywheel.setSpeed(sp);
+	}
+
 	public void setFlywheelEncPos(int enc) {
 		flywheel.setEncPos(enc);
 	}
@@ -126,6 +130,10 @@ public class ShooterSubsystem extends MappedSubsystem {
 
 	public void setIntakeByMode(double sp) {
 		intake.setByMode(sp);
+	}
+
+	public void setIntakePercentVbus(double percentVbus) {
+		intake.setPercentVbus(percentVbus);
 	}
 
 	public double getFlywheelEncVel() {
