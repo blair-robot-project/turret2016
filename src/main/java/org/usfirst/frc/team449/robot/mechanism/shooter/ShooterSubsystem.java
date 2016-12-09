@@ -136,10 +136,6 @@ public class ShooterSubsystem extends MappedSubsystem {
 		return flywheel.getEncPosition();
 	}
 
-	public double getFlywheelFGain() {
-		return flywheel.getFGain();
-	}
-
 	public double getFlywheelOutputVoltage() {
 		return flywheel.getOutputVoltage();
 	}

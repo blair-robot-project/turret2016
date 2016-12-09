@@ -78,10 +78,6 @@ public class CANTalonSRX extends Component {
 	protected void setPIDF(double mkP, double mkI, double mkD, double mkF) {
 	}
 
-	public double getFGain() {
-		return canTalon.getF();
-	}
-
 	public boolean isEnabled() {
 		return canTalon.isEnabled();
 	}
@@ -129,10 +125,6 @@ public class CANTalonSRX extends Component {
 
 	public double getClosedLoopError() {
 		return canTalon.getClosedLoopError();
-	}
-
-	public double getError() {
-		return canTalon.getError();
 	}
 
 	public boolean isFwdSwitchClosed() {
