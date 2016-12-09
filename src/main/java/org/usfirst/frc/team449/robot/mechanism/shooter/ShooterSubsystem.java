@@ -59,7 +59,15 @@ public class ShooterSubsystem extends MappedSubsystem {
 		ShooterMap shooterMap = (ShooterMap) map;
 		this.oi = oi;
 		intake = new CANTalonSRX(shooterMap.intakeMap);
-		flywheel = new CANTalonSRX(shooterMap.flywheelMap);
+		flywheel = new CANTalonSRX(shooterMap.flywheelMap) {
+			@Override
+			protected void setPIDF(double mkP, double mkI, double mkD, double mkF) {
+				// TODO put this in map instead of hardcoding
+				kP = (mkP * 1023) / (30.72559 * 4096 * 0.1);
+				kI = (mkI * 1023) / (30.72559 * 4096 * 0.1);
+				kF = 1023.0 / (mkF * 409.6);
+			}
+		};
 		hasBall = false;
 		isIntaking = false;
 		isAccelerated = false;

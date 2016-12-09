@@ -35,7 +35,13 @@ public class TurntableSubsystem extends MappedSubsystem {
 		super(map);
 		TurntableMap turntableMap = (TurntableMap) map;
 		this.oi = oi;
-		canTalonSRX = new CANTalonSRX(turntableMap.canTalonSRXMap);
+		canTalonSRX = new CANTalonSRX(turntableMap.canTalonSRXMap) {
+			@Override
+			protected void setPIDF(double mkP, double mkI, double mkD, double mkF) {
+				// TODO put this in map instead of hardcoding
+				kP = mkP * 2048 / 1.4e6;
+			}
+		};
 		System.out.println("TurntableSubsystem constructed");
 	}
 
