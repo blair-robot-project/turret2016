@@ -35,7 +35,7 @@ public class AccelerateFlywheel extends ReferencingCommand {
 
 	@Override
 	protected void execute() {
-		shooterSubsystem.setFlywheelByMode(50);
+		shooterSubsystem.setFlywheelSpeed(50);
 		shooterSubsystem.setAccelerated(true);
 		shooterSubsystem.logData(50);
 		System.out.println("AccelerateFlywheel executed");
@@ -48,13 +48,13 @@ public class AccelerateFlywheel extends ReferencingCommand {
 
 	@Override
 	protected void end() {
-		shooterSubsystem.setFlywheelByMode(0);
+		shooterSubsystem.setFlywheelSpeed(0);
 		System.out.println("AccelerateFlywheel end");
 	}
 
 	@Override
 	protected void interrupted() {
-		shooterSubsystem.setFlywheelByMode(0);
+		shooterSubsystem.setFlywheelSpeed(0);
 		System.out.println("AccelerateFlywheel interrupted");
 	}
 }

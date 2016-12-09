@@ -100,18 +100,6 @@ public class ShooterSubsystem extends MappedSubsystem {
 		flywheel.setControlMode(mode);
 	}
 
-	/**
-	 * Wrapper on the flywheel's native CAN Talon set method.
-	 * <p>
-	 * When controlling using PercentVBUS, -1 <= sp <= 1
-	 * When controlling using Speed, sp is in RPM (note: revolutions per MINUTE, not second)
-	 *
-	 * @param sp setpoint
-	 */
-	public void setFlywheelByMode(double sp) {
-		flywheel.setByMode(sp);
-	}
-
 	public void setFlywheelSpeed(double sp) {
 		flywheel.setSpeed(sp);
 	}
@@ -126,10 +114,6 @@ public class ShooterSubsystem extends MappedSubsystem {
 
 	public void setIntakeControlMode(CANTalon.TalonControlMode mode) {
 		intake.setControlMode(mode);
-	}
-
-	public void setIntakeByMode(double sp) {
-		intake.setByMode(sp);
 	}
 
 	public void setIntakePercentVbus(double percentVbus) {

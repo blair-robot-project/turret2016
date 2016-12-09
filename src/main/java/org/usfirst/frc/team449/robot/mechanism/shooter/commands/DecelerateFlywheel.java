@@ -36,7 +36,7 @@ public class DecelerateFlywheel extends ReferencingCommand {
 
 	@Override
 	protected void execute() {
-		shooterSubsystem.setFlywheelByMode(0);
+		shooterSubsystem.setFlywheelSpeed(0);
 		shooterSubsystem.setAccelerated(false);
 		shooterSubsystem.logData(0);
 		System.out.println("DecelerateFlywheel executed");

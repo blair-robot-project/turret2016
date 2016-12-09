@@ -35,7 +35,7 @@ public class StopIntakeBall extends ReferencingCommand {
 
 	@Override
 	protected void execute() {
-		shooterSubsystem.setIntakeByMode(0);
+		shooterSubsystem.setIntakePercentVbus(0);
 		shooterSubsystem.setIntaking(false);
 		System.out.println("StopIntakeBall executed");
 	}

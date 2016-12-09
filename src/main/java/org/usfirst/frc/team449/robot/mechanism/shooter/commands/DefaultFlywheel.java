@@ -9,6 +9,7 @@ import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
 
 /**
  * Created by BlairRobot on 2016-11-13.
+ * TODO: Delete this?
  */
 
 public class DefaultFlywheel extends ReferencingCommand {
@@ -29,9 +30,8 @@ public class DefaultFlywheel extends ReferencingCommand {
 
 	@Override
 	protected void initialize() {
-		shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.Speed);
 		shooterSubsystem.setFlywheelEncPos(0);
-		shooterSubsystem.setFlywheelByMode(-1); //WITH THIS ONE
+		shooterSubsystem.setFlywheelSpeed(-1); //WITH THIS ONE
 		System.out.println("DefaultTurn initialized");
 	}
 
