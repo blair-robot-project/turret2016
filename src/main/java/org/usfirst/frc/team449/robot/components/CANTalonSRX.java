@@ -82,10 +82,6 @@ public class CANTalonSRX extends Component {
 		return canTalon.isEnabled();
 	}
 
-	public boolean isAlive() {
-		return canTalon.isAlive();
-	}
-
 	public CANTalon.TalonControlMode getControlMode() {
 		return canTalon.getControlMode();
 	}
@@ -149,6 +145,44 @@ public class CANTalonSRX extends Component {
 		} else {
 			canTalon.set(sp);
 		}
+	}
+
+	/**
+	 * Give a PercentVbus setpoint (set to PercentVbus mode and set)
+	 *
+	 * @param percentVbus percent of total voltage (between -1.0 and +1.0)
+	 */
+	public void setPercentVbus(double percentVbus) {
+		if (Math.abs(percentVbus) > 1.0) {
+			System.out.println("WARNING: YOU ARE CLIPPING MAX PERCENT VBUS AT " + percentVbus);
+			percentVbus = Math.signum(percentVbus);
+		}
+		canTalon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		canTalon.set(percentVbus);
+	}
+
+	/**
+	 * Give a position setpoint
+	 * TODO: figure out units and warning clip to input range
+	 *
+	 * @param positionSp position setpoint
+	 */
+	public void setPosition(double positionSp) {
+		canTalon.changeControlMode(CANTalon.TalonControlMode.Position);
+		canTalon.set(positionSp);
+	}
+
+	/**
+	 * Give a velocity setpoint
+	 * Note: This method is called setSpeed since the TalonControlMode enum is called speed. However, the input argument
+	 * is signed and is actually a velocity
+	 * TODO: figure out units and warning clip to input range
+	 *
+	 * @param velocitySp velocity setpoint
+	 */
+	public void setSpeed(double velocitySp) {
+		canTalon.changeControlMode(CANTalon.TalonControlMode.Speed);
+		canTalon.set(velocitySp);
 	}
 
 	public void enableBrakeMode(boolean brake) {
