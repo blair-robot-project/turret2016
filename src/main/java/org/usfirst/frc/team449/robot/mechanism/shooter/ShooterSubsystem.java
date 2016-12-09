@@ -62,7 +62,6 @@ public class ShooterSubsystem extends MappedSubsystem {
 		flywheel = new CANTalonSRX(shooterMap.flywheelMap) {
 			@Override
 			protected void setPIDF(double mkP, double mkI, double mkD, double mkF) {
->>>>>>> 8abdf28e85878b7d29703e96442658ed54a2d3bf
 				// TODO put this in map instead of hardcoding
 				kP = (mkP * 1023) / (30.72559 * 4096 * 0.1);
 				kI = (mkI * 1023) / (30.72559 * 4096 * 0.1);
