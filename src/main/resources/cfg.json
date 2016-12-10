@@ -8,15 +8,15 @@
           "instances": {
             "canTalonSRXMap": {
               "port": 2,
-              "feedbackDevice": 6,
+              "feedbackDevice": 0,
               "reverseSensor": false,
               "reverseOutput": false,
               "isInverted": false,
               "nominalOutVoltage": 0.0,
               "peakOutVoltage": 12.0,
               "profile": 0,
-              "kP": 0.01,
-              "kI": 0.0,
+              "kP": 8.0,
+              "kI": 0.01,
               "kD": 0.0,
               "kF": 0.0,
               "fwdLimNormOpen": true,

@@ -53,12 +53,14 @@ public class CANTalonSRX extends Component {
 	 * Method called in the constructor that sets the true PID values before they are handed to the Talon's internal
 	 * PID controller.
 	 * <p>
-	 * When called in the constructor, this method takes the map's PIDF values as its arguments, scales them, and sticks
+	 * When called in the constructor, this method takes the map's PIDF values as its arguments, scales them, and
+	 * sticks
 	 * them in the kP, kI, kD, kF fields. Later in the constructor, the Talon is given those fields as the final PIDF.
 	 * <p>
 	 * By default, the map PIDF values are untouched before they go into the Talon. However, you may want to specify
 	 * a scaling factor between the map PIDF and the PIDF that is fed to the Talon. When you are PIDF tuning, you want
-	 * to think of changing PIDF as fractions of a full response. However, robots have intrinsic scaling factors between
+	 * to think of changing PIDF as fractions of a full response. However, robots have intrinsic scaling factors
+	 * between
 	 * the input units and the measured units and PIDF values, so this method allows you to specify external scaling
 	 * factors so that you can have your fractional PIDF in one place on the map and your scaling in another place in
 	 * the map.
@@ -66,8 +68,10 @@ public class CANTalonSRX extends Component {
 	 * To scale PIDF between the map and the Talon, override this method and change what the PIDF fields are assigned
 	 * to.
 	 * <p>
-	 * Note that true PIDF have already been assigned for the first time in the constructor. If you do not want to scale
-	 * anything, you do not need to fill out this method, and if you only want to scale one value, you can write in just
+	 * Note that true PIDF have already been assigned for the first time in the constructor. If you do not want to
+	 * scale
+	 * anything, you do not need to fill out this method, and if you only want to scale one value, you can write in
+	 * just
 	 * that one value when you override this.
 	 *
 	 * @param mkP map kP
@@ -174,7 +178,8 @@ public class CANTalonSRX extends Component {
 
 	/**
 	 * Give a velocity setpoint in RPS
-	 * Note: This method is called setSpeed since the TalonControlMode enum is called speed. However, the input argument
+	 * Note: This method is called setSpeed since the TalonControlMode enum is called speed. However, the input
+	 * argument
 	 * is signed and is actually a velocity
 	 *
 	 * @param velocitySp velocity setpoint in revolutions per second

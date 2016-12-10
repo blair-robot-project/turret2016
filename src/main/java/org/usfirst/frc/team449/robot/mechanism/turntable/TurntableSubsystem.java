@@ -12,6 +12,8 @@ import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
  * Turntable subsystem
  */
 public class TurntableSubsystem extends MappedSubsystem {
+	private boolean fwdEverPressed;
+	private boolean revEverPressed;
 	/**
 	 * Talon speed controller used to turn the turntable
 	 */
@@ -39,7 +41,8 @@ public class TurntableSubsystem extends MappedSubsystem {
 			@Override
 			protected void setPIDF(double mkP, double mkI, double mkD, double mkF) {
 				// TODO put this in map instead of hardcoding
-				kP = mkP * 2000. / 1.4e6 / 2.;
+				kP = mkP * 2048. / 1.4e6;
+				kI = mkI * 2048. / 1.4e6;
 			}
 		};
 		System.out.println("TurntableSubsystem constructed");
@@ -121,9 +124,21 @@ public class TurntableSubsystem extends MappedSubsystem {
 	}
 
 	public void log() {
-		SmartDashboard.putNumber("Position", getPosition());
+		if(canTalonSRX.isFwdSwitchClosed() && !fwdEverPressed)
+			fwdEverPressed = true;
+		if(canTalonSRX.isRevSwitchClosed() && !revEverPressed)
+			revEverPressed = true;
+		SmartDashboard.putBoolean("Fwd LimSwitch", canTalonSRX.isFwdSwitchClosed());
+		SmartDashboard.putBoolean("Rev LimSwitch", canTalonSRX.isRevSwitchClosed());
+		SmartDashboard.putBoolean("Fwd LimSwitch sticky", fwdEverPressed);
+		SmartDashboard.putBoolean("Rev LimSwitch sticky", revEverPressed);
+
 		SmartDashboard.putNumber("Enc Position", getEncPosition());
 		SmartDashboard.putNumber("PW Position", getPWPosition());
 		SmartDashboard.putNumber("Analog Position", getAnalogPosition());
+
+		SmartDashboard.putNumber("Internally Calculated Error", canTalonSRX.getClosedLoopError());
+		SmartDashboard.putNumber("SP - OP", getSetpoint() * 100 * 6 * 4096 - getEncPosition());
+		SmartDashboard.putNumber("Setpoint", getSetpoint());
 	}
 }

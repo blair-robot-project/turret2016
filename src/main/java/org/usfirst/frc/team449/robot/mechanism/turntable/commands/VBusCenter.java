@@ -2,7 +2,6 @@ package org.usfirst.frc.team449.robot.mechanism.turntable.commands;
 
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
@@ -33,9 +32,6 @@ public class VBusCenter extends ReferencingCommand {
 				.setControlMode(CANTalon
 						.TalonControlMode.PercentVbus);
 		turntableSubsystem.setPercentVbus(0.5);
-
-		SmartDashboard.putNumber("Turntable Encoder", turntableSubsystem.getEncPosition());
-		SmartDashboard.putNumber("Turtable Position", turntableSubsystem.getPosition());
 	}
 
 	@Override

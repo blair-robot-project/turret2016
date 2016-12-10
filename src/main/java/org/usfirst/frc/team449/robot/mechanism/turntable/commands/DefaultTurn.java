@@ -2,7 +2,6 @@ package org.usfirst.frc.team449.robot.mechanism.turntable
 		.commands;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
@@ -27,7 +26,7 @@ public class DefaultTurn extends ReferencingCommand {
 	@Override
 	protected void initialize() {
 		//        double setpoint = 0.00025 * .75;
-		double setpoint = 1. / 7.;
+		double setpoint = 0;
 		turntableSubsystem.setControlMode(CANTalon.TalonControlMode.Position);
 		turntableSubsystem.setPosition(setpoint);
 		System.out.println("DefaultTurn initialized");
@@ -36,7 +35,6 @@ public class DefaultTurn extends ReferencingCommand {
 	@Override
 	protected void execute() {
 		turntableSubsystem.log();
-		SmartDashboard.putNumber("Error", turntableSubsystem.getError());
 	}
 
 	@Override
