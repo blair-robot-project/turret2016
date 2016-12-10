@@ -154,14 +154,14 @@ public class ShooterSubsystem extends MappedSubsystem {
 			sb.append((System.nanoTime() - startTime) / 100);
 			sb.append(",");
 			sb.append(sp);
-			SmartDashboard.putNumber("Flywheel Setpoint", getFlywheelSetpoint() / 60);
+//			SmartDashboard.putNumber("Flywheel Setpoint", getFlywheelSetpoint() / 60);
 			sb.append(",");
 			sb.append(getFlywheelEncVel() / NATIVE);
-			SmartDashboard.putNumber("Flywheel Velocity", getFlywheelEncVel() / NATIVE);
+//			SmartDashboard.putNumber("Flywheel Velocity", getFlywheelEncVel() / NATIVE);
 			sb.append(",");
 			sb.append(getFlywheelClosedLoopError() / NATIVE);
-			SmartDashboard.putNumber("Flywheel Error", getFlywheelClosedLoopError() / NATIVE);
-			SmartDashboard.putNumber("Flywheel Output Voltage", getFlywheelOutputVoltage());
+//			SmartDashboard.putNumber("Flywheel Error", getFlywheelClosedLoopError() / NATIVE);
+//			SmartDashboard.putNumber("Flywheel Output Voltage", getFlywheelOutputVoltage());
 			sb.append("\n");
 			fw.write(sb.toString());
 			fw.close();
