@@ -14,6 +14,11 @@ import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 public class TurntableSubsystem extends MappedSubsystem {
 	private boolean fwdEverPressed;
 	private boolean revEverPressed;
+	final static double NATIVE2INTERNAL_ROT = 4096.0;
+
+	final static double INTERNAL2OUTPUT = 100.0;
+
+	final static double OUT2TURNTABLE = 5.37;   // TODO figure out what this is EXACTLY
 	/**
 	 * Talon speed controller used to turn the turntable
 	 */
@@ -55,6 +60,10 @@ public class TurntableSubsystem extends MappedSubsystem {
 	 */
 	public void setEncPos(int pos) {
 		canTalonSRX.setEncPos(pos);
+	}
+
+	public void setPos(int pos){
+		canTalonSRX.setPos(pos);
 	}
 
 	/**
@@ -116,6 +125,14 @@ public class TurntableSubsystem extends MappedSubsystem {
 		return canTalonSRX.getOutputVoltage();
 	}
 
+	public static double degreesToNative(double degrees){
+		return degrees/360 * NATIVE2INTERNAL_ROT * INTERNAL2OUTPUT * OUT2TURNTABLE;
+	}
+
+	public static double nativeToDegrees(double nativeUnits){
+		return nativeUnits / OUT2TURNTABLE / INTERNAL2OUTPUT / NATIVE2INTERNAL_ROT * 360;
+	}
+
 	@Override
 	protected void initDefaultCommand() {
 		System.out.println("TurntableSubsystem initDefaultCommand started");
@@ -134,8 +151,11 @@ public class TurntableSubsystem extends MappedSubsystem {
 		SmartDashboard.putBoolean("Rev LimSwitch sticky", revEverPressed);
 
 		SmartDashboard.putNumber("Enc Position", getEncPosition());
+		SmartDashboard.putNumber("Position", getPosition());
+		SmartDashboard.putNumber("Degree position", nativeToDegrees(getPosition()));
 		SmartDashboard.putNumber("PW Position", getPWPosition());
 		SmartDashboard.putNumber("Analog Position", getAnalogPosition());
+		SmartDashboard.putString("Control Mode", canTalonSRX.getControlMode().toString());
 
 		SmartDashboard.putNumber("Internally Calculated Error", canTalonSRX.getClosedLoopError());
 		SmartDashboard.putNumber("SP - OP", getSetpoint() * 100 * 6 * 4096 - getEncPosition());

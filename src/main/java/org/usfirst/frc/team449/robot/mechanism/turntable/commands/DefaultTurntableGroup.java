@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable.commands;
 
 
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team449.robot.ReferencingCommandGroup;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
@@ -18,8 +19,7 @@ public class DefaultTurntableGroup extends ReferencingCommandGroup {
 		requires(turntableSubsystem);
 		this.oi = oi;
 
-//		addSequential(new BangCalibrate(turntableSubsystem, 10));
-		//        addSequential(new VBusCenter(turntableSubsystem, 3));
+		addSequential(new BangCalibrate(turntableSubsystem, 10));
 		addSequential(new DefaultTurn(turntableSubsystem, oi));
 		System.out.println("DONE WITH DEFAULT TURNTABLE GROUP");
 	}

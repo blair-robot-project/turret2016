@@ -1,8 +1,5 @@
-package org.usfirst.frc.team449.robot.mechanism.turntable
-		.commands;
+package org.usfirst.frc.team449.robot.mechanism.turntable.commands;
 
-
-import edu.wpi.first.wpilibj.CANTalon;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.Robot;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
@@ -38,34 +35,35 @@ public class BangCalibrate extends ReferencingCommand {
 			turntableSubsystem.setPercentVbus(0.5);
 			if (turntableSubsystem.isFwdSwitchClosed()) {
 				hitLeft = true;
-				turntableSubsystem.setEncPos(0);
+				turntableSubsystem.setPos(0);
 			}
 		} else if (!finished) {
 			turntableSubsystem.setPercentVbus(-0.5);
 			if (turntableSubsystem.isRevSwitchClosed()) {
 				finished = true;
 				turntableSubsystem.setPercentVbus(0);
-				turntableSubsystem.setEncPos((int) (turntableSubsystem.getEncPosition() / 2));
-				turntableSubsystem.setLimit((long) (Math.abs(turntableSubsystem.getEncPosition()) * 0.49));
-				System.out.println("FULL SWEEP " + turntableSubsystem.getEncPosition());
+				turntableSubsystem.setPos((int) (turntableSubsystem.getPosition() / 2));
+				turntableSubsystem.setLimit((long) (Math.abs(turntableSubsystem.getPosition()) * 0.49));
+				System.out.println("FULL SWEEP " + turntableSubsystem.getPosition());
 			}
-		} else if (finished && Math.abs(turntableSubsystem.getEncPosition()) > 1000) {
+		} /* else if (finished && Math.abs(turntableSubsystem.getPosition()) > 1000) {
 			turntableSubsystem.setPercentVbus(0.5);
 		} else {
 			actuallyFinished = true;
 			System.out.println("ACTUALLY FINISHED");
 		}
+		*/
 		turntableSubsystem.log();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return actuallyFinished;
+		return finished;
 	}
 
 	@Override
 	protected void end() {
-		System.out.println("BANG CALIBRATE END POS " + turntableSubsystem.getEncPosition());
+		System.out.println("BANG CALIBRATE END POS " + turntableSubsystem.getPosition());
 		System.out.println("BangCalibrate end");
 	}
 

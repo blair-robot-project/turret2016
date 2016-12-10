@@ -90,13 +90,16 @@ public class CANTalonSRX extends Component {
 		return canTalon.getControlMode();
 	}
 
-	public void setControlMode(CANTalon.TalonControlMode
-			                           mode) {
+	public void setControlMode(CANTalon.TalonControlMode mode) {
 		canTalon.changeControlMode(mode);
 	}
 
 	public void setEncPos(int pos) {
 		canTalon.setEncPosition(pos);
+	}
+
+	public void setPos(int pos){
+		canTalon.setPosition(pos);
 	}
 
 	public double getOutputVoltage() {
