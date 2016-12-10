@@ -26,7 +26,10 @@ public class DefaultTurn extends ReferencingCommand {
 	@Override
 	protected void initialize() {
 		//        double setpoint = 0.00025 * .75;
-		double setpoint = 0;
+		double NATIVE2INTERNAL_ROT = 4096.0;
+		double INTERNAL2OUTPUT = 100.0;
+		double OUT2TURNTABLE = 6.0;   // TODO figure out what this is EXACTLY
+		double setpoint = 0.25 * NATIVE2INTERNAL_ROT * INTERNAL2OUTPUT * OUT2TURNTABLE;
 		turntableSubsystem.setControlMode(CANTalon.TalonControlMode.Position);
 		turntableSubsystem.setPosition(setpoint);
 		System.out.println("DefaultTurn initialized");
