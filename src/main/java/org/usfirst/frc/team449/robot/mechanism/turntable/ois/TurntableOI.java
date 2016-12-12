@@ -5,4 +5,5 @@ package org.usfirst.frc.team449.robot.mechanism.turntable.ois;
  */
 public interface TurntableOI {
 	double getTurntableVelocity();
+	double getTurntableThrottle();
 }
