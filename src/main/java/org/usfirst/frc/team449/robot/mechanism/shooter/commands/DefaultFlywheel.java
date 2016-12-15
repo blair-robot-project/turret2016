@@ -32,7 +32,7 @@ public class DefaultFlywheel extends ReferencingCommand {
 	protected void initialize() {
 		shooterSubsystem.setFlywheelEncPos(0);
 		shooterSubsystem.setFlywheelSpeed(-1); //WITH THIS ONE
-		System.out.println("DefaultTurn initialized");
+		System.out.println("JoystickIntegratedPositionControl initialized");
 	}
 
 
@@ -40,8 +40,6 @@ public class DefaultFlywheel extends ReferencingCommand {
 	protected void execute() {
 		//shooterSubsystem.setFlywheelByMode(revPerSecToEnc(oi.getJoyValue()));
 		//        shooterSubsystem.setFlywheelByMode(oi.getJoyValue());
-		shooterSubsystem.logData(oi.getJoyValue());
-		SmartDashboard.putNumber("Joystick", oi.getJoyValue());
 		SmartDashboard.putNumber("Output Voltage", shooterSubsystem.getFlywheelOutputVoltage());
 		//SmartDashboard.putNumber("Velocity Setpoint", oi.getJoyValue()*MAX_SPEED);
 		SmartDashboard.putNumber("RPS Speed", encToRevPerSec(shooterSubsystem.getFlywheelEncVel()));
