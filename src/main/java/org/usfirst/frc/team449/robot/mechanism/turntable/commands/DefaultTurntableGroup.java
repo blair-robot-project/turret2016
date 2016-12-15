@@ -1,14 +1,10 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable.commands;
 
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team449.robot.ReferencingCommandGroup;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 
-/**
- * Created by BlairRobot on 2016-11-07.
- */
 public class DefaultTurntableGroup extends ReferencingCommandGroup {
 	private TurntableOI oi;
 
@@ -20,8 +16,8 @@ public class DefaultTurntableGroup extends ReferencingCommandGroup {
 		this.oi = oi;
 
 		addSequential(new BangCalibrate(turntableSubsystem, 10));
-		//addSequential(new DefaultTurn(turntableSubsystem, oi));
-		addSequential(new PositionTurn(turntableSubsystem, oi));
+		addSequential(new JoystickIntegratedPositionControl(turntableSubsystem, oi));
+//		addSequential(new JoystickStraightPositionControl(turntableSubsystem, oi));
 		System.out.println("DONE WITH DEFAULT TURNTABLE GROUP");
 	}
 }
