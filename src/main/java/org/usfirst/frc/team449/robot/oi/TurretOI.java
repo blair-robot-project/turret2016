@@ -67,22 +67,15 @@ public class TurretOI extends OISubsystem implements
 		injectorB.whenReleased(new StopIntakeBall(shooterSubsystem));
 		flywheelB.whenPressed(new AccelerateFlywheel(shooterSubsystem));
 		flywheelB.whenReleased(new DecelerateFlywheel(shooterSubsystem));
-		//goToPositionB.whenPressed(new PositionTurn(turntableSubsystem));
-	}
-
-	/**
-	 * @return turntable's throttle
-	 */
-	@Override
-	public double getTurntableVelocity() {
-		return turntableThrottle.getValue();
-	}
-
-	public double getJoyValue() {
-		return flywheelJ.getAxis(Joystick.AxisType.kY);
+		//goToPositionB.whenPressed(new JoystickStraightPositionControl(turntableSubsystem));
 	}
 
 	public double getTurntableThrottle(){return turntableJ.getAxis(Joystick.AxisType.kY);}
+
+	@Override
+	public double getTurntablePosition() {
+		return turntableJ.getAxis(Joystick.AxisType.kZ);
+	}
 
 	/**
 	 * Non-applicable method for driving a drive chassis
@@ -112,7 +105,6 @@ public class TurretOI extends OISubsystem implements
 	// TODO take this out of OISubsystem in central repo
 	@Override
 	public void toggleCamera() {
-
 	}
 
 	/**
@@ -121,6 +113,5 @@ public class TurretOI extends OISubsystem implements
 	// TODO implement this empty function in OISubsystem
 	@Override
 	protected void initDefaultCommand() {
-
 	}
 }

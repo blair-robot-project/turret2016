@@ -8,17 +8,17 @@ import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 /**
  * Created by BlairRobot on 2016-11-07.
  */
-public class DefaultTurn extends ReferencingCommand {
+public class JoystickIntegratedPositionControl extends ReferencingCommand {
 	private TurntableOI oi;
 	private TurntableSubsystem turntableSubsystem;
 	double integral = 0;
 
-	public DefaultTurn(TurntableSubsystem turntableSubsystem, TurntableOI oi) {
+	public JoystickIntegratedPositionControl(TurntableSubsystem turntableSubsystem, TurntableOI oi) {
 		super(turntableSubsystem);
-		System.out.println("DefaultTurn start construct");
+		System.out.println("JoystickIntegratedPositionControl start construct");
 		this.oi = oi;
 		this.turntableSubsystem = turntableSubsystem;
-		System.out.println("DefaultTurn constructed");
+		System.out.println("JoystickIntegratedPositionControl constructed");
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class DefaultTurn extends ReferencingCommand {
 		integral = deadband(oi.getTurntableThrottle())*0.02;
 		//turntableSubsystem.setControlMode(CANTalon.TalonControlMode.Disabled);
 		turntableSubsystem.setPosition(setpoint);
-		System.out.println("DefaultTurn initialized");
+		System.out.println("JoystickIntegratedPositionControl initialized");
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class DefaultTurn extends ReferencingCommand {
 			integral+=deadband(oi.getTurntableThrottle())*0.02;
 		}
 
-		turntableSubsystem.setPosition(TurntableSubsystem.degreesToNative(integral)*60);
+		turntableSubsystem.setPosition(TurntableSubsystem.degreesToNative(integral)*100);
 		SmartDashboard.putNumber("Integral",integral);
 		SmartDashboard.putNumber("Throttle",oi.getTurntableThrottle());
 	}
