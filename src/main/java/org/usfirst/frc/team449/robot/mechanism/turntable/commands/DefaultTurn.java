@@ -48,7 +48,7 @@ public class DefaultTurn extends ReferencingCommand {
 			integral+=deadband(oi.getTurntableThrottle())*0.02;
 		}
 
-		turntableSubsystem.setPosition(TurntableSubsystem.degreesToNative(integral)*60);
+		turntableSubsystem.setPosition(TurntableSubsystem.degreesToNative(integral)*100);
 		SmartDashboard.putNumber("Integral",integral);
 		SmartDashboard.putNumber("Throttle",oi.getTurntableThrottle());
 	}

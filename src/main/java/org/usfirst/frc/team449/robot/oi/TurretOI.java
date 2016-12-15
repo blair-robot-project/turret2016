@@ -84,7 +84,7 @@ public class TurretOI extends OISubsystem implements
 		return flywheelJ.getAxis(Joystick.AxisType.kY);
 	}
 
-	public double getTurntableThrottle(){return turntableJ.getAxis(Joystick.AxisType.kY);}
+	public double getTurntableThrottle(){return turntableJ.getAxis(Joystick.AxisType.kZ);}
 
 	/**
 	 * Non-applicable method for driving a drive chassis
