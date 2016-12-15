@@ -1,7 +1,6 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable.commands;
 
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team449.robot.ReferencingCommandGroup;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;

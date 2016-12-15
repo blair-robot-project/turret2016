@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable;
 
 import org.json.JSONObject;
+import org.usfirst.frc.team449.robot.components.maps.CANTalonSRXMap;
 import org.usfirst.frc.team449.robot.mechanism.MechanismMap;
 
 /**

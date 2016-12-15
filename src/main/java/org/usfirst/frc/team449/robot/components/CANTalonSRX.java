@@ -1,7 +1,7 @@
 package org.usfirst.frc.team449.robot.components;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import org.usfirst.frc.team449.robot.RobotMap;
+import org.usfirst.frc.team449.robot.components.maps.CANTalonSRXMap;
 
 /**
  * Created by BlairRobot on 2016-11-05.
@@ -15,7 +15,7 @@ public class CANTalonSRX extends Component {
 	protected double kD;
 	protected double kF;
 
-	public CANTalonSRX(RobotMap.CANTalonSRXMap m) {
+	public CANTalonSRX(CANTalonSRXMap m) {
 		System.out.println(m.port);
 		canTalon = new CANTalon(m.port);
 		canTalon.setFeedbackDevice(CANTalon.FeedbackDevice.valueOf(m.feedbackDevice));

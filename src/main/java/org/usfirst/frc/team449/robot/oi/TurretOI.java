@@ -9,13 +9,11 @@ import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DecelerateFlywhe
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.IntakeBall;
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.StopIntakeBall;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
-import org.usfirst.frc.team449.robot.mechanism.turntable.commands.PositionTurn;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 import org.usfirst.frc.team449.robot.oi.components.SmoothedThrottle;
 import org.usfirst.frc.team449.robot.oi.components.Throttle;
 
 import static org.usfirst.frc.team449.robot.Robot.shooterSubsystem;
-import static org.usfirst.frc.team449.robot.Robot.turntableSubsystem;
 
 /**
  * OI used to control the turret
@@ -110,8 +108,6 @@ public class TurretOI extends OISubsystem implements
 
 	/**
 	 * Non-applicable method for toggling a camera
-	 *
-	 * @return 0
 	 */
 	// TODO take this out of OISubsystem in central repo
 	@Override

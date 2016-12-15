@@ -3,7 +3,6 @@ package org.usfirst.frc.team449.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import org.json.JSONObject;
-import org.usfirst.frc.team449.robot.mechanism.shooter.ShooterMap;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ShooterSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableMap;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;

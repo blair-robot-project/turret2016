@@ -1,6 +1,5 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable.commands;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;

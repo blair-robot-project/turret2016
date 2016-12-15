@@ -10,7 +10,6 @@ import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
  */
 public class BangCalibrate extends ReferencingCommand {
 	private boolean finished;
-	private boolean actuallyFinished;
 	private boolean hitLeft;
 
 	private TurntableSubsystem turntableSubsystem;
@@ -21,7 +20,6 @@ public class BangCalibrate extends ReferencingCommand {
 		this.turntableSubsystem = turntableSubsystem;
 		finished = false;
 		hitLeft = false;
-		actuallyFinished = false;
 	}
 
 	@Override
@@ -46,13 +44,7 @@ public class BangCalibrate extends ReferencingCommand {
 				turntableSubsystem.setLimit((long) (Math.abs(turntableSubsystem.getPosition()) * 0.49));
 				System.out.println("FULL SWEEP " + turntableSubsystem.getPosition());
 			}
-		} /* else if (finished && Math.abs(turntableSubsystem.getPosition()) > 1000) {
-			turntableSubsystem.setPercentVbus(0.5);
-		} else {
-			actuallyFinished = true;
-			System.out.println("ACTUALLY FINISHED");
 		}
-		*/
 		turntableSubsystem.log();
 	}
 
