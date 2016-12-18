@@ -71,12 +71,12 @@ public class TurretOI extends OISubsystem implements
 	 * Does not do anything right now (no buttons to map)
 	 */
 	public void mapButtons() {
-		injectorB.whenPressed(new IntakeBall(shooterSubsystem));
-		injectorB.whenReleased(new StopIntakeBall(shooterSubsystem));
-		flywheelB.whenPressed(new AccelerateFlywheel(shooterSubsystem));
-		flywheelB.whenReleased(new DecelerateFlywheel(shooterSubsystem));
-		turntableFwdB.whileHeld(new SlowTurnFwd(turntableSubsystem));
-		turntableRevB.whileHeld(new SlowTurnRev(turntableSubsystem));
+//		injectorB.whenPressed(new IntakeBall(shooterSubsystem));
+//		injectorB.whenReleased(new StopIntakeBall(shooterSubsystem));
+//		flywheelB.whenPressed(new AccelerateFlywheel(shooterSubsystem));
+//		flywheelB.whenReleased(new DecelerateFlywheel(shooterSubsystem));
+//		turntableFwdB.whileHeld(new SlowTurnFwd(turntableSubsystem));
+//		turntableRevB.whileHeld(new SlowTurnRev(turntableSubsystem));
 	}
 
 	/**

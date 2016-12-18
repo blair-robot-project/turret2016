@@ -8,7 +8,7 @@ import org.usfirst.frc.team449.robot.RobotMap;
  */
 public class CANTalonSRX extends Component {
 
-	CANTalon canTalon;
+	public CANTalon canTalon;
 
 	protected double kP;
 	protected double kI;
@@ -190,6 +190,16 @@ public class CANTalonSRX extends Component {
 	public void setSpeed(double velocitySp) {
 		canTalon.changeControlMode(CANTalon.TalonControlMode.Speed);
 		canTalon.set(velocitySp * 60); // 60 converts from RPS to RPM, TODO figure out where the 60 should actually go
+	}
+
+	/**
+	 * Set up the motor to follow a master motor.
+	 *
+	 * @param masterID device ID of the master motor
+	 */
+	public void setSlave(int masterID) {
+		canTalon.changeControlMode(CANTalon.TalonControlMode.Follower);
+		canTalon.set(masterID);
 	}
 
 	public void enableBrakeMode(boolean brake) {

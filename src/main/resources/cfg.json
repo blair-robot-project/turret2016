@@ -7,7 +7,7 @@
         "CANTalonSRXMap": {
           "instances": {
             "canTalonSRXMap": {
-              "port": 2,
+              "port": 1,
               "feedbackDevice": 0,
               "reverseSensor": false,
               "reverseOutput": false,
@@ -61,7 +61,7 @@
               "brakeMode": true
             },
             "flywheelMap": {
-              "port": 1,
+              "port": 2,
               "feedbackDevice": 7,
               "reverseSensor": true,
               "reverseOutput": false,

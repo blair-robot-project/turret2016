@@ -44,10 +44,10 @@ public class Robot extends IterativeRobot {
 		cfg = MappedSubsystem.readConfig("/home/lvuser/cfg.json");
 		System.out.println("Start map init");
 		oi = new TurretOI(new OIMap(cfg));
-		System.out.println("Start turntable init");
-		turntableSubsystem = new TurntableSubsystem(new TurntableMap(cfg), oi);
-//		System.out.println("Start shooter init");
-//		shooterSubsystem = new ShooterSubsystem(new ShooterMap(cfg), oi);
+//		System.out.println("Start turntable init");
+//		turntableSubsystem = new TurntableSubsystem(new TurntableMap(cfg), oi);
+		System.out.println("Start shooter init");
+		shooterSubsystem = new ShooterSubsystem(new ShooterMap(cfg), oi);
 
 		// Map buttons AFTER all the subsystems are inited
 		oi.mapButtons();

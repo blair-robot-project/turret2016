@@ -68,6 +68,10 @@ public class ShooterSubsystem extends MappedSubsystem {
 				kF = 1023.0 / (mkF * 409.6);
 			}
 		};
+
+		intake.setSlave(flywheel.canTalon.getDeviceID());
+//		flywheel.setSlave(intake.canTalon.getDeviceID());
+
 		hasBall = false;
 		isIntaking = false;
 		isAccelerated = false;

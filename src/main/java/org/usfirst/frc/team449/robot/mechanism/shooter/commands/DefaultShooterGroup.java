@@ -20,10 +20,11 @@ public class DefaultShooterGroup extends ReferencingCommandGroup {
 		requires(shooterSubsystem);
 
 		//addSequential(new DefaultFlywheel(shooterSubsystem, oi));
-		addSequential(new IntakeBall(shooterSubsystem), 1);
+//		addSequential(new IntakeBall(shooterSubsystem), 1);
 		for (int i = 0; i < 5; i++) {
-			addSequential(new DecelerateFlywheel(shooterSubsystem), 5);
-			addSequential(new AccelerateFlywheel(shooterSubsystem), 60);
+//			addSequential(new DecelerateFlywheel(shooterSubsystem), 5);
+//			addSequential(new AccelerateFlywheel(shooterSubsystem), 60);
+			addSequential(new TestSlave(shooterSubsystem));
 		}
 	}
 }
