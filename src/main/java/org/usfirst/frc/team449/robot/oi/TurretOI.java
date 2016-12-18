@@ -4,20 +4,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team449.robot.RobotMap;
-import org.usfirst.frc.team449.robot.mechanism.shooter.commands.AccelerateFlywheel;
-import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DecelerateFlywheel;
-import org.usfirst.frc.team449.robot.mechanism.shooter.commands.IntakeBall;
-import org.usfirst.frc.team449.robot.mechanism.shooter.commands.StopIntakeBall;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
-import org.usfirst.frc.team449.robot.mechanism.turntable.commands.PositionTurn;
-import org.usfirst.frc.team449.robot.mechanism.turntable.commands.SlowTurnFwd;
-import org.usfirst.frc.team449.robot.mechanism.turntable.commands.SlowTurnRev;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 import org.usfirst.frc.team449.robot.oi.components.SmoothedThrottle;
 import org.usfirst.frc.team449.robot.oi.components.Throttle;
-
-import static org.usfirst.frc.team449.robot.Robot.shooterSubsystem;
-import static org.usfirst.frc.team449.robot.Robot.turntableSubsystem;
 
 /**
  * OI used to control the turret

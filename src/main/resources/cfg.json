@@ -46,7 +46,7 @@
               "nominalOutVoltage": 0.0,
               "peakOutVoltage": 12.0,
               "profile": 0,
-              "kP": 0.5,
+              "kP": 5,
               "kI": 0,
               "kD": 0,
               "kF": 0,
