@@ -10,6 +10,8 @@ import org.usfirst.frc.team449.robot.mechanism.shooter.commands.IntakeBall;
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.StopIntakeBall;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
 import org.usfirst.frc.team449.robot.mechanism.turntable.commands.PositionTurn;
+import org.usfirst.frc.team449.robot.mechanism.turntable.commands.SlowTurnFwd;
+import org.usfirst.frc.team449.robot.mechanism.turntable.commands.SlowTurnRev;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 import org.usfirst.frc.team449.robot.oi.components.SmoothedThrottle;
 import org.usfirst.frc.team449.robot.oi.components.Throttle;
@@ -35,13 +37,15 @@ public class TurretOI extends OISubsystem implements
 	/**
 	 * Joystick used to control the injector wheel
 	 */
+
 	private Button injectorB;
 	/**
 	 * Joystick used to control the flywheel
 	 */
 	private Button flywheelB;
 
-	private Button goToPositionB;
+	private Button turntableRevB;
+	private Button turntableFwdB;
 
 	/**
 	 * Instantiate the TurretOI
@@ -50,13 +54,15 @@ public class TurretOI extends OISubsystem implements
 	 */
 	public TurretOI(RobotMap map) {
 		super(map);
-		turntableJ = new Joystick(0);
-		flywheelJ = new Joystick(1);
-		injectorB = new JoystickButton(turntableJ, 2);
-		flywheelB = new JoystickButton(turntableJ, 1);
+		turntableJ = new Joystick(2);
+		flywheelJ = new Joystick(0);
+		injectorB = new JoystickButton(flywheelJ, 2);
+		flywheelB = new JoystickButton(flywheelJ, 1);
 		turntableThrottle = new SmoothedThrottle(turntableJ, 2);
-		//goToPositionB = new JoystickButton(turntableJ,8);
+		turntableRevB = new JoystickButton(turntableJ, 7);
+		turntableFwdB = new JoystickButton(turntableJ, 8);
 	}
+
 
 	/**
 	 * Map the buttons (called in Robot.robotInit after
@@ -69,7 +75,8 @@ public class TurretOI extends OISubsystem implements
 		injectorB.whenReleased(new StopIntakeBall(shooterSubsystem));
 		flywheelB.whenPressed(new AccelerateFlywheel(shooterSubsystem));
 		flywheelB.whenReleased(new DecelerateFlywheel(shooterSubsystem));
-		//goToPositionB.whenPressed(new PositionTurn(turntableSubsystem));
+		turntableFwdB.whileHeld(new SlowTurnFwd(turntableSubsystem));
+		turntableRevB.whileHeld(new SlowTurnRev(turntableSubsystem));
 	}
 
 	/**
@@ -107,6 +114,7 @@ public class TurretOI extends OISubsystem implements
 	public double getDriveAxisRight() {
 		return 0;
 	}
+
 
 	/**
 	 * Non-applicable method for toggling a camera

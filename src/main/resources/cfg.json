@@ -27,7 +27,7 @@
               "revSoftLimEnabled": false,
               "fwdSoftLimVal": 0.1,
               "revSoftLimVal": -0.1,
-              "brakeMode": false
+              "brakeMode": true
             }
           }
         }

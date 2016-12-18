@@ -8,6 +8,10 @@ import org.usfirst.frc.team449.robot.components.CANTalonSRX;
 import org.usfirst.frc.team449.robot.mechanism.turntable.commands.DefaultTurntableGroup;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  * Turntable subsystem
  */
@@ -32,6 +36,8 @@ public class TurntableSubsystem extends MappedSubsystem {
 	 */
 	private long limit = 1;
 
+	private long startTime;
+
 	/**
 	 * Creates a mapped subsystem and sets its map
 	 *
@@ -51,6 +57,7 @@ public class TurntableSubsystem extends MappedSubsystem {
 			}
 		};
 		System.out.println("TurntableSubsystem constructed");
+		startTime = System.nanoTime();
 	}
 
 	/**
@@ -62,7 +69,7 @@ public class TurntableSubsystem extends MappedSubsystem {
 		canTalonSRX.setEncPos(pos);
 	}
 
-	public void setPos(int pos){
+	public void setPos(int pos) {
 		canTalonSRX.setPos(pos);
 	}
 
@@ -125,25 +132,31 @@ public class TurntableSubsystem extends MappedSubsystem {
 		return canTalonSRX.getOutputVoltage();
 	}
 
-	public static double degreesToNative(double degrees){
-		return degrees/360 * NATIVE2INTERNAL_ROT * INTERNAL2OUTPUT * OUT2TURNTABLE;
+	public static double degreesToNative(double degrees) {
+		return degrees / 360 * NATIVE2INTERNAL_ROT * INTERNAL2OUTPUT * OUT2TURNTABLE;
 	}
 
-	public static double nativeToDegrees(double nativeUnits){
+	public static double nativeToDegrees(double nativeUnits) {
 		return nativeUnits / OUT2TURNTABLE / INTERNAL2OUTPUT / NATIVE2INTERNAL_ROT * 360;
 	}
 
 	@Override
 	protected void initDefaultCommand() {
+		try (PrintWriter writer = new PrintWriter("/home/lvuser/turntableLog.csv")) {
+			writer.println("Time,EncVel,Error");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		System.out.println("TurntableSubsystem initDefaultCommand started");
 		setDefaultCommand(new DefaultTurntableGroup(this, oi));
 		System.out.println("TurntableSubsystem initDefaultCommand finished");
 	}
 
 	public void log() {
-		if(canTalonSRX.isFwdSwitchClosed() && !fwdEverPressed)
+		if (canTalonSRX.isFwdSwitchClosed() && !fwdEverPressed)
 			fwdEverPressed = true;
-		if(canTalonSRX.isRevSwitchClosed() && !revEverPressed)
+		if (canTalonSRX.isRevSwitchClosed() && !revEverPressed)
 			revEverPressed = true;
 		SmartDashboard.putBoolean("Fwd LimSwitch", canTalonSRX.isFwdSwitchClosed());
 		SmartDashboard.putBoolean("Rev LimSwitch", canTalonSRX.isRevSwitchClosed());
@@ -160,5 +173,21 @@ public class TurntableSubsystem extends MappedSubsystem {
 		SmartDashboard.putNumber("Internally Calculated Error", canTalonSRX.getClosedLoopError());
 		SmartDashboard.putNumber("SP - OP", getSetpoint() * 100 * 6 * 4096 - getEncPosition());
 		SmartDashboard.putNumber("Setpoint", getSetpoint());
+
+		try (FileWriter fw = new FileWriter("/home/lvuser/turretLog.csv", true)) {
+			StringBuilder sb = new StringBuilder();
+			sb.append((System.nanoTime() - startTime) / 100);
+			sb.append(",");
+			sb.append(getEncPosition());
+			sb.append(",");
+			sb.append(canTalonSRX.getClosedLoopError());
+			sb.append(",");
+			sb.append(oi.getTurntableThrottle() * 135);
+			sb.append("\n");
+			fw.write(sb.toString());
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
