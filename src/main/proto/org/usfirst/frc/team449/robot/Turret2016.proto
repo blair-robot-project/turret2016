@@ -9,5 +9,5 @@ option java_outer_classname = "Turret2016Map";
 message Turret2016 {
     required Shooter shooter = 1;
     required Turntable turntable = 2;
-    required OI this_oi = 3;
+    required OI oi = 3;
 }

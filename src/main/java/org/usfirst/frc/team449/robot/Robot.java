@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
 			e.printStackTrace();
 		}
 		System.out.println("Start map init");
-		oi = new TurretOI(new OIMap(cfg.getThisOi()));
+		oi = new TurretOI(new OIMap(cfg.getOi()));
 		System.out.println("Start turntable init");
 		turntableSubsystem = new TurntableSubsystem(new TurntableMap(cfg.getTurntable()), oi);
 //		System.out.println("Start shooter init");
