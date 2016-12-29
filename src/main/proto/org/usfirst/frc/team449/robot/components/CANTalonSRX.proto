@@ -1,9 +1,9 @@
 syntax = "proto2";
 
 option java_package = "maps.org.usfirst.frc.team449.robot.components";
-option java_outer_classname = "CanTalonSRXMap";
+option java_outer_classname = "CANTalonSRXMap";
 
-message CanTalonSRX {
+message CANTalonSRX {
     required int32 port = 1;
     required int32 feedbackDevice = 2;
     required bool reverseSensor = 3;

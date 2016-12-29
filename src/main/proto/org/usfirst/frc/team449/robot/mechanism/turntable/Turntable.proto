@@ -1,9 +1,9 @@
 syntax = "proto2";
-import "org/usfirst/frc/team449/robot/components/CanTalonSRX.proto";
+import "org/usfirst/frc/team449/robot/components/CANTalonSRX.proto";
 
 option java_package = "maps.org.usfirst.frc.team449.robot.mechanism.turntable";
 option java_outer_classname = "TurntableMap";
 
 message Turntable {
-    required CanTalonSRX can_talon_SRX = 1;
+    required CANTalonSRX can_talon_SRX = 1;
 }
