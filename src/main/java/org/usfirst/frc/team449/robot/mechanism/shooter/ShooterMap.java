@@ -1,6 +1,5 @@
 package org.usfirst.frc.team449.robot.mechanism.shooter;
 
-import org.json.JSONObject;
 import org.usfirst.frc.team449.robot.components.maps.CANTalonSRXMap;
 import org.usfirst.frc.team449.robot.mechanism.MechanismMap;
 
@@ -18,8 +17,10 @@ public class ShooterMap extends MechanismMap {
 	 * @param json a JSONObject containing the configuration for the maps in this
 	 *             object
 	 */
-	public ShooterMap(JSONObject json) {
-		super(json);
+	public ShooterMap(maps.org.usfirst.frc.team449.robot.mechanism.shooter.ShooterMap.Shooter message) {
+		super(message.getSuper());
+		intakeMap = new CANTalonSRXMap(message.getIntake());
+		flywheelMap = new CANTalonSRXMap(message.getFlywheel());
 	}
 
 }

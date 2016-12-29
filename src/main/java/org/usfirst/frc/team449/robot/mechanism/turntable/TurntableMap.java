@@ -1,6 +1,5 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable;
 
-import org.json.JSONObject;
 import org.usfirst.frc.team449.robot.components.maps.CANTalonSRXMap;
 import org.usfirst.frc.team449.robot.mechanism.MechanismMap;
 
@@ -20,8 +19,9 @@ public class TurntableMap extends MechanismMap {
 	 *             configuration for the maps in this
 	 *             object
 	 */
-	public TurntableMap(JSONObject json) {
-		super(json);
+	public TurntableMap(maps.org.usfirst.frc.team449.robot.mechanism.turntable.TurntableMap.Turntable message) {
+		super(message.getSuper());
+		canTalonSRXMap = new CANTalonSRXMap(message.getCanTalonSRX());
 	}
 
 }

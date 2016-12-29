@@ -2,12 +2,14 @@ package org.usfirst.frc.team449.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import org.json.JSONObject;
+import org.usfirst.frc.team449.robot.mechanism.shooter.ShooterMap;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ShooterSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableMap;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
 import org.usfirst.frc.team449.robot.oi.OIMap;
 import org.usfirst.frc.team449.robot.oi.TurretOI;
+
+import java.io.IOException;
 
 /**
  * Turntable base Robot class
@@ -31,7 +33,7 @@ public class Robot extends IterativeRobot {
 	/**
 	 * Configuration map
 	 */
-	private static JSONObject cfg;
+	private static maps.org.usfirst.frc.team449.robot.Turret2016Map.Turret2016 cfg;
 
 	/**
 	 * Initialization block run only when code is
@@ -40,13 +42,17 @@ public class Robot extends IterativeRobot {
 	 * Instatiates subsystems and maps the OI buttons
 	 */
 	public void robotInit() {
-		cfg = MappedSubsystem.readConfig("/home/lvuser/cfg.json");
+		try {
+			MappedSubsystem.readConfig("/home/lvuser/map.cfg", cfg);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		System.out.println("Start map init");
-		oi = new TurretOI(new OIMap(cfg));
+		oi = new TurretOI(new OIMap(cfg.getThisOi()));
 		System.out.println("Start turntable init");
-		turntableSubsystem = new TurntableSubsystem(new TurntableMap(cfg), oi);
+		turntableSubsystem = new TurntableSubsystem(new TurntableMap(cfg.getTurntable()), oi);
 //		System.out.println("Start shooter init");
-//		shooterSubsystem = new ShooterSubsystem(new ShooterMap(cfg), oi);
+//		shooterSubsystem = new ShooterSubsystem(new ShooterMap(cfg.getShooter()), oi);
 
 		// Map buttons AFTER all the subsystems are inited
 		oi.mapButtons();
