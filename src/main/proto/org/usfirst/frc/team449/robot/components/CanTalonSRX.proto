@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+option java_package = "maps.org.usfirst.frc.team449.robot.components";
+option java_outer_classname = "CanTalonSRXMap";
+
+message CanTalonSRX {
+    required int32 port = 1;
+    required int32 feedbackDevice = 2;
+    required bool reverseSensor = 3;
+    required bool reverseOutput = 4;
+    required bool isInverted = 5;
+    required double nominalOutVoltage = 6;
+    required double peakOutVoltage = 7;
+    required int32 profile = 8;
+    required double kP = 9;
+    required double kI = 10;
+    required double kD = 11;
+    required double kF = 12;
+    required bool fwdLimNormOpen = 13;
+    required bool revLimNormOpen = 14;
+    required bool fwdLimEnabled = 15;
+    required bool revLimEnabled = 16;
+    required bool fwdSoftLimEnabled = 17;
+    required double fwdSoftLimVal = 18;
+    required bool revSoftLimEnabled = 19;
+    required double revSoftLimVal = 20;
+    required bool brakeMode = 21;
+}

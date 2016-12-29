@@ -1,0 +1,11 @@
+syntax = "proto2";
+import "org/usfirst/frc/team449/robot/mechanism/shooter/Shooter.proto";
+import "org/usfirst/frc/team449/robot/mechanism/turntable/Turntable.proto";
+
+option java_package = "maps.org.usfirst.frc.team449.robot";
+option java_outer_classname = "Turret2016Map";
+
+message Turret2016 {
+    required Shooter shooter = 1;
+    required Turntable turntable = 2;
+}
