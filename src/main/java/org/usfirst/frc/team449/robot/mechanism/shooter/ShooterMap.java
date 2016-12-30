@@ -11,11 +11,10 @@ public class ShooterMap extends MechanismMap {
 	public CANTalonSRXMap flywheelMap;
 
 	/**
-	 * creates a new Mechanism Map based on the configuration in the given json
-	 * any maps in here are to be shared across all mechanism subsystems
+	 * Creates a new Mechanism Map based on the configuration in the given message.
+	 * Any maps in here are to be shared across all Shooter subsystems.
 	 *
-	 * @param json a JSONObject containing the configuration for the maps in this
-	 *             object
+	 * @param message The protobuf message with the data for this object.
 	 */
 	public ShooterMap(maps.org.usfirst.frc.team449.robot.mechanism.shooter.ShooterMap.Shooter message) {
 		super(message.getSuper());
