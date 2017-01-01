@@ -18,7 +18,7 @@ public class CANTalonSRX extends Component {
 	public CANTalonSRX(CANTalonSRXMap m) {
 		System.out.println(m.port);
 		canTalon = new CANTalon(m.port);
-		canTalon.setFeedbackDevice(CANTalon.FeedbackDevice.valueOf(m.feedbackDevice));
+		canTalon.setFeedbackDevice(CANTalon.FeedbackDevice.valueOf(m.feedbackDevice.getNumber()));
 		canTalon.reverseSensor(m.reverseSensor);
 		canTalon.reverseOutput(m.reverseOutput);
 		canTalon.setInverted(m.isInverted);
