@@ -2,6 +2,7 @@ package org.usfirst.frc.team449.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import maps.org.usfirst.frc.team449.robot.Turret2016Map;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ShooterMap;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ShooterSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableMap;
@@ -43,7 +44,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		try {
-			MappedSubsystem.readConfig("/home/lvuser/map.cfg", cfg);
+			cfg = (Turret2016Map.Turret2016) MappedSubsystem.readConfig("/home/lvuser/map.cfg", Turret2016Map.Turret2016.newBuilder());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
