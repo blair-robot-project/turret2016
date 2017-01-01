@@ -7,7 +7,7 @@ import org.usfirst.frc.team449.robot.MapObject;
  */
 public class CANTalonSRXMap  extends MapObject {
     public int port;
-    public int feedbackDevice;
+    public maps.org.usfirst.frc.team449.robot.components.CANTalonSRXMap.CANTalonSRX.FeedbackDevice feedbackDevice;
     public boolean reverseSensor;
     public boolean reverseOutput;
     public boolean isInverted;

@@ -5,7 +5,17 @@ option java_outer_classname = "CANTalonSRXMap";
 
 message CANTalonSRX {
     required int32 port = 1;
-    required int32 feedback_device = 2;
+    enum FeedbackDevice{
+        QUAD_ENCODER = 0;
+        ANALOG_POT = 2;
+        ANALOG_ENCODER = 3;
+        ENC_RISING = 4;
+        ENC_FALLING = 5;
+        CTRE_MAG_ENCODER_RELATIVE = 6;
+        CTRE_MAG_ENCODER_ABSOLUTE = 7;
+        PULSE_WIDTH = 8;
+    }
+    required FeedbackDevice feedback_device = 2;
     required bool reverse_sensor = 3;
     required bool reverse_output = 4;
     required bool is_inverted = 5;
