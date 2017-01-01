@@ -1,6 +1,5 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
@@ -48,8 +47,6 @@ public class JoystickIntegratedPositionControl extends ReferencingCommand {
 		}
 
 		turntableSubsystem.setPosition(TurntableSubsystem.degreesToNative(integral)*100);
-		SmartDashboard.putNumber("Integral",integral);
-		SmartDashboard.putNumber("Throttle",oi.getTurntableThrottle());
 	}
 
 	@Override

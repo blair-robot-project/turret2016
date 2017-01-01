@@ -1,8 +1,6 @@
 package org.usfirst.frc.team449.robot.mechanism.shooter.commands;
 
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ShooterSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
@@ -39,10 +37,6 @@ public class DefaultFlywheel extends ReferencingCommand {
 
 	@Override
 	protected void execute() {
-		SmartDashboard.putNumber("Output Voltage", shooterSubsystem.getFlywheelOutputVoltage());
-		SmartDashboard.putNumber("RPS Speed", encToRevPerSec(shooterSubsystem.getFlywheelEncVel()));
-		SmartDashboard.putNumber("Raw Position", shooterSubsystem.getFlywheelEncPos());
-		SmartDashboard.putNumber("Speed (rev/s)", shooterSubsystem.getFlywheelEncVel() / 409.6);
 		System.out.println(shooterSubsystem.getFlywheelEncVel() / 409.6);
 	}
 
