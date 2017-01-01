@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import org.usfirst.frc.team449.robot.MappedSubsystem;
 import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DefaultFlywheel;
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DefaultShooterGroup;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
 
@@ -83,7 +84,8 @@ public class ShooterSubsystem extends MappedSubsystem {
 			e.printStackTrace();
 		}
 		startTime = System.nanoTime();
-		setDefaultCommand(new DefaultShooterGroup(this, oi));
+//		setDefaultCommand(new DefaultShooterGroup(this, oi));
+		setDefaultCommand(new DefaultFlywheel(this, oi));
 		System.out.println("ShooterSubsystem.initDefaultCommand finished");
 	}
 
