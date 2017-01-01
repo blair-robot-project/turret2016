@@ -8,7 +8,7 @@ import org.usfirst.frc.team449.robot.components.maps.CANTalonSRXMap;
  */
 public class CANTalonSRX extends Component {
 
-	CANTalon canTalon;
+	public CANTalon canTalon;
 
 	protected double kP;
 	protected double kI;

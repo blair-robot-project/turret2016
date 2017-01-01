@@ -29,8 +29,8 @@ public class DefaultFlywheel extends ReferencingCommand {
 
 	@Override
 	protected void initialize() {
-		shooterSubsystem.flywheel.setPercentVbus(1);
-		shooterSubsystem.intake.setPercentVbus(1);
+		shooterSubsystem.flywheel.setPercentVbus(0.2);
+		shooterSubsystem.intake.setPercentVbus(0.2);
 		System.out.println("JoystickIntegratedPositionControl initialized");
 	}
 
@@ -39,7 +39,9 @@ public class DefaultFlywheel extends ReferencingCommand {
 	protected void execute() {
 		System.out.println(shooterSubsystem.getFlywheelEncVel() / 409.6);
 		SmartDashboard.putNumber("Flywheel Enc Vel", shooterSubsystem.flywheel.getEncVelocity());
+		SmartDashboard.putNumber("Flywheel PW Vel", shooterSubsystem.flywheel.canTalon.getPulseWidthVelocity());
 		SmartDashboard.putNumber("Intake Enc Vel", shooterSubsystem.intake.getEncVelocity());
+		SmartDashboard.putNumber("Intake PW Vel", shooterSubsystem.intake.canTalon.getPulseWidthVelocity());
 	}
 
 	@Override
