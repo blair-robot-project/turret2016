@@ -50,10 +50,10 @@ public class Robot extends IterativeRobot {
 		}
 		System.out.println("Start map init");
 		oi = new TurretOI(new OIMap(cfg.getOi()));
-		System.out.println("Start turntable init");
-		turntableSubsystem = new TurntableSubsystem(new TurntableMap(cfg.getTurntable()), oi);
-//		System.out.println("Start shooter init");
-//		shooterSubsystem = new ShooterSubsystem(new ShooterMap(cfg.getShooter()), oi);
+//		System.out.println("Start turntable init");
+//		turntableSubsystem = new TurntableSubsystem(new TurntableMap(cfg.getTurntable()), oi);
+		System.out.println("Start shooter init");
+		shooterSubsystem = new ShooterSubsystem(new ShooterMap(cfg.getShooter()), oi);
 
 		// Map buttons AFTER all the subsystems are inited
 		oi.mapButtons();
