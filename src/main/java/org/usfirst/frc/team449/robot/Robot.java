@@ -3,11 +3,8 @@ package org.usfirst.frc.team449.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import maps.org.usfirst.frc.team449.robot.Turret2016Map;
-import org.usfirst.frc.team449.robot.mechanism.shooter.ShooterMap;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ShooterSubsystem;
-import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableMap;
 import org.usfirst.frc.team449.robot.mechanism.turntable.TurntableSubsystem;
-import org.usfirst.frc.team449.robot.oi.OIMap;
 import org.usfirst.frc.team449.robot.oi.TurretOI;
 
 import java.io.IOException;
@@ -49,9 +46,9 @@ public class Robot extends IterativeRobot {
 			e.printStackTrace();
 		}
 		System.out.println("Start map init");
-		oi = new TurretOI(new OIMap(cfg.getOi()));
+		oi = new TurretOI(cfg.getOi());
 		System.out.println("Start turntable init");
-		turntableSubsystem = new TurntableSubsystem(new TurntableMap(cfg.getTurntable()), oi);
+		turntableSubsystem = new TurntableSubsystem(cfg.getTurntable(), oi);
 //		System.out.println("Start shooter init");
 //		shooterSubsystem = new ShooterSubsystem(new ShooterMap(cfg.getShooter()), oi);
 
