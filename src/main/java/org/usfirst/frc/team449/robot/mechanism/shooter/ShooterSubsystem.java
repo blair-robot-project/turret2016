@@ -21,11 +21,11 @@ public class ShooterSubsystem extends MappedSubsystem {
 	/**
 	 * The motor on the lower bar to suck up the ball.
 	 */
-	private CANTalonSRX intake;
+	public CANTalonSRX intake;
 	/**
 	 * The motor on the upper bar that spins at high speed to launch the ball.
 	 */
-	private CANTalonSRX flywheel;
+	public CANTalonSRX flywheel;
 	/**
 	 * OI to get the fire button from
 	 */
