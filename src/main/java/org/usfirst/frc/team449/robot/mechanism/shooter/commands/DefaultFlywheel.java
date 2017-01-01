@@ -28,8 +28,8 @@ public class DefaultFlywheel extends ReferencingCommand {
 
 	@Override
 	protected void initialize() {
-		shooterSubsystem.setFlywheelSpeed(-1); //WITH THIS ONE
-		shooterSubsystem.setIntakePercentVbus(1);
+		shooterSubsystem.flywheel.setPercentVbus(1);
+		shooterSubsystem.intake.setPercentVbus(1);
 		System.out.println("JoystickIntegratedPositionControl initialized");
 	}
 
