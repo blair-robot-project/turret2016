@@ -1,6 +1,7 @@
 package org.usfirst.frc.team449.robot.mechanism.shooter.commands;
 
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.ReferencingCommand;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ShooterSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
@@ -37,6 +38,8 @@ public class DefaultFlywheel extends ReferencingCommand {
 	@Override
 	protected void execute() {
 		System.out.println(shooterSubsystem.getFlywheelEncVel() / 409.6);
+		SmartDashboard.putNumber("Flywheel Enc Vel", shooterSubsystem.flywheel.getEncVelocity());
+		SmartDashboard.putNumber("Intake Enc Vel", shooterSubsystem.intake.getEncVelocity());
 	}
 
 	@Override
