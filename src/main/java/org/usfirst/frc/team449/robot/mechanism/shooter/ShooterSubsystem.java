@@ -85,7 +85,6 @@ public class ShooterSubsystem extends MappedSubsystem {
 		}
 		startTime = System.nanoTime();
 		setDefaultCommand(new DefaultShooterGroup(this, oi));
-//		setDefaultCommand(new DefaultFlywheel(this, oi));
 		System.out.println("ShooterSubsystem.initDefaultCommand finished");
 	}
 
