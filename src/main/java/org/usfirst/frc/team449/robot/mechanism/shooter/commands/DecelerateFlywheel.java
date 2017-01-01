@@ -29,13 +29,15 @@ public class DecelerateFlywheel extends ReferencingCommand {
 
 	@Override
 	protected void initialize() {
-		shooterSubsystem.flywheel.setPercentVbus(0.0);
-		shooterSubsystem.setAccelerated(false);
+		shooterSubsystem.setFlywheelControlMode(CANTalon.TalonControlMode.Speed);
+		//shooterSubsystem.enableFlywheelBrakeMode(true);
 		System.out.println("DecelerateFlywheel init");
 	}
 
 	@Override
 	protected void execute() {
+		shooterSubsystem.setFlywheelSpeed(0);
+		shooterSubsystem.setAccelerated(false);
 		shooterSubsystem.logData(0);
 		System.out.println("DecelerateFlywheel executed");
 	}
