@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
 		System.out.println("Start turntable init");
 		turntableSubsystem = new TurntableSubsystem(cfg.getTurntable(), oi);
 		System.out.println("Start shooter init");
-		shooterSubsystem = new ShooterSubsystem(new ShooterMap(cfg.getShooter()), oi);
+		shooterSubsystem = new ShooterSubsystem(cfg.getShooter(), oi);
 
 
 		// Map buttons AFTER all the subsystems are inited
