@@ -1,7 +1,6 @@
 package org.usfirst.frc.team449.robot.components;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import org.usfirst.frc.team449.robot.components.maps.CANTalonSRXMap;
 
 /**
  * Created by BlairRobot on 2016-11-05.
@@ -15,38 +14,36 @@ public class CANTalonSRX extends Component {
 	protected double kD;
 	protected double kF;
 
-	public CANTalonSRX(CANTalonSRXMap m) {
-		System.out.println(m.port);
-		canTalon = new CANTalon(m.port);
-		canTalon.setFeedbackDevice(CANTalon.FeedbackDevice.valueOf(m.feedbackDevice.getNumber()));
-		canTalon.reverseSensor(m.reverseSensor);
-		canTalon.reverseOutput(m.reverseOutput);
-		canTalon.setInverted(m.isInverted);
+	public CANTalonSRX(maps.org.usfirst.frc.team449.robot.components.CANTalonSRXMap.CANTalonSRX m) {
+		System.out.println(m.getPort());
+		canTalon = new CANTalon(m.getPort());
+		canTalon.setFeedbackDevice(CANTalon.FeedbackDevice.valueOf(m.getFeedbackDevice().getNumber()));
+		canTalon.reverseSensor(m.getReverseSensor());
+		canTalon.reverseOutput(m.getReverseOutput());
+		canTalon.setInverted(m.getIsInverted());
 		canTalon.configNominalOutputVoltage
-				(+m.nominalOutVoltage, -m.nominalOutVoltage);
-		canTalon.configPeakOutputVoltage(+m.peakOutVoltage,
-				-m.peakOutVoltage);
-		canTalon.setProfile(m.profile);
+				(+m.getNominalOutVoltage(), -m.getNominalOutVoltage());
+		canTalon.configPeakOutputVoltage(+m.getPeakOutVoltage(),
+				-m.getPeakOutVoltage());
+		canTalon.setProfile(m.getProfile());
 
-		kP = m.kP;
-		kI = m.kI;
-		kD = m.kD;
-		kF = m.kF;
-		setPIDF(m.kP, m.kI, m.kD, m.kF);
+		kP = m.getKP();
+		kI = m.getKI();
+		kD = m.getKD();
+		kF = m.getKF();
+		setPIDF(m.getKP(), m.getKI(), m.getKD(), m.getKF());
 		canTalon.setPID(kP, kI, kD, kF, 0, 0, 0);
 
 		canTalon.setProfile(0);
 
-		canTalon.ConfigFwdLimitSwitchNormallyOpen(m.fwdLimNormOpen);
-		canTalon.ConfigRevLimitSwitchNormallyOpen
-				(m.revLimNormOpen);
-		canTalon.enableLimitSwitch(m.fwdLimEnabled,
-				m.revLimEnabled);
-		canTalon.enableForwardSoftLimit(m.fwdSoftLimEnabled);
-		canTalon.setForwardSoftLimit(m.fwdSoftLimVal);
-		canTalon.enableReverseSoftLimit(m.revSoftLimEnabled);
-		canTalon.setReverseSoftLimit(m.revSoftLimVal);
-		canTalon.enableBrakeMode(m.brakeMode);
+		canTalon.ConfigFwdLimitSwitchNormallyOpen(m.getFwdLimNormOpen());
+		canTalon.ConfigRevLimitSwitchNormallyOpen(m.getRevLimNormOpen());
+		canTalon.enableLimitSwitch(m.getFwdLimEnabled(), m.getRevLimEnabled());
+		canTalon.enableForwardSoftLimit(m.getFwdSoftLimEnabled());
+		canTalon.setForwardSoftLimit(m.getFwdSoftLimVal());
+		canTalon.enableReverseSoftLimit(m.getRevSoftLimEnabled());
+		canTalon.setReverseSoftLimit(m.getRevSoftLimVal());
+		canTalon.enableBrakeMode(m.getBrakeMode());
 	}
 
 	/**

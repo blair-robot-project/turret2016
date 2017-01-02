@@ -1,9 +1,8 @@
 package org.usfirst.frc.team449.robot.mechanism.shooter;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import org.usfirst.frc.team449.robot.MappedSubsystem;
-import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
+import org.usfirst.frc.team449.robot.mechanism.MechanismSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DefaultFlywheel;
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DefaultShooterGroup;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
@@ -15,7 +14,7 @@ import java.io.PrintWriter;
 /**
  * Shooter Subsystem
  */
-public class ShooterSubsystem extends MappedSubsystem {
+public class ShooterSubsystem extends MechanismSubsystem {
 
 	private final double NATIVE = 409.6;
 
@@ -54,12 +53,11 @@ public class ShooterSubsystem extends MappedSubsystem {
 	 * @param map the map of constants relevant to this
 	 *            subsystem
 	 */
-	public ShooterSubsystem(RobotMap map, ShooterOI oi) {
-		super(map);
-		ShooterMap shooterMap = (ShooterMap) map;
+	public ShooterSubsystem(maps.org.usfirst.frc.team449.robot.mechanism.shooter.ShooterMap.Shooter map, ShooterOI oi) {
+		super(map.getMechanism());
 		this.oi = oi;
-		intake = new CANTalonSRX(shooterMap.intakeMap);
-		flywheel = new CANTalonSRX(shooterMap.flywheelMap) {
+		intake = new CANTalonSRX(map.getIntake());
+		flywheel = new CANTalonSRX(map.getFlywheel()) {
 			@Override
 			protected void setPIDF(double mkP, double mkI, double mkD, double mkF) {
 				// TODO put this in map instead of hardcoding

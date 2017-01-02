@@ -6,7 +6,7 @@ option java_package = "maps.org.usfirst.frc.team449.robot.mechanism.shooter";
 option java_outer_classname = "ShooterMap";
 
 message Shooter {
-    required Mechanism super = 3;
+    required Mechanism mechanism = 3;
     required CANTalonSRX intake = 1;
     required CANTalonSRX flywheel = 2;
 }

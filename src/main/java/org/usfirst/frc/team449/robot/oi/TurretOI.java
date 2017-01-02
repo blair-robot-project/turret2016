@@ -3,7 +3,6 @@ package org.usfirst.frc.team449.robot.oi;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.AccelerateFlywheel;
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DecelerateFlywheel;
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.IntakeBall;
@@ -46,7 +45,7 @@ public class TurretOI extends OISubsystem implements
 	 *
 	 * @param map configuration map
 	 */
-	public TurretOI(RobotMap map) {
+	public TurretOI(maps.org.usfirst.frc.team449.robot.oi.OIMap.OI map) {
 		super(map);
 		turntableJ = new Joystick(0);
 		flywheelJ = new Joystick(1);

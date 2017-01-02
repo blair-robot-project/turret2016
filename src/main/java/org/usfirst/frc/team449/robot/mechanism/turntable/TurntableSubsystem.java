@@ -1,16 +1,15 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import org.usfirst.frc.team449.robot.MappedSubsystem;
-import org.usfirst.frc.team449.robot.RobotMap;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
+import org.usfirst.frc.team449.robot.mechanism.MechanismSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.turntable.commands.DefaultTurntableGroup;
 import org.usfirst.frc.team449.robot.mechanism.turntable.ois.TurntableOI;
 
 /**
  * Turntable subsystem
  */
-public class TurntableSubsystem extends MappedSubsystem {
+public class TurntableSubsystem extends MechanismSubsystem {
 	private boolean fwdEverPressed;
 	private boolean revEverPressed;
 	final static double NATIVE2INTERNAL_ROT = 4096.0;
@@ -37,11 +36,10 @@ public class TurntableSubsystem extends MappedSubsystem {
 	 * @param map the map of constants relevant to this
 	 *            subsystem
 	 */
-	public TurntableSubsystem(RobotMap map, TurntableOI oi) {
-		super(map);
-		TurntableMap turntableMap = (TurntableMap) map;
+	public TurntableSubsystem(maps.org.usfirst.frc.team449.robot.mechanism.turntable.TurntableMap.Turntable map, TurntableOI oi) {
+		super(map.getMechanism());
 		this.oi = oi;
-		canTalonSRX = new CANTalonSRX(turntableMap.canTalonSRXMap) {
+		canTalonSRX = new CANTalonSRX(map.getCanTalonSRX()) {
 			@Override
 			protected void setPIDF(double mkP, double mkI, double mkD, double mkF) {
 				// TODO put this in map instead of hardcoding
