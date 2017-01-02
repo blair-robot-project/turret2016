@@ -29,32 +29,19 @@ public class DefaultFlywheel extends ReferencingCommand {
 
 	@Override
 	protected void initialize() {
-		shooterSubsystem.setFlywheelEncPos(0);
-		shooterSubsystem.setFlywheelSpeed(-1); //WITH THIS ONE
+		shooterSubsystem.flywheel.setPercentVbus(0.2);
+		shooterSubsystem.intake.setPercentVbus(0.2);
 		System.out.println("JoystickIntegratedPositionControl initialized");
 	}
 
 
 	@Override
 	protected void execute() {
-		//shooterSubsystem.setFlywheelByMode(revPerSecToEnc(oi.getJoyValue()));
-		//        shooterSubsystem.setFlywheelByMode(oi.getJoyValue());
-		SmartDashboard.putNumber("Output Voltage", shooterSubsystem.getFlywheelOutputVoltage());
-		//SmartDashboard.putNumber("Velocity Setpoint", oi.getJoyValue()*MAX_SPEED);
-		SmartDashboard.putNumber("RPS Speed", encToRevPerSec(shooterSubsystem.getFlywheelEncVel()));
-		SmartDashboard.putNumber("Raw Position", shooterSubsystem.getFlywheelEncPos());
-		SmartDashboard.putNumber("Speed (rev/s)", shooterSubsystem.getFlywheelEncVel() / 409.6);
 		System.out.println(shooterSubsystem.getFlywheelEncVel() / 409.6);
-
-		//SmartDashboard.putNumber("FGain", shooterSubsystem.getFlywheelFGain());
-		//SmartDashboard.putNumber("Output Voltage", shooterSubsystem.getFlywheelOutputVoltage());
-		//SmartDashboard.putNumber("PID Error", shooterSubsystem.getError());
-		//SmartDashboard.putBoolean("PID Talon Enabled", shooterSubsystem.isEnabled());
-		//SmartDashboard.putBoolean("PID Talon Alive", shooterSubsystem.isAlive());
-		//SmartDashboard.putBoolean("PID Talon", shooterSubsystem.getControlMode().isPID());
-		//shooterSubsystem.setFlywheelByMode(oi.getJoyValue()*MAX_SPEED); //SWITCH OUT WHICH IS COMMENTED
-		//        shooterSubsystem.setFlywheelByMode(1); //WITH THIS ONE
-		//shooterSubsystem.setFlywheelByMode(MAX_SPEED);
+		SmartDashboard.putNumber("Flywheel Enc Vel", shooterSubsystem.flywheel.getEncVelocity());
+		SmartDashboard.putNumber("Flywheel PW Vel", shooterSubsystem.flywheel.canTalon.getPulseWidthVelocity());
+		SmartDashboard.putNumber("Intake Enc Vel", shooterSubsystem.intake.getEncVelocity());
+		SmartDashboard.putNumber("Intake PW Vel", shooterSubsystem.intake.canTalon.getPulseWidthVelocity());
 	}
 
 	@Override
@@ -69,4 +56,4 @@ public class DefaultFlywheel extends ReferencingCommand {
 	private double revPerSecToEnc(double rps) {
 		return (4 * CPR * rps) / 10;
 	}
-} //TYPE "gradle deploy"
+}

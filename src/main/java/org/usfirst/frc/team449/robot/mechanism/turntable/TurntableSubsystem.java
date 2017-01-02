@@ -1,7 +1,6 @@
 package org.usfirst.frc.team449.robot.mechanism.turntable;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
 import org.usfirst.frc.team449.robot.mechanism.MechanismSubsystem;
 import org.usfirst.frc.team449.robot.mechanism.turntable.commands.DefaultTurntableGroup;
@@ -60,7 +59,7 @@ public class TurntableSubsystem extends MechanismSubsystem {
 		canTalonSRX.setEncPos(pos);
 	}
 
-	public void setPos(int pos){
+	public void setPos(int pos) {
 		canTalonSRX.setPos(pos);
 	}
 
@@ -123,11 +122,11 @@ public class TurntableSubsystem extends MechanismSubsystem {
 		return canTalonSRX.getOutputVoltage();
 	}
 
-	public static double degreesToNative(double degrees){
-		return degrees/360 * NATIVE2INTERNAL_ROT * INTERNAL2OUTPUT * OUT2TURNTABLE;
+	public static double degreesToNative(double degrees) {
+		return degrees / 360 * NATIVE2INTERNAL_ROT * INTERNAL2OUTPUT * OUT2TURNTABLE;
 	}
 
-	public static double nativeToDegrees(double nativeUnits){
+	public static double nativeToDegrees(double nativeUnits) {
 		return nativeUnits / OUT2TURNTABLE / INTERNAL2OUTPUT / NATIVE2INTERNAL_ROT * 360;
 	}
 
@@ -139,24 +138,11 @@ public class TurntableSubsystem extends MechanismSubsystem {
 	}
 
 	public void log() {
-		if(canTalonSRX.isFwdSwitchClosed() && !fwdEverPressed)
+		if (canTalonSRX.isFwdSwitchClosed() && !fwdEverPressed) {
 			fwdEverPressed = true;
-		if(canTalonSRX.isRevSwitchClosed() && !revEverPressed)
+		}
+		if (canTalonSRX.isRevSwitchClosed() && !revEverPressed) {
 			revEverPressed = true;
-		SmartDashboard.putBoolean("Fwd LimSwitch", canTalonSRX.isFwdSwitchClosed());
-		SmartDashboard.putBoolean("Rev LimSwitch", canTalonSRX.isRevSwitchClosed());
-		SmartDashboard.putBoolean("Fwd LimSwitch sticky", fwdEverPressed);
-		SmartDashboard.putBoolean("Rev LimSwitch sticky", revEverPressed);
-
-		SmartDashboard.putNumber("Enc Position", getEncPosition());
-		SmartDashboard.putNumber("Position", getPosition());
-		SmartDashboard.putNumber("Degree position", nativeToDegrees(getPosition()));
-		SmartDashboard.putNumber("PW Position", getPWPosition());
-		SmartDashboard.putNumber("Analog Position", getAnalogPosition());
-		SmartDashboard.putString("Control Mode", canTalonSRX.getControlMode().toString());
-
-		SmartDashboard.putNumber("Internally Calculated Error", canTalonSRX.getClosedLoopError());
-		SmartDashboard.putNumber("SP - OP", getSetpoint() * 100 * 6 * 4096 - getEncPosition());
-		SmartDashboard.putNumber("Setpoint", getSetpoint());
+		}
 	}
 }

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.CANTalon;
  */
 public class CANTalonSRX extends Component {
 
-	CANTalon canTalon;
+	public CANTalon canTalon;
 
 	protected double kP;
 	protected double kI;

@@ -3,6 +3,7 @@ package org.usfirst.frc.team449.robot.mechanism.shooter;
 import edu.wpi.first.wpilibj.CANTalon;
 import org.usfirst.frc.team449.robot.components.CANTalonSRX;
 import org.usfirst.frc.team449.robot.mechanism.MechanismSubsystem;
+import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DefaultFlywheel;
 import org.usfirst.frc.team449.robot.mechanism.shooter.commands.DefaultShooterGroup;
 import org.usfirst.frc.team449.robot.mechanism.shooter.ois.ShooterOI;
 
@@ -20,11 +21,11 @@ public class ShooterSubsystem extends MechanismSubsystem {
 	/**
 	 * The motor on the lower bar to suck up the ball.
 	 */
-	private CANTalonSRX intake;
+	public CANTalonSRX intake;
 	/**
 	 * The motor on the upper bar that spins at high speed to launch the ball.
 	 */
-	private CANTalonSRX flywheel;
+	public CANTalonSRX flywheel;
 	/**
 	 * OI to get the fire button from
 	 */
@@ -82,6 +83,7 @@ public class ShooterSubsystem extends MechanismSubsystem {
 		}
 		startTime = System.nanoTime();
 		setDefaultCommand(new DefaultShooterGroup(this, oi));
+//		setDefaultCommand(new DefaultFlywheel(this, oi));
 		System.out.println("ShooterSubsystem.initDefaultCommand finished");
 	}
 
@@ -151,14 +153,10 @@ public class ShooterSubsystem extends MechanismSubsystem {
 			sb.append((System.nanoTime() - startTime) / 100);
 			sb.append(",");
 			sb.append(sp);
-//			SmartDashboard.putNumber("Flywheel Setpoint", getFlywheelSetpoint() / 60);
 			sb.append(",");
 			sb.append(getFlywheelEncVel() / NATIVE);
-//			SmartDashboard.putNumber("Flywheel Velocity", getFlywheelEncVel() / NATIVE);
 			sb.append(",");
 			sb.append(getFlywheelClosedLoopError() / NATIVE);
-//			SmartDashboard.putNumber("Flywheel Error", getFlywheelClosedLoopError() / NATIVE);
-//			SmartDashboard.putNumber("Flywheel Output Voltage", getFlywheelOutputVoltage());
 			sb.append("\n");
 			fw.write(sb.toString());
 			fw.close();
