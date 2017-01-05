@@ -3,19 +3,38 @@ package org.usfirst.frc.team449.robot.components;
 import edu.wpi.first.wpilibj.CANTalon;
 
 /**
- * Created by BlairRobot on 2016-11-05.
+ * Component wrapper on CTRE CAN Talon SRX {@link CANTalon}
  */
 public class CANTalonSRX extends Component {
 
+	/**
+	 * The CTRE CAN Talon SRX that this class is a wrapper on
+	 */
 	public CANTalon canTalon;
 
+	/**
+	 * kP of the internal PID loop
+	 */
 	protected double kP;
+	/**
+	 * kI of the internal PID loop
+	 */
 	protected double kI;
+	/**
+	 * kD of the internal PID loop
+	 */
 	protected double kD;
+	/**
+	 * kF of the interal PID loop
+	 */
 	protected double kF;
 
+	/**
+	 * Construct the CANTalonSRX from its map object
+	 * @param m CANTalonSRX map object
+	 */
 	public CANTalonSRX(maps.org.usfirst.frc.team449.robot.components.CANTalonSRXMap.CANTalonSRX m) {
-		System.out.println(m.getPort());
+		// Configure stuff
 		canTalon = new CANTalon(m.getPort());
 		canTalon.setFeedbackDevice(CANTalon.FeedbackDevice.valueOf(m.getFeedbackDevice().getNumber()));
 		canTalon.reverseSensor(m.getReverseSensor());
@@ -27,15 +46,20 @@ public class CANTalonSRX extends Component {
 				-m.getPeakOutVoltage());
 		canTalon.setProfile(m.getProfile());
 
+		/*
+		 * Read the PIDF constants from the map, then call setPIDF to scale the stuff in the map as desired to get to
+		 * native units, appropriates or whatever the hell the controller expect, then set the PIDF slots of the
+		 * hardware and choose the slot
+		 */
 		kP = m.getKP();
 		kI = m.getKI();
 		kD = m.getKD();
 		kF = m.getKF();
 		setPIDF(m.getKP(), m.getKI(), m.getKD(), m.getKF());
 		canTalon.setPID(kP, kI, kD, kF, 0, 0, 0);
-
 		canTalon.setProfile(0);
 
+		// Configure more stuff
 		canTalon.ConfigFwdLimitSwitchNormallyOpen(m.getFwdLimNormOpen());
 		canTalon.ConfigRevLimitSwitchNormallyOpen(m.getRevLimNormOpen());
 		canTalon.enableLimitSwitch(m.getFwdLimEnabled(), m.getRevLimEnabled());
