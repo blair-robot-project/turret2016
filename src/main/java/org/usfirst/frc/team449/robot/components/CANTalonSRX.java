@@ -160,22 +160,6 @@ public class CANTalonSRX extends Component {
 	}
 
 	/**
-	 * Wrapper on the native CAN Talon set method.
-	 * <p>
-	 * When controlling using PercentVBUS, -1 <= sp <= 1
-	 * When controlling using Speed, sp is in RPM (note: revolutions per MINUTE, not second)
-	 *
-	 * @param sp setpoint
-	 */
-	public void setByMode(double sp) {
-		if (getControlMode() == CANTalon.TalonControlMode.Speed) {
-			canTalon.set(sp * 60);
-		} else {
-			canTalon.set(sp);
-		}
-	}
-
-	/**
 	 * Give a PercentVbus setpoint (set to PercentVbus mode and set)
 	 *
 	 * @param percentVbus percent of total voltage (between -1.0 and +1.0)
