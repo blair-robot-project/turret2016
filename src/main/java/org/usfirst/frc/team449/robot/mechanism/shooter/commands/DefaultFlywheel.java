@@ -38,9 +38,9 @@ public class DefaultFlywheel extends ReferencingCommand {
 	@Override
 	protected void execute() {
 		System.out.println(shooterSubsystem.getFlywheelEncVel() / 409.6);
-		SmartDashboard.putNumber("Flywheel Enc Vel", shooterSubsystem.flywheel.getEncVelocity());
+		SmartDashboard.putNumber("Flywheel Enc Vel", shooterSubsystem.flywheel.canTalon.getEncVelocity());
 		SmartDashboard.putNumber("Flywheel PW Vel", shooterSubsystem.flywheel.canTalon.getPulseWidthVelocity());
-		SmartDashboard.putNumber("Intake Enc Vel", shooterSubsystem.intake.getEncVelocity());
+		SmartDashboard.putNumber("Intake Enc Vel", shooterSubsystem.intake.canTalon.getEncVelocity());
 		SmartDashboard.putNumber("Intake PW Vel", shooterSubsystem.intake.canTalon.getPulseWidthVelocity());
 	}
 

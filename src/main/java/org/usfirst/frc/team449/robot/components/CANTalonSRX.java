@@ -103,62 +103,6 @@ public class CANTalonSRX extends Component {
 	protected void setPIDF(double mkP, double mkI, double mkD, double mkF) {
 	}
 
-	public boolean isEnabled() {
-		return canTalon.isEnabled();
-	}
-
-	public CANTalon.TalonControlMode getControlMode() {
-		return canTalon.getControlMode();
-	}
-
-	public void setControlMode(CANTalon.TalonControlMode mode) {
-		canTalon.changeControlMode(mode);
-	}
-
-	public void setEncPos(int pos) {
-		canTalon.setEncPosition(pos);
-	}
-
-	public void setPos(int pos){
-		canTalon.setPosition(pos);
-	}
-
-	public double getOutputVoltage() {
-		return canTalon.getOutputVoltage();
-	}
-
-	public double getEncVelocity() {
-		return canTalon.getEncVelocity();
-	}
-
-	public double getEncPosition() {
-		return canTalon.getEncPosition();
-	}
-
-	public double getPosition() {
-		return canTalon.getPosition();
-	}
-
-	public double getPWPosition() {
-		return canTalon.getPulseWidthPosition();
-	}
-
-	public double getAnalogPosition() {
-		return canTalon.getAnalogInPosition();
-	}
-
-	public double getClosedLoopError() {
-		return canTalon.getClosedLoopError();
-	}
-
-	public boolean isFwdSwitchClosed() {
-		return canTalon.isFwdLimitSwitchClosed();
-	}
-
-	public boolean isRevSwitchClosed() {
-		return canTalon.isRevLimitSwitchClosed();
-	}
-
 	/**
 	 * Give a PercentVbus setpoint (set to PercentVbus mode and set)
 	 *
@@ -195,14 +139,6 @@ public class CANTalonSRX extends Component {
 	public void setSpeed(double velocitySp) {
 		canTalon.changeControlMode(CANTalon.TalonControlMode.Speed);
 		canTalon.set(velocitySp * 60); // 60 converts from RPS to RPM, TODO figure out where the 60 should actually go
-	}
-
-	public void enableBrakeMode(boolean brake) {
-		canTalon.enableBrakeMode(brake);
-	}
-
-	public double getSetpoint() {
-		return canTalon.getSetpoint();
 	}
 
 	@Override

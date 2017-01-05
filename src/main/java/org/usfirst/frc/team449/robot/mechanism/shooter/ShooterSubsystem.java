@@ -96,7 +96,7 @@ public class ShooterSubsystem extends MechanismSubsystem {
 	}
 
 	public void setFlywheelControlMode(CANTalon.TalonControlMode mode) {
-		flywheel.setControlMode(mode);
+		flywheel.canTalon.changeControlMode(mode);
 	}
 
 	public void setFlywheelSpeed(double sp) {
@@ -104,15 +104,15 @@ public class ShooterSubsystem extends MechanismSubsystem {
 	}
 
 	public void setFlywheelEncPos(int enc) {
-		flywheel.setEncPos(enc);
+		flywheel.canTalon.setEncPosition(enc);
 	}
 
 	public void enableFlywheelBrakeMode(boolean brake) {
-		flywheel.enableBrakeMode(brake);
+		flywheel.canTalon.enableBrakeMode(brake);
 	}
 
 	public void setIntakeControlMode(CANTalon.TalonControlMode mode) {
-		intake.setControlMode(mode);
+		intake.canTalon.changeControlMode(mode);
 	}
 
 	public void setIntakePercentVbus(double percentVbus) {
@@ -120,31 +120,31 @@ public class ShooterSubsystem extends MechanismSubsystem {
 	}
 
 	public double getFlywheelEncVel() {
-		return flywheel.getEncVelocity();
+		return flywheel.canTalon.getEncVelocity();
 	}
 
 	public double getFlywheelEncPos() {
-		return flywheel.getEncPosition();
+		return flywheel.canTalon.getEncPosition();
 	}
 
 	public double getFlywheelOutputVoltage() {
-		return flywheel.getOutputVoltage();
+		return flywheel.canTalon.getOutputVoltage();
 	}
 
 	public double getFlywheelClosedLoopError() {
-		return flywheel.getClosedLoopError();
+		return flywheel.canTalon.getClosedLoopError();
 	}
 
 	public boolean isFlywheelEnabled() {
-		return flywheel.isEnabled();
+		return flywheel.canTalon.isEnabled();
 	}
 
 	public double getFlywheelSetpoint() {
-		return flywheel.getSetpoint();
+		return flywheel.canTalon.getSetpoint();
 	}
 
 	public CANTalon.TalonControlMode getFlywheelControlMode() {
-		return flywheel.getControlMode();
+		return flywheel.canTalon.getControlMode();
 	}
 
 	public void logData(double sp) {

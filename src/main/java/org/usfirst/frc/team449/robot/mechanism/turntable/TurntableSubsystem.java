@@ -56,30 +56,30 @@ public class TurntableSubsystem extends MechanismSubsystem {
 	 * @param pos value to set the tick counter to
 	 */
 	public void setEncPos(int pos) {
-		canTalonSRX.setEncPos(pos);
+		canTalonSRX.canTalon.setEncPosition(pos);
 	}
 
 	public void setPos(int pos) {
-		canTalonSRX.setPos(pos);
+		canTalonSRX.canTalon.setPosition(pos);
 	}
 
 	/**
 	 * @return encoder tick count
 	 */
 	public double getEncPosition() {
-		return canTalonSRX.getEncPosition();
+		return canTalonSRX.canTalon.getEncPosition();
 	}
 
 	public double getPosition() {
-		return canTalonSRX.getPosition();
+		return canTalonSRX.canTalon.getPosition();
 	}
 
 	public double getPWPosition() {
-		return canTalonSRX.getPWPosition();
+		return canTalonSRX.canTalon.getPulseWidthPosition();
 	}
 
 	public double getAnalogPosition() {
-		return canTalonSRX.getAnalogPosition();
+		return canTalonSRX.canTalon.getAnalogInPosition();
 	}
 
 	public void setPercentVbus(double percentVbus) {
@@ -91,15 +91,15 @@ public class TurntableSubsystem extends MechanismSubsystem {
 	}
 
 	public void setControlMode(CANTalon.TalonControlMode mode) {
-		canTalonSRX.setControlMode(mode);
+		canTalonSRX.canTalon.changeControlMode(mode);
 	}
 
 	public boolean isFwdSwitchClosed() {
-		return canTalonSRX.isFwdSwitchClosed();
+		return canTalonSRX.canTalon.isFwdLimitSwitchClosed();
 	}
 
 	public boolean isRevSwitchClosed() {
-		return canTalonSRX.isRevSwitchClosed();
+		return canTalonSRX.canTalon.isRevLimitSwitchClosed();
 	}
 
 	public long getLimit() {
@@ -111,15 +111,15 @@ public class TurntableSubsystem extends MechanismSubsystem {
 	}
 
 	public double getError() {
-		return canTalonSRX.getClosedLoopError();
+		return canTalonSRX.canTalon.getClosedLoopError();
 	}
 
 	public double getSetpoint() {
-		return canTalonSRX.getSetpoint();
+		return canTalonSRX.canTalon.getSetpoint();
 	}
 
 	public double getOutputVoltage() {
-		return canTalonSRX.getOutputVoltage();
+		return canTalonSRX.canTalon.getOutputVoltage();
 	}
 
 	public static double degreesToNative(double degrees) {
@@ -138,10 +138,10 @@ public class TurntableSubsystem extends MechanismSubsystem {
 	}
 
 	public void log() {
-		if (canTalonSRX.isFwdSwitchClosed() && !fwdEverPressed) {
+		if (canTalonSRX.canTalon.isFwdLimitSwitchClosed() && !fwdEverPressed) {
 			fwdEverPressed = true;
 		}
-		if (canTalonSRX.isRevSwitchClosed() && !revEverPressed) {
+		if (canTalonSRX.canTalon.isRevLimitSwitchClosed() && !revEverPressed) {
 			revEverPressed = true;
 		}
 	}
