@@ -8,14 +8,14 @@ message CANTalonSRX {
 
     // Feedback Device represents CTRE's {@link CANTalon.FeedbackDevice}
     enum FeedbackDevice{
-        QUAD_ENCODER = 0;
-        ANALOG_POT = 2;
-        ANALOG_ENCODER = 3;
-        ENC_RISING = 4;
-        ENC_FALLING = 5;
-        CTRE_MAG_ENCODER_RELATIVE = 6;
-        CTRE_MAG_ENCODER_ABSOLUTE = 7;
-        PULSE_WIDTH = 8;
+        QuadEncoder = 0;
+        AnalogPot = 2;
+        AnalogEncoder = 3;
+        EncRising = 4;
+        EncFalling = 5;
+        CtreMagEncoder_Relative = 6;
+        CtreMagEncoder_Absolute = 7;
+        PulseWidth = 8;
     }
 
     required FeedbackDevice feedback_device = 2;
