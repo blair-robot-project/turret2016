@@ -31,6 +31,7 @@ public class CANTalonSRX extends Component {
 
 	/**
 	 * Construct the CANTalonSRX from its map object
+	 *
 	 * @param m CANTalonSRX map object
 	 */
 	public CANTalonSRX(maps.org.usfirst.frc.team449.robot.components.CANTalonSRXMap.CANTalonSRX m) {
@@ -118,7 +119,7 @@ public class CANTalonSRX extends Component {
 	}
 
 	/**
-	 * Give a position setpoint
+	 * Give a position closed loop setpoint
 	 * TODO: figure out units and warning clip to input range
 	 *
 	 * @param positionSp position setpoint
@@ -129,10 +130,10 @@ public class CANTalonSRX extends Component {
 	}
 
 	/**
-	 * Give a velocity setpoint in RPS
+	 * Give a velocity closed loop setpoint in RPS
+	 * <p>
 	 * Note: This method is called setSpeed since the TalonControlMode enum is called speed. However, the input
-	 * argument
-	 * is signed and is actually a velocity
+	 * argument is signed and is actually a velocity.
 	 *
 	 * @param velocitySp velocity setpoint in revolutions per second
 	 */
