@@ -55,6 +55,7 @@ public class ShooterSubsystem extends MechanismSubsystem {
 	 */
 	public ShooterSubsystem(maps.org.usfirst.frc.team449.robot.mechanism.shooter.ShooterMap.Shooter map, ShooterOI oi) {
 		super(map.getMechanism());
+		this.map = map;
 		this.oi = oi;
 		intake = new CANTalonSRX(map.getIntake());
 		flywheel = new CANTalonSRX(map.getFlywheel()) {

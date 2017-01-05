@@ -38,6 +38,7 @@ public class TurntableSubsystem extends MechanismSubsystem {
 	 */
 	public TurntableSubsystem(maps.org.usfirst.frc.team449.robot.mechanism.turntable.TurntableMap.Turntable map, TurntableOI oi) {
 		super(map.getMechanism());
+		this.map = map;
 		this.oi = oi;
 		canTalonSRX = new CANTalonSRX(map.getCanTalonSRX()) {
 			@Override
